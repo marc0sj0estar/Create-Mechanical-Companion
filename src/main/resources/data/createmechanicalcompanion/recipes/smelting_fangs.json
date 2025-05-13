@@ -1,0 +1,18 @@
+{
+  "type": "create:mechanical_crafting",
+  "key": {
+    "R": {
+      "item": "minecraft:blaze_rod"
+    },
+    "B": {
+      "item": "create:brass_ingot"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "R R"
+  ],
+  "result": {
+    "item": "createmechanicalcompanion:smelting_fangs"
+  }
+}

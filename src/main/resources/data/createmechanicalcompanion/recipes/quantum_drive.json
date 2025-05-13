@@ -1,0 +1,25 @@
+{
+  "type": "create:mechanical_crafting",
+  "key": {
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "B": {
+      "item": "create:brass_sheet"
+    },
+    "C": {
+    "item": "create:precision_mechanism"
+    },
+    "T": {
+      "item": "create:electron_tube"
+    }
+  },
+  "pattern": [
+    "BBBBB",
+    "BCETB",
+    "BBBBB"
+  ],
+  "result": {
+    "item": "createmechanicalcompanion:quantum_drive"
+  }
+}

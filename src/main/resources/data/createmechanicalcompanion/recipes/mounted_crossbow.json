@@ -1,0 +1,22 @@
+{
+  "type": "create:mechanical_crafting",
+  "key": {
+    "P": {
+      "item": "create:precision_mechanism"
+    },
+    "C": {
+      "item": "minecraft:crossbow"
+    },
+    "B": {
+      "item": "create:brass_ingot"
+    }
+  },
+  "pattern": [
+    "P",
+    "C",
+    "B"
+  ],
+  "result": {
+    "item": "createmechanicalcompanion:mounted_crossbow"
+  }
+}

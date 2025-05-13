@@ -1,0 +1,17 @@
+{
+  "type": "create:mechanical_crafting",
+  "key": {
+    "B": {
+      "item": "create:brass_ingot"
+    },
+    "F": {
+      "item": "minecraft:firework_rocket"
+    }
+  },
+  "pattern": [
+    "FBF"
+  ],
+  "result": {
+    "item": "createmechanicalcompanion:booster_rocket"
+  }
+}

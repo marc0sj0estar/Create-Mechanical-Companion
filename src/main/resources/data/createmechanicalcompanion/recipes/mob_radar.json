@@ -1,0 +1,24 @@
+{
+  "type": "create:mechanical_crafting",
+  "key": {
+    "S": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "B": {
+      "item": "create:brass_ingot"
+    },
+    "A": {
+      "item": "create:andesite_alloy"
+    }
+  },
+  "pattern": [
+    "BSB",
+    " A ",
+    "BSB",
+    " A ",
+    " A "
+  ],
+  "result": {
+    "item": "createmechanicalcompanion:mob_radar"
+  }
+}

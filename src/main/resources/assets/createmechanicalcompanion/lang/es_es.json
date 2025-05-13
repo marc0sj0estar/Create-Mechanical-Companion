@@ -1,0 +1,38 @@
+{
+  "item.createmechanicalcompanion.shift": "§8Mantenga presionado [§7Shift§8] para ver el Resumen.",
+  "item.createmechanicalcompanion.shift2": "§8Mantenga presionado [§fShift§8] para ver el Resumen.",
+
+  "item.createmechanicalcompanion.defensive_module": "§3Modulos defensivos",
+  "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8Crea un §7Lobo Mecánico§r§8 que protege al portador.\nPuedes abrir el menú de modulos haciendo click derecho o curarlo con una llave inglesa,\nCuando el §7Lobo Mecánico§r§8 muere, volverá a parecer después de un tiempo con los modulos.",
+  "item.createmechanicalcompanion.reinforced_plates.tooltip": "§8Añade armadura adicional al  §7Lobo Mecánico.",
+  "item.createmechanicalcompanion.netherite_plates.tooltip": "§8Añade armadura, vida adicional y inmunidad al fuego al §7Lobo Mecánico.",
+
+  "item.createmechanicalcompanion.offensive_module": "§4Modulos de ataque",
+  "item.createmechanicalcompanion.mounted_crossbow.tooltip": "§8Añade una ballesta inteligente encima del §7Lobo Mecánico §8que solo le hace daño a su objetivo.",
+  "item.createmechanicalcompanion.tesla_tail.tooltip": "§8Añade una cola eléctrica al §7Lobo Mecánico §8que daña a sus atacantes.",
+  "item.createmechanicalcompanion.smelting_fangs.tooltip": "§8Añade daño de fuego al §7Lobo Mecánico§8.",
+
+  "item.createmechanicalcompanion.movement_module": "§2Modulos de movimiento",
+  "item.createmechanicalcompanion.booster_rocket.tooltip": "§8Añade un impulso de velocidad al §7Lobo Mecánico §8cuando encuentra un objetivo.",
+  "item.createmechanicalcompanion.quantum_drive.tooltip": "§8Le otorga al §7Lobo Mecánico §8la capacidad de teletransportarse.",
+
+  "item.createmechanicalcompanion.utility_module": "§5Modulos de Utilidad",
+  "item.createmechanicalcompanion.regenerative_casing.tooltip": "§8Le otorga al §7Lobo Mecánico §8la capacidad de regenerarse.",
+  "item.createmechanicalcompanion.mounted_light.tooltip": "§8Le da al §7Lobo Mecánico §8una luz portatil.",
+  "item.createmechanicalcompanion.mob_radar.tooltip": "§8Destacas a las entidades hostiles cerca del §7Lobo Mecánico§8, incluso detras de las paredes.",
+
+
+  "item.createmechanicalcompanion.reinforced_plates": "Placas Reforzadas",
+  "item.createmechanicalcompanion.netherite_plates": "Placas Reforzadas de Netherita",
+  "item.createmechanicalcompanion.mounted_crossbow": "Ballesta Montada",
+  "item.createmechanicalcompanion.tesla_tail": "Cola Tesla",
+  "item.createmechanicalcompanion.smelting_fangs": "Colmillos Ígneos",
+  "item.createmechanicalcompanion.booster_rocket": "Cohete Propulsor",
+  "item.createmechanicalcompanion.quantum_drive": "Impulsor Cuántico",
+  "item.createmechanicalcompanion.regenerative_casing": "Carcasa Regenerativa",
+  "item.createmechanicalcompanion.mounted_light": "Arnes con Antorcha",
+  "item.createmechanicalcompanion.mob_radar": "Radar de Mobs",
+  "item.createmechanicalcompanion.mechanical_wolf_link": "Link de Lobo Mecánico",
+
+  "creativetab.create_mechanical_companion_tab": "Create: Compañero Mecánico"
+}

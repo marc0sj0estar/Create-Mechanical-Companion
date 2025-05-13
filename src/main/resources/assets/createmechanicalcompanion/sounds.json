@@ -1,0 +1,20 @@
+{
+  "equip_module": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "createmechanicalcompanion:equip_module",
+        "stream": false
+      }
+    ]
+  },
+  "mounted_crossbow_sound": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "createmechanicalcompanion:mounted_crossbow_sound",
+        "stream": false
+      }
+    ]
+  }
+}

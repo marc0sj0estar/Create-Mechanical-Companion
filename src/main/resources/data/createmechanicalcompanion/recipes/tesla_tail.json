@@ -1,0 +1,23 @@
+{
+  "type": "create:mechanical_crafting",
+  "key": {
+    "B": {
+      "item": "create:brass_ingot"
+    },
+    "R": {
+      "item": "minecraft:lightning_rod"
+    },
+    "C": {
+      "item": "minecraft:copper_block"
+    }
+  },
+  "pattern": [
+    " C ",
+    "RBR",
+    "RBR",
+    " B "
+  ],
+  "result": {
+    "item": "createmechanicalcompanion:tesla_tail"
+  }
+}

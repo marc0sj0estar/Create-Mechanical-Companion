@@ -1,0 +1,18 @@
+{
+  "type": "create:mechanical_crafting",
+  "key": {
+    "T": {
+      "item": "minecraft:torch"
+    },
+    "B": {
+      "item": "create:brass_ingot"
+    }
+  },
+  "pattern": [
+    "T  T",
+    "BBBB"
+  ],
+  "result": {
+    "item": "createmechanicalcompanion:mounted_light"
+  }
+}

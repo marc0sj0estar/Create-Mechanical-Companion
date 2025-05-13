@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "createmechanicalcompanion:reinforced_plates"
+    },
+    {
+      "item": "create:precision_mechanism"
+    }
+  ],
+  "results": [
+    {
+      "item": "createmechanicalcompanion:regenerative_casing"
+    }
+  ]
+}
