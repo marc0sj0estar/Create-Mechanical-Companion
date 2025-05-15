@@ -454,10 +454,8 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
     @Override
     public boolean doHurtTarget(Entity pEntity) {
-        if(isModuleEquipped(ModItems.SMELTING_FANGS.get()))
-        {
+        if(isModuleEquipped(ModItems.SMELTING_FANGS.get())) {
             pEntity.setSecondsOnFire(5);
-            return pEntity.hurt(this.damageSources().onFire(), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
         }
         return pEntity.hurt(this.damageSources().mobAttack(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
     }
@@ -494,7 +492,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
     @Override
     public boolean fireImmune() {
-        return isModuleEquipped(ModItems.NETHERITE_PLATES.get());
+        return isModuleEquipped(ModItems.NETHERITE_PLATES.get()) || isModuleEquipped(ModItems.SMELTING_FANGS.get());
     }
 
     @Override
