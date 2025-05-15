@@ -46,7 +46,12 @@ import org.jetbrains.annotations.Nullable;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotResult;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+
 import java.util.List;
+import java.util.Optional;
 
 public class CustomWolf extends Wolf implements MenuProvider {
 
@@ -216,6 +221,10 @@ public class CustomWolf extends Wolf implements MenuProvider {
         super.tick();
         double boosterSpeedIncrease = 0.3D;
         if (!this.level().isClientSide) {
+            if(getOwner() == null){
+                discard();
+            }
+            checkForDuplicate();
             double defaultHealthValue = 30;
             if(isModuleEquipped(ModItems.NETHERITE_PLATES.get()))
             {
@@ -352,6 +361,22 @@ public class CustomWolf extends Wolf implements MenuProvider {
             {
                 int mobRadarPingDuration = 60;
                 livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, mobRadarPingDuration, 0, false, false));
+            }
+        }
+    }
+
+    private void checkForDuplicate(){
+        if(this.getOwner() instanceof Player player){
+            ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(player).orElse(null);
+            if(curiosInventory == null){
+                return;
+            }
+            Optional<SlotResult> item = curiosInventory.findCurio("head", 0);
+            if(item.isEmpty()){
+                return;
+            }
+            if(!this.getUUID().equals(item.get().stack().getTag().getUUID("WolfUUID"))){
+                discard();
             }
         }
     }
