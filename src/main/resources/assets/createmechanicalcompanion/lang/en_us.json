@@ -11,7 +11,7 @@
   "item.createmechanicalcompanion.offensive_module": "§4Offensive Module.",
   "item.createmechanicalcompanion.mounted_crossbow.tooltip": "§8Adds a mounted crossbow to the §7Mechanical Wolf §8that only damages its target.",
   "item.createmechanicalcompanion.tesla_tail.tooltip": "§8Adds a Tesla Tail to the §7Mechanical Wolf §8that damages its attackers.",
-  "item.createmechanicalcompanion.smelting_fangs.tooltip": "§8Adds fire damage to the §7Mechanical Wolf.",
+  "item.createmechanicalcompanion.smelting_fangs.tooltip": "§8Adds fire damage to the §7Mechanical Wolf§8 and gives it fire immunity.",
 
   "item.createmechanicalcompanion.movement_module": "§2Movement Module",
   "item.createmechanicalcompanion.booster_rocket.tooltip": "§8Adds boost of speed to the §7Mechanical Wolf §8when it finds a target.",
