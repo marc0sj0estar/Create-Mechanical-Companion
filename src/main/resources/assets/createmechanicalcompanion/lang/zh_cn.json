@@ -1,0 +1,38 @@
+{
+  "item.createmechanicalcompanion.shift": "§8按住[§7Shift§8]可查看概要。",
+  "item.createmechanicalcompanion.shift2": "§8按住[§7Shift§8]可查看概要。",
+
+  "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8生成一只保护穿戴者的§7动力狼§r§8。\n使用扳手右击它打开模块交互界面或治疗它。\n当§7动力狼§r§8死亡，在冷却结束后，它会带着模块重生。",
+
+  "item.createmechanicalcompanion.defensive_module": "§3防御模块",
+  "item.createmechanicalcompanion.reinforced_plates.tooltip": "§8为§7动力狼§r§8增加额外的护甲值。",
+  "item.createmechanicalcompanion.netherite_plates.tooltip": "§8为§7动力狼§r§8增加额外护甲值，额外生命值以及火焰免疫。",
+
+  "item.createmechanicalcompanion.offensive_module": "§4进攻模块",
+  "item.createmechanicalcompanion.mounted_crossbow.tooltip": "§8为§7动力狼§r§8添加挂载弩，其能对目标造成伤害。",
+  "item.createmechanicalcompanion.tesla_tail.tooltip": "§8为§7动力狼§r§8添加特斯拉尾，特斯拉尾会对攻击者造成伤害。",
+  "item.createmechanicalcompanion.smelting_fangs.tooltip": "§8使§7动力狼§r§8获得火焰免疫并且攻击附带火焰附加。",
+
+  "item.createmechanicalcompanion.movement_module": "§2动力模块",
+  "item.createmechanicalcompanion.booster_rocket.tooltip": "§8当§7动力狼§r§8找到目标时，增加其移动速度。",
+  "item.createmechanicalcompanion.quantum_drive.tooltip": "§8允许§7动力狼§r§8传送至目标。",
+
+  "item.createmechanicalcompanion.utility_module": "§5实用模块",
+  "item.createmechanicalcompanion.regenerative_casing.tooltip": "§8使§7动力狼§r§8获得生命恢复效果。",
+  "item.createmechanicalcompanion.mounted_light.tooltip": "§8使§7动力狼§r§8获得移动光源。",
+  "item.createmechanicalcompanion.mob_radar.tooltip": "§8哪怕隔着墙，§7动力狼§r§8会高亮附近的生物，。",
+
+  "item.createmechanicalcompanion.reinforced_plates": "加固板",
+  "item.createmechanicalcompanion.netherite_plates": "下届合金板",
+  "item.createmechanicalcompanion.mounted_crossbow": "挂载弩",
+  "item.createmechanicalcompanion.tesla_tail": "特斯拉尾",
+  "item.createmechanicalcompanion.smelting_fangs": "熔融尖牙",
+  "item.createmechanicalcompanion.booster_rocket": "助推火箭",
+  "item.createmechanicalcompanion.quantum_drive": "量子驱动器",
+  "item.createmechanicalcompanion.regenerative_casing": "再生外壳",
+  "item.createmechanicalcompanion.mounted_light": "挂载灯",
+  "item.createmechanicalcompanion.mob_radar": "生物雷达",
+  "item.createmechanicalcompanion.mechanical_wolf_link": "§6动力狼连接器",
+
+  "creativetab.create_mechanical_companion_tab": "机械动力：动力伙伴"
+}
