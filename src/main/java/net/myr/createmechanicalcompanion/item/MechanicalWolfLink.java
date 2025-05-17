@@ -53,16 +53,22 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
 
         if(tag.contains("WolfUUID")){
             UUID wolfUUID = tag.getUUID("WolfUUID");
-            LivingEntity entity = (LivingEntity) ((ServerLevel) level).getEntity(wolfUUID);
-            if(entity == null)
-            {
+            CustomWolf entity =(CustomWolf) ((ServerLevel) level).getEntity(wolfUUID);
+            if(entity == null) {
                 summonWolf(level, player, tag);
-            }else{
-                if(entity.getHealth() <= 0){
-                    tag.putInt("SpawnCooldown", 200);
-                }
-                saveWolfModulesToTrinket(tag, ((CustomWolf) entity).getItemHandler());
+                return;
             }
+
+            if(entity.getHealth() <= 0){
+                tag.putInt("SpawnCooldown", 200);
+            }
+
+            if(entity.getCustomName() != null){
+                String wolfName = entity.getCustomName().getString();
+                tag.putString("Nametag", wolfName);
+            }
+
+            saveWolfModulesToTrinket(tag, ((CustomWolf) entity).getItemHandler());
         }else{
             summonWolf(level, player, tag);
         }
@@ -78,17 +84,22 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
             }else{
                 tag.putInt("SpawnCooldown", spawnCooldown);
             }
+            return;
 
-        }else{
-            CustomWolf newWolf = new CustomWolf(ModEntity.CUSTOM_WOLF.get(), level);
-            newWolf.tame(player);
-            newWolf.setPos(player.getX(), player.getY(), player.getZ());
-            level.addFreshEntity(newWolf);
-
-            ItemStackHandler wolfInventory = loadWolfModulesFromTrinket(tag, newWolf.getItemHandler().getSlots());
-            newWolf.setItemHandler(wolfInventory);
-            tag.putUUID("WolfUUID", newWolf.getUUID());
         }
+
+        CustomWolf newWolf = new CustomWolf(ModEntity.CUSTOM_WOLF.get(), level);
+        newWolf.tame(player);
+        newWolf.setPos(player.getX(), player.getY(), player.getZ());
+        level.addFreshEntity(newWolf);
+        if(tag.contains("Nametag")){
+            newWolf.setCustomName(Component.literal(tag.getString("Nametag")));
+        }
+
+
+        ItemStackHandler wolfInventory = loadWolfModulesFromTrinket(tag, newWolf.getItemHandler().getSlots());
+        newWolf.setItemHandler(wolfInventory);
+        tag.putUUID("WolfUUID", newWolf.getUUID());
 
     }
 

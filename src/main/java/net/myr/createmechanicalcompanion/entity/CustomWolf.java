@@ -195,10 +195,10 @@ public class CustomWolf extends Wolf implements MenuProvider {
             if(player.getItemInHand(hand).getItem() == AllItems.WRENCH.get()){
                 this.heal(5);
                 this.level().playSound(this, this.blockPosition(), SoundEvents.IRON_GOLEM_REPAIR, SoundSource.NEUTRAL, 1, 1);
-
-            }else{
-                NetworkHooks.openScreen(serverPlayer, this, buf -> buf.writeVarInt(this.getId()));
+                return InteractionResult.SUCCESS;
             }
+
+            NetworkHooks.openScreen(serverPlayer, this, buf -> buf.writeVarInt(this.getId()));
         }
         return InteractionResult.SUCCESS;
     }
