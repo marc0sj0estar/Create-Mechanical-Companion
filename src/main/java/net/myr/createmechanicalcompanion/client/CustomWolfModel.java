@@ -96,8 +96,6 @@ public class CustomWolfModel extends HierarchicalModel<CustomWolf> {
         PartDefinition partdefinition = meshdefinition.getRoot();
 
 
-
-
         PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(-3.0F, -3.0F, -2.0F, 6.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false)
                 .texOffs(20, 29).addBox(-3.0F, -5.0F, 0.0F, 2.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
                 .texOffs(20, 29).addBox(1.0F, -5.0F, 0.0F, 2.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
@@ -124,7 +122,7 @@ public class CustomWolfModel extends HierarchicalModel<CustomWolf> {
 
         PartDefinition body_r1 = body.addOrReplaceChild("body_r1", CubeListBuilder.create().texOffs(26, 17).addBox(-4.0F, -12.0F, -1.0F, 6.0F, 9.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 10.0F, -3.0F, -0.0873F, 0.0F, 0.0F));
 
-        PartDefinition crossbow = body.addOrReplaceChild("crossbow", CubeListBuilder.create().texOffs(33, 4).addBox(-0.5F, -0.5F, -6.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(0.0F))
+        PartDefinition crossbow = body.addOrReplaceChild("crossbow", CubeListBuilder.create().texOffs(16, 58).addBox(-0.5F, -0.5F, -6.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(0.0F))
                 .texOffs(16, 50).addBox(-1.5F, -5.5F, -1.0F, 3.0F, 11.0F, 3.0F, new CubeDeformation(0.0F))
                 .texOffs(25, 50).addBox(-2.5F, 3.5F, 0.0F, 5.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, 2.5F, 8.0F));
 
@@ -161,9 +159,9 @@ public class CustomWolfModel extends HierarchicalModel<CustomWolf> {
 
         PartDefinition cube_r7 = leg0.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(50, 17).addBox(-1.0F, -4.0F, -2.0F, 3.0F, 5.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 1.0F, 0.0F, 0.1745F, 0.0F, 0.0F));
 
-        PartDefinition leg1_r1 = leg0.addOrReplaceChild("leg1_r1", CubeListBuilder.create().texOffs(56, 1).addBox(0.0F, -4.0F, 6.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 8.0F, -3.0F, 0.6545F, 0.0F, 0.0F));
+        PartDefinition leg1_r1 = leg0.addOrReplaceChild("leg1_r1", CubeListBuilder.create().texOffs(37, 44).addBox(0.0F, -4.0F, 6.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 8.0F, -3.0F, 0.6545F, 0.0F, 0.0F));
 
-        PartDefinition leg1_r2 = leg0.addOrReplaceChild("leg1_r2", CubeListBuilder.create().texOffs(56, 0).addBox(0.0F, -5.0F, 6.0F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 5.0F, -6.0F, -0.5236F, 0.0F, 0.0F));
+        PartDefinition leg1_r2 = leg0.addOrReplaceChild("leg1_r2", CubeListBuilder.create().texOffs(37, 44).addBox(0.0F, -5.0F, 6.0F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 5.0F, -6.0F, -0.5236F, 0.0F, 0.0F));
 
         PartDefinition reinforcedPlate0 = leg0.addOrReplaceChild("reinforcedPlate0", CubeListBuilder.create(), PartPose.offset(-2.0F, 1.0F, 0.0F));
 
@@ -179,9 +177,9 @@ public class CustomWolfModel extends HierarchicalModel<CustomWolf> {
 
         PartDefinition cube_r11 = leg1.addOrReplaceChild("cube_r11", CubeListBuilder.create().texOffs(50, 17).addBox(-2.0F, -4.0F, -2.0F, 3.0F, 5.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 1.0F, 0.0F, 0.1745F, 0.0F, 0.0F));
 
-        PartDefinition leg1_r3 = leg1.addOrReplaceChild("leg1_r3", CubeListBuilder.create().texOffs(56, 0).addBox(0.0F, -4.0F, 6.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, 8.0F, -3.0F, 0.6545F, 0.0F, 0.0F));
+        PartDefinition leg1_r3 = leg1.addOrReplaceChild("leg1_r3", CubeListBuilder.create().texOffs(37, 43).addBox(0.0F, -4.0F, 6.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, 8.0F, -3.0F, 0.6545F, 0.0F, 0.0F));
 
-        PartDefinition leg1_r4 = leg1.addOrReplaceChild("leg1_r4", CubeListBuilder.create().texOffs(55, 0).addBox(0.0F, -5.0F, 6.0F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, 5.0F, -6.0F, -0.5236F, 0.0F, 0.0F));
+        PartDefinition leg1_r4 = leg1.addOrReplaceChild("leg1_r4", CubeListBuilder.create().texOffs(37, 42).addBox(0.0F, -5.0F, 6.0F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, 5.0F, -6.0F, -0.5236F, 0.0F, 0.0F));
 
         PartDefinition reinforcedPlate1 = leg1.addOrReplaceChild("reinforcedPlate1", CubeListBuilder.create(), PartPose.offset(-1.0F, 1.0F, 0.0F));
 
@@ -197,9 +195,9 @@ public class CustomWolfModel extends HierarchicalModel<CustomWolf> {
 
         PartDefinition cube_r14 = leg2.addOrReplaceChild("cube_r14", CubeListBuilder.create().texOffs(52, 11).addBox(-4.0F, -3.0F, -0.1F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 5.0F, -1.0F, -0.0873F, 0.0F, 0.0F));
 
-        PartDefinition cube_r15 = leg2.addOrReplaceChild("cube_r15", CubeListBuilder.create().texOffs(54, 0).addBox(-1.5F, -3.0F, -1.0F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.0F, 3.0F, 0.0F, 0.0873F, 0.0F, 0.0F));
+        PartDefinition cube_r15 = leg2.addOrReplaceChild("cube_r15", CubeListBuilder.create().texOffs(37, 45).addBox(-1.5F, -3.0F, -1.0F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.0F, 3.0F, 0.0F, 0.0873F, 0.0F, 0.0F));
 
-        PartDefinition leg3_r1 = leg2.addOrReplaceChild("leg3_r1", CubeListBuilder.create().texOffs(56, 0).addBox(1.0F, -8.0F, -5.0F, 2.0F, 7.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.5F, 12.0F, 1.0F, -0.4363F, 0.0F, 0.0F));
+        PartDefinition leg3_r1 = leg2.addOrReplaceChild("leg3_r1", CubeListBuilder.create().texOffs(37, 42).addBox(1.0F, -8.0F, -5.0F, 2.0F, 7.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.5F, 12.0F, 1.0F, -0.4363F, 0.0F, 0.0F));
 
         PartDefinition reinforcedPlate2 = leg2.addOrReplaceChild("reinforcedPlate2", CubeListBuilder.create(), PartPose.offset(-1.5F, 2.0F, -1.0F));
 
@@ -215,9 +213,9 @@ public class CustomWolfModel extends HierarchicalModel<CustomWolf> {
 
         PartDefinition cube_r19 = leg3.addOrReplaceChild("cube_r19", CubeListBuilder.create().texOffs(52, 11).addBox(-4.0F, -3.0F, -0.1F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 5.0F, -1.0F, -0.0873F, 0.0F, 0.0F));
 
-        PartDefinition cube_r20 = leg3.addOrReplaceChild("cube_r20", CubeListBuilder.create().texOffs(54, 0).addBox(-1.5F, -3.0F, -1.0F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 3.0F, 0.0F, 0.0873F, 0.0F, 0.0F));
+        PartDefinition cube_r20 = leg3.addOrReplaceChild("cube_r20", CubeListBuilder.create().texOffs(37, 45).addBox(-1.5F, -3.0F, -1.0F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 3.0F, 0.0F, 0.0873F, 0.0F, 0.0F));
 
-        PartDefinition leg3_r2 = leg3.addOrReplaceChild("leg3_r2", CubeListBuilder.create().texOffs(55, 1).addBox(1.0F, -8.0F, -4.0F, 2.0F, 7.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 12.0F, 0.0F, -0.4363F, 0.0F, 0.0F));
+        PartDefinition leg3_r2 = leg3.addOrReplaceChild("leg3_r2", CubeListBuilder.create().texOffs(37, 42).addBox(1.0F, -8.0F, -4.0F, 2.0F, 7.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 12.0F, 0.0F, -0.4363F, 0.0F, 0.0F));
 
         PartDefinition reinforcedPlate3 = leg3.addOrReplaceChild("reinforcedPlate3", CubeListBuilder.create(), PartPose.offset(1.5F, 2.0F, -1.0F));
 
@@ -242,6 +240,10 @@ public class CustomWolfModel extends HierarchicalModel<CustomWolf> {
         PartDefinition torch2 = torch.addOrReplaceChild("torch2", CubeListBuilder.create().texOffs(56, 52).addBox(-1.0F, -10.0F, -1.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F))
                 .texOffs(44, 60).addBox(-1.5F, -4.0F, -1.5F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
                 .texOffs(44, 60).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(8.0F, 0.0F, 0.0F));
+
+
+
+
 
 
 

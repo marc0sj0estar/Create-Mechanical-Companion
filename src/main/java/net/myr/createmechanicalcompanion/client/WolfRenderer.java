@@ -12,6 +12,8 @@ import org.jetbrains.annotations.NotNull;
 public class WolfRenderer extends MobRenderer<CustomWolf, CustomWolfModel> {
 
     private static final ResourceLocation WOLF_TEXTURE = new ResourceLocation(CreateMechanicalCompanion.MOD_ID, "textures/entity/wolf.png");
+    private static final ResourceLocation DENNIS_TEXTURE = new ResourceLocation(CreateMechanicalCompanion.MOD_ID, "textures/entity/dennis.png");
+    private static final ResourceLocation COOLER_DENNIS_TEXTURE = new ResourceLocation(CreateMechanicalCompanion.MOD_ID, "textures/entity/cooler_dennis.png");
 
     public WolfRenderer(EntityRendererProvider.Context context) {
         super(context, new CustomWolfModel(context.bakeLayer(ModModelLayers.CUSTOM_WOLF)), 0.5f);
@@ -19,7 +21,16 @@ public class WolfRenderer extends MobRenderer<CustomWolf, CustomWolfModel> {
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull CustomWolf entity) {
-        return WOLF_TEXTURE;
+        if(entity.getCustomName() == null){
+            return WOLF_TEXTURE;
+        }
+
+        return switch (entity.getCustomName().getString()) {
+            case "Dennis" -> DENNIS_TEXTURE;
+            case "The Cooler Dennis" -> COOLER_DENNIS_TEXTURE;
+            default -> WOLF_TEXTURE;
+        };
+
     }
 
     @Override
