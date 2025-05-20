@@ -1,6 +1,7 @@
 package net.myr.createmechanicalcompanion.entity;
 
 import com.simibubi.create.AllItems;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
@@ -13,7 +14,13 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.*;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.horse.Llama;
+import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -38,6 +45,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkHooks;
+import net.myr.createmechanicalcompanion.FollowUnlessMenuOpenGoal;
 import net.myr.createmechanicalcompanion.sounds.ModSounds;
 import net.myr.createmechanicalcompanion.item.ModItems;
 import net.myr.createmechanicalcompanion.screen.WolfMenu;
@@ -61,7 +69,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
     private static final int UTILITY_SLOT = 3;
     private static final int UTILITY_SLOT2 = 4;
 
-    private static final double movementSpeed = 0.3D;
+    private static final double movementSpeed = 0.35D;
 
     private static final int reinforcedPlatesArmorValue = 4;
     private static final int netheritePlatesArmorValue = 6;
@@ -198,7 +206,12 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 return InteractionResult.SUCCESS;
             }
 
-            NetworkHooks.openScreen(serverPlayer, this, buf -> buf.writeVarInt(this.getId()));
+            if(player.getUUID().equals(this.getOwner().getUUID()))
+            {
+                NetworkHooks.openScreen(serverPlayer, this, buf -> buf.writeVarInt(this.getId()));
+            }else{
+                serverPlayer.displayClientMessage(Component.translatable("entity.createmechanicalcompanion.ownership_warning"), true);
+            }
         }
         return InteractionResult.SUCCESS;
     }
@@ -213,7 +226,18 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
     @Override
     protected void registerGoals() {
-        super.registerGoals();
+        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
+        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
+        this.goalSelector.addGoal(8, new FollowUnlessMenuOpenGoal(this, 0.6D));
+        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
+        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
+        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, true, this::isAngryAt));
+        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, AbstractSkeleton.class, false));
+        this.targetSelector.addGoal(8, new ResetUniversalAngerTargetGoal<>(this, true));
     }
 
     @Override
@@ -225,6 +249,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 discard();
             }
             checkForDuplicate();
+
             double defaultHealthValue = 30;
             if(isModuleEquipped(ModItems.NETHERITE_PLATES.get()))
             {

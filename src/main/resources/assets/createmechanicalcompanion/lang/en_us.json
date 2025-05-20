@@ -34,5 +34,7 @@
   "item.createmechanicalcompanion.mob_radar": "Mob Radar",
   "item.createmechanicalcompanion.mechanical_wolf_link": "§6Mechanical Wolf Link",
 
+  "entity.createmechanicalcompanion.ownership_warning": "§cYou can't change the modules of a Mechanical Wolf you don't own.",
+
   "creativetab.create_mechanical_companion_tab": "Create: Mechanical Companion"
 }

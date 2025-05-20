@@ -34,5 +34,7 @@
   "item.createmechanicalcompanion.mob_radar": "生物雷达",
   "item.createmechanicalcompanion.mechanical_wolf_link": "§6动力狼连接器",
 
+  "entity.createmechanicalcompanion.ownership_warning": "§c您无法更改不属于您的机械狼的模块。",
+
   "creativetab.create_mechanical_companion_tab": "机械动力：动力伙伴"
 }
