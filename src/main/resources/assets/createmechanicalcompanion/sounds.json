@@ -16,5 +16,14 @@
         "stream": false
       }
     ]
+  },
+  "bite_sound": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "createmechanicalcompanion:bite_sound",
+        "stream": false
+      }
+    ]
   }
 }

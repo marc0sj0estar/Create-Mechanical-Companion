@@ -69,9 +69,7 @@ public class WolfMenu extends AbstractContainerMenu {
 
                 @Override
                 public void setByPlayer(ItemStack pStack) {
-                    if(!pStack.isEmpty()){
-                        playInsertSound();
-                    }
+                    playInsertSound();
                     super.setByPlayer(pStack);
                 }
             });
@@ -86,9 +84,7 @@ public class WolfMenu extends AbstractContainerMenu {
 
                 @Override
                 public void setByPlayer(ItemStack pStack) {
-                    if(!pStack.isEmpty()){
-                        playInsertSound();
-                    }
+                    playInsertSound();
                     super.setByPlayer(pStack);
                 }
             });
@@ -101,9 +97,7 @@ public class WolfMenu extends AbstractContainerMenu {
 
                 @Override
                 public void setByPlayer(ItemStack pStack) {
-                    if(!pStack.isEmpty()){
-                        playInsertSound();
-                    }
+                    playInsertSound();
                     super.setByPlayer(pStack);
                 }
             });
@@ -121,9 +115,7 @@ public class WolfMenu extends AbstractContainerMenu {
 
                 @Override
                 public void setByPlayer(ItemStack pStack) {
-                    if(!pStack.isEmpty()){
-                        playInsertSound();
-                    }
+                    playInsertSound();
                     super.setByPlayer(pStack);
                 }
             });
@@ -141,9 +133,7 @@ public class WolfMenu extends AbstractContainerMenu {
 
                 @Override
                 public void setByPlayer(ItemStack pStack) {
-                    if(!pStack.isEmpty()){
-                        playInsertSound();
-                    }
+                    playInsertSound();
                     super.setByPlayer(pStack);
                 }
             });
@@ -152,7 +142,8 @@ public class WolfMenu extends AbstractContainerMenu {
 
     private void playInsertSound(){
         if (wolf.level().isClientSide) {
-            Minecraft.getInstance().level.playLocalSound(wolf.blockPosition(), ModSounds.EQUIP_MODULE.get(), SoundSource.PLAYERS, 1.0F, 1.0F, false);
+            float pitch = 0.95F + wolf.getRandom().nextFloat() * 0.1F;
+            Minecraft.getInstance().level.playLocalSound(wolf.blockPosition(), ModSounds.EQUIP_MODULE.get(), SoundSource.PLAYERS, 0.8F, pitch, false);
         }
     }
 

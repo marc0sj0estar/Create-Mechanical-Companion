@@ -1,7 +1,6 @@
 package net.myr.createmechanicalcompanion.entity;
 
 import com.simibubi.create.AllItems;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
@@ -16,10 +15,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.*;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -45,7 +41,8 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkHooks;
-import net.myr.createmechanicalcompanion.FollowUnlessMenuOpenGoal;
+import net.myr.createmechanicalcompanion.CustomLeapAtTargetGoal;
+import net.myr.createmechanicalcompanion.StrollUnlessMenuOpenGoal;
 import net.myr.createmechanicalcompanion.sounds.ModSounds;
 import net.myr.createmechanicalcompanion.item.ModItems;
 import net.myr.createmechanicalcompanion.screen.WolfMenu;
@@ -227,9 +224,10 @@ public class CustomWolf extends Wolf implements MenuProvider {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(4, new CustomLeapAtTargetGoal(this, 0.3F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
-        this.goalSelector.addGoal(8, new FollowUnlessMenuOpenGoal(this, 0.6D));
+        this.goalSelector.addGoal(8, new StrollUnlessMenuOpenGoal(this, 0.6D));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
@@ -300,7 +298,8 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
                 arrow.setPos(this.getX(), this.getEyeY() + 0.5, this.getZ());
                 arrow.shoot(direction.x, direction.y, direction.z, 1.6F, 0.0F);
-                this.level().playSound(this, this.blockPosition(), ModSounds.MOUNTED_CROSSBOW_SOUND.get(), SoundSource.HOSTILE, 0.15f, 1);
+                float pitch = 0.8F + this.random.nextFloat() * 0.4F;
+                this.level().playSound(this, this.blockPosition(), ModSounds.MOUNTED_CROSSBOW_SOUND.get(), SoundSource.HOSTILE, 0.15f, pitch);
 
                 this.level().addFreshEntity(arrow);
             }
@@ -482,6 +481,8 @@ public class CustomWolf extends Wolf implements MenuProvider {
         if(isModuleEquipped(ModItems.SMELTING_FANGS.get())) {
             pEntity.setSecondsOnFire(5);
         }
+        float pitch = 0.8F + this.random.nextFloat() * 0.4F;
+        this.level().playSound(this, this.blockPosition(), ModSounds.BITE_SOUND.get(), SoundSource.NEUTRAL, 1, pitch);
         return pEntity.hurt(this.damageSources().mobAttack(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
     }
 

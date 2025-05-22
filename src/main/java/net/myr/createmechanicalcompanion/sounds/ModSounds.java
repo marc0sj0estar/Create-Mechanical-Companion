@@ -18,4 +18,8 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> MOUNTED_CROSSBOW_SOUND =
             SOUND_EVENTS.register("mounted_crossbow_sound", () ->
                     SoundEvent.createVariableRangeEvent(new ResourceLocation(CreateMechanicalCompanion.MOD_ID, "mounted_crossbow_sound")));
+
+    public static final RegistryObject<SoundEvent> BITE_SOUND =
+            SOUND_EVENTS.register("bite_sound", () ->
+                    SoundEvent.createVariableRangeEvent(new ResourceLocation(CreateMechanicalCompanion.MOD_ID, "bite_sound")));
 }
