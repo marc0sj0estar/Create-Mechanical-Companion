@@ -22,4 +22,12 @@ public class StrollUnlessMenuOpenGoal extends WaterAvoidingRandomStrollGoal {
         }
         return super.canUse();
     }
+
+    @Override
+    public boolean canContinueToUse() {
+        if(this.mob instanceof CustomWolf wolf && wolf.getOwner() instanceof Player player && player.containerMenu instanceof WolfMenu) {
+            return false;
+        }
+        return super.canContinueToUse();
+    }
 }

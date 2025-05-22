@@ -2,25 +2,25 @@
   "item.createmechanicalcompanion.shift": "§8Hold [§7Shift§8] for Summary.",
   "item.createmechanicalcompanion.shift2": "§8Hold [§fShift§8] for Summary.",
 
-  "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8Spawns a §7Mechanical Wolf§r§8 to protect the wearer.\nYou can open the module interface by right clicking it or heal it by using a wrench.\nWhen the §7Mechanical Wolf§r§8 dies, it will respawn with the modules equipped after a short cooldown.",
+  "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8Spawns a §7Mechanical Wolf§r§8 to protect the wearer.\nYou can open the module interface by right-clicking it or heal it by using a wrench.\nWhen the §7Mechanical Wolf§r§8 dies, it will respawn with the modules equipped after a short cooldown.",
 
   "item.createmechanicalcompanion.defensive_module": "§3Defensive Module",
   "item.createmechanicalcompanion.reinforced_plates.tooltip": "§8Adds additional armor to the §7Mechanical Wolf.",
   "item.createmechanicalcompanion.netherite_plates.tooltip": "§8Adds more armor, additional health and fire immunity to the §7Mechanical Wolf.",
 
-  "item.createmechanicalcompanion.offensive_module": "§4Offensive Module.",
+  "item.createmechanicalcompanion.offensive_module": "§4Offensive Module",
   "item.createmechanicalcompanion.mounted_crossbow.tooltip": "§8Adds a mounted crossbow to the §7Mechanical Wolf §8that only damages its target.",
   "item.createmechanicalcompanion.tesla_tail.tooltip": "§8Adds a Tesla Tail to the §7Mechanical Wolf §8that damages its attackers.",
-  "item.createmechanicalcompanion.smelting_fangs.tooltip": "§8Adds fire damage to the §7Mechanical Wolf§8 and gives it fire immunity.",
+  "item.createmechanicalcompanion.smelting_fangs.tooltip": "§8Grants fire damage to the §7Mechanical Wolf§8 and gives it fire immunity.",
 
   "item.createmechanicalcompanion.movement_module": "§2Movement Module",
-  "item.createmechanicalcompanion.booster_rocket.tooltip": "§8Adds boost of speed to the §7Mechanical Wolf §8when it finds a target.",
+  "item.createmechanicalcompanion.booster_rocket.tooltip": "§8Adds a boost of speed to the §7Mechanical Wolf §8when it finds a target.",
   "item.createmechanicalcompanion.quantum_drive.tooltip": "§8Allows the §7Mechanical Wolf §8to teleport to its target.",
 
   "item.createmechanicalcompanion.utility_module": "§5Utility Module",
-  "item.createmechanicalcompanion.regenerative_casing.tooltip": "§8Gives the §7Mechanical Wolf §8a the ability to regenerate health.",
+  "item.createmechanicalcompanion.regenerative_casing.tooltip": "§8Gives the §7Mechanical Wolf §8the ability to regenerate health.",
   "item.createmechanicalcompanion.mounted_light.tooltip": "§8Gives the §7Mechanical Wolf §8a portable light source.",
-  "item.createmechanicalcompanion.mob_radar.tooltip": "§8Highlights the mobs nearby the §7Mechanical Wolf §8even through walls.",
+  "item.createmechanicalcompanion.mob_radar.tooltip": "§8Highlights hostile mobs near the §7Mechanical Wolf §8even through walls.",
 
   "item.createmechanicalcompanion.reinforced_plates": "Reinforced Plates",
   "item.createmechanicalcompanion.netherite_plates": "Netherite Plates",
@@ -34,7 +34,7 @@
   "item.createmechanicalcompanion.mob_radar": "Mob Radar",
   "item.createmechanicalcompanion.mechanical_wolf_link": "§6Mechanical Wolf Link",
 
-  "entity.createmechanicalcompanion.ownership_warning": "§cYou can't change the modules of a Mechanical Wolf you don't own.",
+  "entity.createmechanicalcompanion.ownership_warning": "§cThis Mechanical Wolf doesn't belong to you.",
 
   "creativetab.create_mechanical_companion_tab": "Create: Mechanical Companion"
 }

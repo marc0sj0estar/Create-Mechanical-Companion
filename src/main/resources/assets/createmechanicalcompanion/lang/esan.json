@@ -1,0 +1,40 @@
+{
+  "item.createmechanicalcompanion.shift": "§8Mantenga preçionao [§7Shift§8] pa bêh el Reçumen.",
+  "item.createmechanicalcompanion.shift2": "§8Mantenga preçionao [§fShift§8] pa bêh el Reçumen.",
+
+  "item.createmechanicalcompanion.defensive_module": "§3Módulô defençibô",
+  "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8Crea un §7Firulaî§r§8 que protehe ar portadôh.\nPuedê abrîh er menú de módulô açiendo clîh derexo o curâl-lo con una yabe ingleça,\nCuando el §7Firulaî§r§8 muere, reapareçe dêppuêh de un tiempo con lô módulô equipáô.",
+  "item.createmechanicalcompanion.reinforced_plates.tooltip": "§8Añade armadura adiçionâh al §7Firulaî.",
+  "item.createmechanicalcompanion.netherite_plates.tooltip": "§8Añade armadura, bida adiçionâh y îmmunidá ar fuego al §7Firulaî.",
+
+  "item.createmechanicalcompanion.offensive_module": "§4Módulô de ataque",
+  "item.createmechanicalcompanion.mounted_crossbow.tooltip": "§8Añade una bayêtta intelihente ençima del §7Firulaî §8que çolo le açe daño a çu ôhhetibo.",
+  "item.createmechanicalcompanion.tesla_tail.tooltip": "§8Añade una cola eléttrica al §7Firulaî §8que daña a çû atacantê.",
+  "item.createmechanicalcompanion.smelting_fangs.tooltip": "§8Añade daño de fuego e al §7Firulaî§8 y le otorga îmmunidá ar fuego.",
+
+  "item.createmechanicalcompanion.movement_module": "§2Módulô de mobimiento",
+  "item.createmechanicalcompanion.booster_rocket.tooltip": "§8Añade un impurço de beloçidá al §7Firulaî §8cuando encuentra un ôhhetibo.",
+  "item.createmechanicalcompanion.quantum_drive.tooltip": "§8Le otorga al §7Firulaî §8la capaçidá de teletrâpportarçe.",
+
+  "item.createmechanicalcompanion.utility_module": "§5Módulô de utilidad",
+  "item.createmechanicalcompanion.regenerative_casing.tooltip": "§8Le otorga al §7Firulaî §8la capaçidá de rehenerarçe.",
+  "item.createmechanicalcompanion.mounted_light.tooltip": "§8Le da al §7Firulaî §8una lûh portátî.",
+  "item.createmechanicalcompanion.mob_radar.tooltip": "§8Dêttaca a lâ entidadê ôttilê çerca del §7Firulaî§8, incluço detrâ de lâ paredê.",
+
+
+  "item.createmechanicalcompanion.reinforced_plates": "Placâ Reforçâh",
+  "item.createmechanicalcompanion.netherite_plates": "Placâ Reforçâh de Netherita",
+  "item.createmechanicalcompanion.mounted_crossbow": "Bayêtta Montá",
+  "item.createmechanicalcompanion.tesla_tail": "Cola Têl-la",
+  "item.createmechanicalcompanion.smelting_fangs": "Cormiyô Ínneô",
+  "item.createmechanicalcompanion.booster_rocket": "Coete Propurçor",
+  "item.createmechanicalcompanion.quantum_drive": "Impurçôh Cuántico",
+  "item.createmechanicalcompanion.regenerative_casing": "Carcaça Reheneratiba",
+  "item.createmechanicalcompanion.mounted_light": "Ânnêh con Antorxa",
+  "item.createmechanicalcompanion.mob_radar": "Radâh de Criaturâh",
+  "item.createmechanicalcompanion.mechanical_wolf_link": "Vínculo der Firulaî",
+
+  "entity.createmechanicalcompanion.ownership_warning": "§çÊtte Firulaî no te perteneçe.",
+
+  "creativetab.create_mechanical_companion_tab": "Create: Compañero Mecánico"
+}
