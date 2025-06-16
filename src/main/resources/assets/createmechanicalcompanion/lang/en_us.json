@@ -3,10 +3,11 @@
   "item.createmechanicalcompanion.shift2": "§8Hold [§fShift§8] for Summary.",
 
   "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8Spawns a §7Mechanical Wolf§r§8 to protect the wearer.\nYou can open the module interface by right-clicking it or heal it by using a wrench.\nWhen the §7Mechanical Wolf§r§8 dies, it will respawn with the modules equipped after a short cooldown.",
+  "item.createmechanicalcompanion.mechanical_wolf_processor.tooltip": "§8Found in §6Illager Workshops§8.\nYou can find §6Illager Workshop Maps§8 when trading with cartographers or wandering traders.\n§8Used to make the §7Mechanical Wolf§8.",
 
   "item.createmechanicalcompanion.defensive_module": "§3Defensive Module",
-  "item.createmechanicalcompanion.reinforced_plates.tooltip": "§8Adds additional armor to the §7Mechanical Wolf.",
-  "item.createmechanicalcompanion.netherite_plates.tooltip": "§8Adds more armor, additional health and fire immunity to the §7Mechanical Wolf.",
+  "item.createmechanicalcompanion.reinforced_plates.tooltip": "§8Adds additional armor to the §7Mechanical Wolf§8.",
+  "item.createmechanicalcompanion.netherite_plates.tooltip": "§8Adds more armor, additional health and fire immunity to the §7Mechanical Wolf§8.",
 
   "item.createmechanicalcompanion.offensive_module": "§4Offensive Module",
   "item.createmechanicalcompanion.mounted_crossbow.tooltip": "§8Adds a mounted crossbow to the §7Mechanical Wolf §8that only damages its target.",
@@ -32,9 +33,22 @@
   "item.createmechanicalcompanion.regenerative_casing": "Regenerative Casing",
   "item.createmechanicalcompanion.mounted_light": "Mounted Light",
   "item.createmechanicalcompanion.mob_radar": "Mob Radar",
+
   "item.createmechanicalcompanion.mechanical_wolf_link": "§6Mechanical Wolf Link",
+  "item.createmechanicalcompanion.illager_workshop_map": "§6§oIllager Workshop Map",
+  "item.createmechanicalcompanion.mechanical_wolf_processor": "Mechanical Wolf Processor",
+  "item.createmechanicalcompanion.mechanical_wolf_motherboard": "Mechanical Wolf Motherboard",
+  "item.createmechanicalcompanion.rose_quartz_lens": "Rose Quartz Lens",
+  "item.createmechanicalcompanion.optical_sensor": "Optical Sensor",
+  "item.createmechanicalcompanion.incomplete_optical_sensor": "Incomplete Optical Sensor",
+  "item.createmechanicalcompanion.incomplete_mechanical_wolf_motherboard": "Incomplete Mechanical Wolf Motherboard",
+  "item.createmechanicalcompanion.illager_engineer_spawn_egg": "Illager Engineer Spawn Egg",
+  "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "Illager Supervisor Spawn Egg",
 
   "entity.createmechanicalcompanion.ownership_warning": "§cThis Mechanical Wolf doesn't belong to you.",
+  "entity.createmechanicalcompanion.custom_wolf": "Mechanical Wolf",
+  "entity.createmechanicalcompanion.illager_engineer": "Illager Engineer",
+  "entity.createmechanicalcompanion.potato_cannon_illager": "Illager Supervisor",
 
   "creativetab.create_mechanical_companion_tab": "Create: Mechanical Companion"
 }

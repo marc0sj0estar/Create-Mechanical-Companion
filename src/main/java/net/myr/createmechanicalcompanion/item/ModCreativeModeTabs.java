@@ -28,6 +28,12 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.MOUNTED_LIGHT.get());
                         output.accept(ModItems.REGENERATIVE_CASING.get());
                         output.accept(ModItems.MECHANICAL_WOLF_LINK.get());
+                        output.accept(ModItems.MECHANICAL_WOLF_PROCESSOR.get());
+                        output.accept(ModItems.MECHANICAL_WOLF_MOTHERBOARD.get());
+                        output.accept(ModItems.OPTICAL_SENSOR.get());
+                        output.accept(ModItems.ROSE_QUARTZ_LENS.get());
+                        output.accept(ModItems.ILLAGER_ENGINEER_SPAWN_EGG.get());
+                        output.accept(ModItems.POTATO_CANNON_ILLAGER_SPAWN_EGG.get());
                     })
                     .icon(() -> new ItemStack(ModItems.ICON_ITEM.get()))
                     .build());

@@ -234,7 +234,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
         this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, true, this::isAngryAt));
-        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, AbstractSkeleton.class, false));
         this.targetSelector.addGoal(8, new ResetUniversalAngerTargetGoal<>(this, true));
     }
 
@@ -396,11 +395,15 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 return;
             }
             Optional<SlotResult> item = curiosInventory.findCurio("head", 0);
-            if(item.isEmpty()){
+            if(item.isEmpty()) {
                 return;
             }
-            if(!this.getUUID().equals(item.get().stack().getTag().getUUID("WolfUUID"))){
-                discard();
+            CompoundTag compoundTag = item.get().stack().getTag();
+            if(compoundTag != null && compoundTag.contains("WolfUUID"))
+            {
+                if(!this.getUUID().equals(compoundTag.getUUID("WolfUUID"))){
+                    discard();
+                }
             }
         }
     }

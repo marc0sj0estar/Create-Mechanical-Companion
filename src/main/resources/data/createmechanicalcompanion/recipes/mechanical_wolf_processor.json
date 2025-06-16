@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "createmechanicalcompanion:mechanical_wolf_motherboard"
+    },
+    {
+      "item": "createmechanicalcompanion:optical_sensor"
+    }
+  ],
+  "results": [
+    {
+      "item": "createmechanicalcompanion:mechanical_wolf_processor"
+    }
+  ]
+}

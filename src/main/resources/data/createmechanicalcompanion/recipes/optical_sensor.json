@@ -1,0 +1,59 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "create:andesite_casing"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "createmechanicalcompanion:optical_sensor"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "createmechanicalcompanion:incomplete_optical_sensor"
+        }
+      ],
+      "results": [
+        {
+          "item": "createmechanicalcompanion:incomplete_optical_sensor"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "createmechanicalcompanion:incomplete_optical_sensor"
+        }
+      ],
+      "results": [
+        {
+          "item": "createmechanicalcompanion:incomplete_optical_sensor"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createmechanicalcompanion:incomplete_optical_sensor"
+        },
+        {
+          "item": "createmechanicalcompanion:rose_quartz_lens"
+        }
+      ],
+      "results": [
+        {
+          "item": "createmechanicalcompanion:incomplete_optical_sensor"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "createmechanicalcompanion:incomplete_optical_sensor"
+  }
+}

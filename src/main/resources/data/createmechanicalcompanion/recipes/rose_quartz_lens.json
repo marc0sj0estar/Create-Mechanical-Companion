@@ -1,0 +1,13 @@
+{
+  "type": "create:sandpaper_polishing",
+  "ingredients": [
+    {
+      "item": "create:electron_tube"
+    }
+  ],
+  "results": [
+    {
+      "item": "createmechanicalcompanion:rose_quartz_lens"
+    }
+  ]
+}

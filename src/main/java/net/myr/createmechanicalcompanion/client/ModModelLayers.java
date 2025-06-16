@@ -7,4 +7,6 @@ import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 public class ModModelLayers {
     public static final ModelLayerLocation CUSTOM_WOLF = new ModelLayerLocation(
             new ResourceLocation(CreateMechanicalCompanion.MOD_ID, "custom_wolf"), "main");
+
+
 }

@@ -2,8 +2,10 @@
   "item.createmechanicalcompanion.shift": "§8Mantenga preçionao [§7Shift§8] pa bêh el Reçumen.",
   "item.createmechanicalcompanion.shift2": "§8Mantenga preçionao [§fShift§8] pa bêh el Reçumen.",
 
-  "item.createmechanicalcompanion.defensive_module": "§3Módulô defençibô",
   "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8Crea un §7Firulaî§r§8 que protehe ar portadôh.\nPuedê abrîh er menú de módulô açiendo clîh derexo o curâl-lo con una yabe ingleça,\nCuando el §7Firulaî§r§8 muere, reapareçe dêppuêh de un tiempo con lô módulô equipáô.",
+  "item.createmechanicalcompanion.mechanical_wolf_processor.tooltip": "§8Encontrao en §6Tayerê Mardeanô§8.\nPuedê encontrâh §6Mapâ a Tayerê Mardeanô§8 comerçiando con cartógrafô o bendedorê amobulantê.\n§8Uçao pa creâh al §7Lobo Mecánico§8.",
+
+  "item.createmechanicalcompanion.defensive_module": "§3Módulô defençibô",
   "item.createmechanicalcompanion.reinforced_plates.tooltip": "§8Añade armadura adiçionâh al §7Firulaî.",
   "item.createmechanicalcompanion.netherite_plates.tooltip": "§8Añade armadura, bida adiçionâh y îmmunidá ar fuego al §7Firulaî.",
 
@@ -32,9 +34,26 @@
   "item.createmechanicalcompanion.regenerative_casing": "Carcaça Reheneratiba",
   "item.createmechanicalcompanion.mounted_light": "Ânnêh con Antorxa",
   "item.createmechanicalcompanion.mob_radar": "Radâh de Criaturâh",
-  "item.createmechanicalcompanion.mechanical_wolf_link": "Vínculo der Firulaî",
 
-  "entity.createmechanicalcompanion.ownership_warning": "§çÊtte Firulaî no te perteneçe.",
+  "item.createmechanicalcompanion.mechanical_wolf_link": "Vínculo der Firulaî",
+  "item.createmechanicalcompanion.illager_workshop_map": "§6§oMapa a Tayêh Mardeano",
+  "item.createmechanicalcompanion.mechanical_wolf_processor": "Proçeçadôh de Lobo Mecánico",
+  "item.createmechanicalcompanion.mechanical_wolf_motherboard": "Placa Baçe de Lobo Mecánico",
+  "item.createmechanicalcompanion.rose_quartz_lens": "Lente de Cuarço Roho",
+  "item.createmechanicalcompanion.optical_sensor": "Çençôh Óttico",
+  "item.createmechanicalcompanion.incomplete_optical_sensor": "Çençôh Óttico Incompleto",
+  "item.createmechanicalcompanion.incomplete_mechanical_wolf_motherboard": "Placa Baçe de Lobo Mecánico Incompleta",
+  "item.createmechanicalcompanion.illager_engineer_spawn_egg": "Guebo de Mardeano Inheniero",
+  "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "Guebo de Mardeano Çuperbiçor",
+
+
+
+  "entity.createmechanicalcompanion.ownership_warning": "§çÊtte Lobo Mecánico no te perteneçe.",
+  "entity.createmechanicalcompanion.custom_wolf": "Lobo Mecánico",
+  "entity.createmechanicalcompanion.illager_engineer": "Mardeano Inheniero",
+  "entity.createmechanicalcompanion.potato_cannon_illager": "Mardeano Çuperbiçor",
+
+
 
   "creativetab.create_mechanical_companion_tab": "Create: Compañero Mecánico"
 }

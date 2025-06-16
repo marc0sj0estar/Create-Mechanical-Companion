@@ -1,0 +1,78 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "forge:plates/copper"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "createmechanicalcompanion:mechanical_wolf_motherboard"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+        },
+        {
+          "item": "minecraft:green_dye"
+        }
+      ],
+      "results": [
+        {
+          "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+        }
+      ],
+      "results": [
+        {
+          "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+        },
+        {
+          "item": "minecraft:comparator"
+        }
+      ],
+      "results": [
+        {
+          "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+        },
+        {
+          "item": "create:electron_tube"
+        }
+      ],
+      "results": [
+        {
+          "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+  }
+}

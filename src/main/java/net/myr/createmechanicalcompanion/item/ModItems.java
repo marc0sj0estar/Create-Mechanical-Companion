@@ -1,17 +1,18 @@
 package net.myr.createmechanicalcompanion.item;
 
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
+import net.myr.createmechanicalcompanion.entity.ModEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -24,6 +25,43 @@ public class ModItems {
 
     public static final RegistryObject<Item> MECHANICAL_WOLF_LINK = ITEMS.register("mechanical_wolf_link",
             () -> new MechanicalWolfLink(new Item.Properties().stacksTo(1)));
+
+    //Recipe items
+    public static final RegistryObject<Item> MECHANICAL_WOLF_PROCESSOR = ITEMS.register("mechanical_wolf_processor", () -> new Item(new Item.Properties().stacksTo(1)){
+        @Override
+        public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+            pTooltipComponents.add(Component.translatable("item.createmechanicalcompanion.mechanical_wolf_processor.tooltip"));
+            super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        }
+    });
+
+    public static final RegistryObject<Item> MECHANICAL_WOLF_MOTHERBOARD = ITEMS.register("mechanical_wolf_motherboard", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ROSE_QUARTZ_LENS = ITEMS.register("rose_quartz_lens", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> OPTICAL_SENSOR = ITEMS.register("optical_sensor", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> INCOMPLETE_OPTICAL_SENSOR = ITEMS.register("incomplete_optical_sensor", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> INCOMPLETE_MECHANICAL_WOLF_MOTHERBOARD = ITEMS.register("incomplete_mechanical_wolf_motherboard", () -> new Item(new Item.Properties().stacksTo(1)));
+
+
+
+
+    public static final RegistryObject<SpawnEggItem> ILLAGER_ENGINEER_SPAWN_EGG =
+            ITEMS.register("illager_engineer_spawn_egg", () ->
+                    new ForgeSpawnEggItem(
+                            ModEntity.ILLAGER_ENGINEER,
+                            0x737373,
+                            0xb2b55c,
+                            new Item.Properties()));
+
+    public static final RegistryObject<SpawnEggItem> POTATO_CANNON_ILLAGER_SPAWN_EGG =
+            ITEMS.register("potato_cannon_illager_spawn_egg", () ->
+                    new ForgeSpawnEggItem(
+                            ModEntity.POTATO_CANNON_ILLAGER,
+                            0x41354a,
+                            0xb2b55c,
+                            new Item.Properties()));
+
+
+
 
     //Defensive modules
     public static final RegistryObject<Item> REINFORCED_PLATES = ITEMS.register("reinforced_plates", () -> new Item(new Item.Properties().stacksTo(1)){

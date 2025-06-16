@@ -7,21 +7,24 @@
     "D": {
       "item": "create:precision_mechanism"
     },
+    "R": {
+      "item": "create:redstone_link"
+    },
     "A": {
       "item": "create:andesite_alloy"
     },
-    "R": {
-      "item": "create:redstone_link"
+    "W": {
+      "item": "createmechanicalcompanion:mechanical_wolf_processor"
     }
   },
   "pattern": [
-    " BBB",
-    "  A ",
-    " BAB",
-    "  A ",
-    "BBBB",
-    "BDRB",
-    "BBBB"
+    " BBB ",
+    "  A  ",
+    " BAB ",
+    "  A  ",
+    "BBBBB",
+    "BDWRB",
+    "BBBBB"
   ],
   "result": {
     "item": "createmechanicalcompanion:mechanical_wolf_link"
