@@ -6,6 +6,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -30,6 +31,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LightBlock;
@@ -119,6 +121,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 return values.length;
             }
         };
+
     }
 
     public static AttributeSupplier.@NotNull Builder createAttributes() {
@@ -203,7 +206,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 return InteractionResult.SUCCESS;
             }
 
-            if(player.getUUID().equals(this.getOwner().getUUID()))
+            if(this.getOwner() != null && player.getUUID().equals(this.getOwner().getUUID()))
             {
                 NetworkHooks.openScreen(serverPlayer, this, buf -> buf.writeVarInt(this.getId()));
             }else{
@@ -485,7 +488,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
             pEntity.setSecondsOnFire(5);
         }
         float pitch = 0.8F + this.random.nextFloat() * 0.4F;
-        this.level().playSound(this, this.blockPosition(), ModSounds.BITE_SOUND.get(), SoundSource.NEUTRAL, 1, pitch);
+        this.level().playSound(this, this.blockPosition(), ModSounds.BITE_SOUND.get(), SoundSource.NEUTRAL, 0.6f, pitch);
         return pEntity.hurt(this.damageSources().mobAttack(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
     }
 

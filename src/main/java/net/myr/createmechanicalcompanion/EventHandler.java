@@ -2,6 +2,7 @@ package net.myr.createmechanicalcompanion;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.client.renderer.entity.IllagerRenderer;
+import net.minecraft.client.renderer.entity.PaintingRenderer;
 import net.minecraft.client.renderer.entity.PillagerRenderer;
 import net.minecraft.client.renderer.entity.VindicatorRenderer;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -36,6 +37,7 @@ public class EventHandler {
         event.registerEntityRenderer(ModEntity.CUSTOM_WOLF.get(), WolfRenderer::new);
         event.registerEntityRenderer(ModEntity.ILLAGER_ENGINEER.get(), IllagerEngineerRenderer::new);
         event.registerEntityRenderer(ModEntity.POTATO_CANNON_ILLAGER.get(), PotatoCannonIllagerRenderer::new);
+        event.registerEntityRenderer(ModEntity.BLUEPRINT_ENTITY.get(), PaintingRenderer::new);
     }
 
 }

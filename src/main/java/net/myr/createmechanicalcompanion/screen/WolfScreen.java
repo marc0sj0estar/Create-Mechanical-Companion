@@ -2,7 +2,9 @@ package net.myr.createmechanicalcompanion.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -27,11 +29,6 @@ public class WolfScreen extends AbstractContainerScreen<WolfMenu> {
     }
 
     @Override
-    protected void init() {
-        super.init();
-    }
-
-    @Override
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
@@ -49,22 +46,18 @@ public class WolfScreen extends AbstractContainerScreen<WolfMenu> {
         }
     }
 
-
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
-
         int xOffset = 64;
         int yOffset = 53;
         int x = (this.width - this.imageWidth) / 2 + xOffset;
         int y = (this.height - this.imageHeight) / 2 + yOffset;
         int scale = 30;
         float yMouseOffset = -25;
-
         InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, x, y, scale, x - mouseX, y - mouseY + yMouseOffset, this.menu.wolf);
-
     }
 }
 

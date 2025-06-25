@@ -12,7 +12,6 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -41,6 +40,7 @@ public class CreateMechanicalCompanion
         ModMenuTypes.register(modEventBus);
         ModEntity.ENTITIES.register(modEventBus);
         ModSounds.SOUND_EVENTS.register(modEventBus);
+        BlueprintPaintingVariants.BLUEPRINT_PAINTINGS.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
 
         modEventBus.addListener(this::commonSetup);

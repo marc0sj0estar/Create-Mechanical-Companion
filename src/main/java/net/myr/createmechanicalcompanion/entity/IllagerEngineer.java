@@ -1,5 +1,6 @@
 package net.myr.createmechanicalcompanion.entity;
 
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -30,6 +31,15 @@ public class IllagerEngineer extends Vindicator {
     public static AttributeSupplier.@NotNull Builder createAttributes() {
         return Vindicator.createAttributes()
                 .add(Attributes.ATTACK_DAMAGE, 13.0D);
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(net.minecraft.world.damagesource.DamageSource source, int looting, boolean recentlyHit) {
+        super.dropCustomDeathLoot(source, looting, recentlyHit);
+        this.spawnAtLocation(AllItems.CRUSHED_COPPER.get(), 1 + this.random.nextInt(2 + looting));
+        this.spawnAtLocation(AllItems.CRUSHED_IRON.get(), 1 + this.random.nextInt(2 + looting));
+        this.spawnAtLocation(AllItems.CRUSHED_ZINC.get(), 1 + this.random.nextInt(2 + looting));
+        this.spawnAtLocation(AllBlocks.COGWHEEL, 1 + this.random.nextInt(2 + looting));
     }
 
     @Override

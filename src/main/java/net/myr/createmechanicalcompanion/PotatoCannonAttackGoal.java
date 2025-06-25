@@ -67,7 +67,7 @@ public class PotatoCannonAttackGoal extends Goal {
         double distance = mob.distanceTo(target);
         mob.getLookControl().setLookAt(target, 30, 30);
 
-        if (distance > attackRange) {
+        if (distance > attackRange || !mob.getSensing().hasLineOfSight(target)) {
             mob.getNavigation().moveTo(target, speed);
             return;
         } else {

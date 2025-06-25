@@ -23,12 +23,10 @@ public class WolfMenu extends AbstractContainerMenu {
 
     public static final int slotAmount = 5;
 
-
     public WolfMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, getWolfEntity(extraData, inv.player.level()), new SimpleContainerData(slotAmount));
         addWolfInventorySlots();
     }
-
 
     private static CustomWolf getWolfEntity(FriendlyByteBuf buf, Level level) {
         int entityId = buf.readVarInt();
@@ -65,7 +63,6 @@ public class WolfMenu extends AbstractContainerMenu {
                     return (stack.getItem() == ModItems.REINFORCED_PLATES.get() ||
                             stack.getItem() == ModItems.NETHERITE_PLATES.get());
                 }
-
 
                 @Override
                 public void setByPlayer(ItemStack pStack) {

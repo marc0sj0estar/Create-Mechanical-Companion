@@ -2,7 +2,6 @@
   "item.createmechanicalcompanion.shift": "§8Mantenga presionado [§7Shift§8] para ver el Resumen.",
   "item.createmechanicalcompanion.shift2": "§8Mantenga presionado [§fShift§8] para ver el Resumen.",
 
-
   "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8Crea un §7Lobo Mecánico§r§8 que protege al portador.\nPuedes abrir el menú de módulos haciendo clic derecho o curarlo con una llave inglesa,\nCuando el §7Lobo Mecánico§r§8 muere, reaparece después de un tiempo con los módulos equipados.",
   "item.createmechanicalcompanion.mechanical_wolf_processor.tooltip": "§8Encontrado en §6Talleres Maldeanos§8.\nPuedes encontrar §6Mapas a Talleres Maldeanos§8 comerciando con cartógrafos o vendedores amobulantes.\n§8Usado para crear al §7Lobo Mecánico§8.",
 
@@ -24,7 +23,6 @@
   "item.createmechanicalcompanion.mounted_light.tooltip": "§8Le da al §7Lobo Mecánico §8una luz portátil.",
   "item.createmechanicalcompanion.mob_radar.tooltip": "§8Destaca a las entidades hostiles cerca del §7Lobo Mecánico§8, incluso detras de las paredes.",
 
-
   "item.createmechanicalcompanion.reinforced_plates": "Placas Reforzadas",
   "item.createmechanicalcompanion.netherite_plates": "Placas Reforzadas de Netherita",
   "item.createmechanicalcompanion.mounted_crossbow": "Ballesta Montada",
@@ -37,6 +35,8 @@
   "item.createmechanicalcompanion.mob_radar": "Radar de Criaturas",
 
   "item.createmechanicalcompanion.mechanical_wolf_link": "Vínculo del Lobo Mecánico",
+  "item.createmechanicalcompanion.blueprint_painting": "Plano decorativo",
+  "item.createmechanicalcompanion.blueprint_painting_tooltip": "§8Objeto decorativo que se puede colocar en las paredes.",
   "item.createmechanicalcompanion.illager_workshop_map": "§6§oMapa a Taller Maldeano",
   "item.createmechanicalcompanion.mechanical_wolf_processor": "Procesador de Lobo Mecánico",
   "item.createmechanicalcompanion.mechanical_wolf_motherboard": "Placa Base de Lobo Mecánico",
@@ -44,15 +44,15 @@
   "item.createmechanicalcompanion.optical_sensor": "Sensor Óptico",
   "item.createmechanicalcompanion.incomplete_optical_sensor": "Sensor Óptico Incompleto",
   "item.createmechanicalcompanion.incomplete_mechanical_wolf_motherboard": "Placa Base de Lobo Mecánico Incompleta",
-  "item.createmechanicalcompanion.illager_engineer_spawn_egg": "Huevo de Maldeano Ingeniero",
-  "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "Huevo de Maldeano Supervisor",
-
-
+  "item.createmechanicalcompanion.illager_engineer_spawn_egg": "Huevo de Ingeniero Maldeano",
+  "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "Huevo de Supervisor Maldeano",
 
   "entity.createmechanicalcompanion.ownership_warning": "§cEste Lobo Mecánico no te pertenece.",
   "entity.createmechanicalcompanion.custom_wolf": "Lobo Mecánico",
-  "entity.createmechanicalcompanion.illager_engineer": "Maldeano Ingeniero",
-  "entity.createmechanicalcompanion.potato_cannon_illager": "Maldeano Supervisor",
+  "entity.createmechanicalcompanion.illager_engineer": "Ingeniero Maldeano",
+  "entity.createmechanicalcompanion.potato_cannon_illager": "Supervisor Maldeano",
 
-  "creativetab.create_mechanical_companion_tab": "Create: Compañero Mecánico"
+  "creativetab.create_mechanical_companion_tab": "Create: Compañero Mecánico",
+
+  "createmechanicalcompanion.tip.map_tip": "Existen rumores de mapas a §6Talleres Maldeanos§r ocultos en lo profundo de los bosques oscuros. ¡Consulta con un cartógrafo o vendedor ambulante!"
 }

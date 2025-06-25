@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.UUID;
 
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +22,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.ItemStackHandler;
 import net.myr.createmechanicalcompanion.entity.CustomWolf;
 import net.myr.createmechanicalcompanion.entity.ModEntity;
+import net.myr.createmechanicalcompanion.sounds.ModSounds;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
@@ -31,6 +35,7 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
     }
 
     private CompoundTag previousModuleTag;
+
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
@@ -96,10 +101,10 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
             newWolf.setCustomName(Component.literal(tag.getString("Nametag")));
         }
 
-
         ItemStackHandler wolfInventory = loadWolfModulesFromTrinket(tag, newWolf.getItemHandler().getSlots());
         newWolf.setItemHandler(wolfInventory);
         tag.putUUID("WolfUUID", newWolf.getUUID());
+
 
     }
 

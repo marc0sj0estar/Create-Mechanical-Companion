@@ -1,5 +1,6 @@
 package net.myr.createmechanicalcompanion.entity;
 
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -105,4 +106,19 @@ public class PotatoCannonIllager extends Pillager {
         return false;
     }
 
+    @Override
+    protected void dropCustomDeathLoot(net.minecraft.world.damagesource.DamageSource source, int looting, boolean recentlyHit) {
+        super.dropCustomDeathLoot(source, looting, recentlyHit);
+        if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.POTATO);
+        if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.CARROT);
+        if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.COD);
+        if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.MELON_SLICE);
+        if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.POISONOUS_POTATO);
+        if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.BAKED_POTATO);
+        if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.SWEET_BERRIES);
+        if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.MELON);
+        if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.PUMPKIN);
+        if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.BEETROOT);
+        if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.APPLE);
+    }
 }

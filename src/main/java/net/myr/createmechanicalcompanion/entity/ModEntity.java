@@ -6,6 +6,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+import net.myr.createmechanicalcompanion.BlueprintPaintingEntity;
 import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 
 
@@ -34,4 +35,12 @@ public class ModEntity {
                     .updateInterval(20)
                     .build(new ResourceLocation(CreateMechanicalCompanion.MOD_ID, "targeted_arrow").toString())
             );
-   }
+
+    public static final RegistryObject<EntityType<BlueprintPaintingEntity>> BLUEPRINT_ENTITY =
+            ENTITIES.register("blueprint_painting",
+                    () -> EntityType.Builder.<BlueprintPaintingEntity>of(BlueprintPaintingEntity::new, MobCategory.MISC)
+                            .sized(0.5F, 0.5F)
+                            .clientTrackingRange(10)
+                            .build("blueprint_painting"));
+
+}

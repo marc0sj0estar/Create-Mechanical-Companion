@@ -35,6 +35,8 @@
   "item.createmechanicalcompanion.mob_radar": "Mob Radar",
 
   "item.createmechanicalcompanion.mechanical_wolf_link": "§6Mechanical Wolf Link",
+  "item.createmechanicalcompanion.blueprint_painting": "Blueprint Schematic",
+  "item.createmechanicalcompanion.blueprint_painting_tooltip": "§8Decorative item that can be placed on walls.",
   "item.createmechanicalcompanion.illager_workshop_map": "§6§oIllager Workshop Map",
   "item.createmechanicalcompanion.mechanical_wolf_processor": "Mechanical Wolf Processor",
   "item.createmechanicalcompanion.mechanical_wolf_motherboard": "Mechanical Wolf Motherboard",
@@ -50,5 +52,7 @@
   "entity.createmechanicalcompanion.illager_engineer": "Illager Engineer",
   "entity.createmechanicalcompanion.potato_cannon_illager": "Illager Supervisor",
 
-  "creativetab.create_mechanical_companion_tab": "Create: Mechanical Companion"
+  "creativetab.create_mechanical_companion_tab": "Create: Mechanical Companion",
+
+  "createmechanicalcompanion.tip.map_tip": "Rumors speak of maps to §6Illager Workshops§r hidden deep in dark forests. Check with a cartographer or wandering trader!"
 }

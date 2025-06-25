@@ -11,6 +11,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.myr.createmechanicalcompanion.BlueprintPaintingItem;
 import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 import net.myr.createmechanicalcompanion.entity.ModEntity;
 import org.jetbrains.annotations.Nullable;
@@ -22,6 +23,8 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CreateMechanicalCompanion.MOD_ID);
 
     public static final RegistryObject<Item> ICON_ITEM = ITEMS.register("tab_icon", () -> new Item(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> BLUEPRINT_PAINTING_ITEM = ITEMS.register("blueprint_painting", () -> new BlueprintPaintingItem(new Item.Properties().stacksTo(16)));
 
     public static final RegistryObject<Item> MECHANICAL_WOLF_LINK = ITEMS.register("mechanical_wolf_link",
             () -> new MechanicalWolfLink(new Item.Properties().stacksTo(1)));

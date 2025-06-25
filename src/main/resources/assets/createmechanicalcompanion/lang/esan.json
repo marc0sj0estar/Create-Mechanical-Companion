@@ -23,7 +23,6 @@
   "item.createmechanicalcompanion.mounted_light.tooltip": "§8Le da al §7Firulaî §8una lûh portátî.",
   "item.createmechanicalcompanion.mob_radar.tooltip": "§8Dêttaca a lâ entidadê ôttilê çerca del §7Firulaî§8, incluço detrâ de lâ paredê.",
 
-
   "item.createmechanicalcompanion.reinforced_plates": "Placâ Reforçâh",
   "item.createmechanicalcompanion.netherite_plates": "Placâ Reforçâh de Netherita",
   "item.createmechanicalcompanion.mounted_crossbow": "Bayêtta Montá",
@@ -36,6 +35,8 @@
   "item.createmechanicalcompanion.mob_radar": "Radâh de Criaturâh",
 
   "item.createmechanicalcompanion.mechanical_wolf_link": "Vínculo der Firulaî",
+  "item.createmechanicalcompanion.blueprint_painting": "Plano decoratibo",
+  "item.createmechanicalcompanion.blueprint_painting_tooltip": "§8Ôhheto decoratibo que çe puede colocâh en lâ paredê.",
   "item.createmechanicalcompanion.illager_workshop_map": "§6§oMapa a Tayêh Mardeano",
   "item.createmechanicalcompanion.mechanical_wolf_processor": "Proçeçadôh de Lobo Mecánico",
   "item.createmechanicalcompanion.mechanical_wolf_motherboard": "Placa Baçe de Lobo Mecánico",
@@ -43,17 +44,15 @@
   "item.createmechanicalcompanion.optical_sensor": "Çençôh Óttico",
   "item.createmechanicalcompanion.incomplete_optical_sensor": "Çençôh Óttico Incompleto",
   "item.createmechanicalcompanion.incomplete_mechanical_wolf_motherboard": "Placa Baçe de Lobo Mecánico Incompleta",
-  "item.createmechanicalcompanion.illager_engineer_spawn_egg": "Guebo de Mardeano Inheniero",
-  "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "Guebo de Mardeano Çuperbiçor",
-
-
+  "item.createmechanicalcompanion.illager_engineer_spawn_egg": "Guebo de Inheniero Mardeano",
+  "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "Guebo de Çuperbiçor Mardeano",
 
   "entity.createmechanicalcompanion.ownership_warning": "§çÊtte Lobo Mecánico no te perteneçe.",
   "entity.createmechanicalcompanion.custom_wolf": "Lobo Mecánico",
-  "entity.createmechanicalcompanion.illager_engineer": "Mardeano Inheniero",
-  "entity.createmechanicalcompanion.potato_cannon_illager": "Mardeano Çuperbiçor",
+  "entity.createmechanicalcompanion.illager_engineer": "Inheniero Mardeano",
+  "entity.createmechanicalcompanion.potato_cannon_illager": "Çuperbiçor Mardeano",
 
+  "creativetab.create_mechanical_companion_tab": "Create: Compañero Mecánico",
 
-
-  "creativetab.create_mechanical_companion_tab": "Create: Compañero Mecánico"
+  "createmechanicalcompanion.tip.map_tip": "Êççîtten rumorê de mapâ a §6Tayerê Mardeanô§r ocurtô en lo profundo de lô bôqquê ôccurô. ¡Conçurta con un cartógrafo o bendedôh ambulante!"
 }

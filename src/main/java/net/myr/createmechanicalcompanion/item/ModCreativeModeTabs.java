@@ -34,6 +34,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.ROSE_QUARTZ_LENS.get());
                         output.accept(ModItems.ILLAGER_ENGINEER_SPAWN_EGG.get());
                         output.accept(ModItems.POTATO_CANNON_ILLAGER_SPAWN_EGG.get());
+                        output.accept(ModItems.BLUEPRINT_PAINTING_ITEM.get());
                     })
                     .icon(() -> new ItemStack(ModItems.ICON_ITEM.get()))
                     .build());
