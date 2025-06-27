@@ -11,6 +11,7 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -42,6 +43,7 @@ public class CreateMechanicalCompanion
         ModSounds.SOUND_EVENTS.register(modEventBus);
         BlueprintPaintingVariants.BLUEPRINT_PAINTINGS.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
+        context.registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ModConfig.COMMON_SPEC);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreative);

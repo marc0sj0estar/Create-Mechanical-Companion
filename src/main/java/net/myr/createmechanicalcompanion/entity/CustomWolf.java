@@ -3,6 +3,7 @@ package net.myr.createmechanicalcompanion.entity;
 import com.simibubi.create.AllItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -17,7 +18,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.*;
 import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -43,7 +47,9 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.myr.createmechanicalcompanion.CustomLeapAtTargetGoal;
+import net.myr.createmechanicalcompanion.ModConfig;
 import net.myr.createmechanicalcompanion.StrollUnlessMenuOpenGoal;
 import net.myr.createmechanicalcompanion.sounds.ModSounds;
 import net.myr.createmechanicalcompanion.item.ModItems;
@@ -124,6 +130,24 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
     }
 
+    @Override
+    public boolean wantsToAttack(LivingEntity pTarget, LivingEntity pOwner) {
+        if (!isBlacklisted(pTarget)) {
+            if (pTarget instanceof Wolf) {
+                Wolf wolf = (Wolf)pTarget;
+                return !wolf.isTame() || wolf.getOwner() != pOwner;
+            } else if (pTarget instanceof Player && pOwner instanceof Player && !((Player)pOwner).canHarmPlayer((Player)pTarget)) {
+                return false;
+            } else if (pTarget instanceof AbstractHorse && ((AbstractHorse)pTarget).isTamed()) {
+                return false;
+            } else {
+                return !(pTarget instanceof TamableAnimal) || !((TamableAnimal)pTarget).isTame();
+            }
+        } else {
+            return false;
+        }
+    }
+
     public static AttributeSupplier.@NotNull Builder createAttributes() {
         return Wolf.createAttributes()
                 .add(Attributes.MAX_HEALTH, 30.0D)
@@ -157,6 +181,12 @@ public class CustomWolf extends Wolf implements MenuProvider {
         itemHandler.deserializeNBT(pCompound.getCompound(("inventory")));
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
         removeLightBlocksAround(this, 3);
+    }
+
+    public boolean isBlacklisted(Entity entity) {
+        ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType());
+        if (id == null) return false;
+        return ModConfig.COMMON.wolfBlacklist.get().contains(id.toString());
     }
 
 
@@ -248,6 +278,8 @@ public class CustomWolf extends Wolf implements MenuProvider {
             if(getOwner() == null){
                 discard();
             }
+
+
             checkForDuplicate();
 
             double defaultHealthValue = 30;
