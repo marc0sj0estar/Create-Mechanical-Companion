@@ -127,7 +127,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 return values.length;
             }
         };
-
     }
 
     @Override
@@ -166,7 +165,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
         if (cap == ForgeCapabilities.ITEM_HANDLER) {
             return lazyItemHandler.cast();
         }
-
         return super.getCapability(cap, side);
     }
 
@@ -279,7 +277,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 discard();
             }
 
-
             checkForDuplicate();
 
             double defaultHealthValue = 30;
@@ -318,7 +315,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
             }else{
                 removePreviousLightBlock();
             }
-
 
             float mountedCrossbowCooldown = 60;
             if(isModuleEquipped(ModItems.MOUNTED_CROSSBOW.get()) && this.getTarget() != null && mountedCrossbowTick >= mountedCrossbowCooldown){
@@ -359,7 +355,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
             if(boosterTimer < boosterCooldown){
                 boosterTimer++;
             }
-
 
             float quantumDriveCooldown = 40;
             if(quantumDriveTimer >= quantumDriveCooldown && this.getTarget() != null && isModuleEquipped(ModItems.QUANTUM_DRIVE.get())) {

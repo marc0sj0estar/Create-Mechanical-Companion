@@ -2,7 +2,7 @@
 
  
 
-_Remember to install [Create](https://modrinth.com/mod/create) and [CuriosAPI](https://modrinth.com/mod/curios)_
+_Remember to install [Create](https://modrinth.com/mod/create) and [CuriosAPI](https://modrinth.com/mod/curios) and use Forge 47.3.10. or above._
 
 This mod adds a new craftable mob to be with you on your journeys, the **Mechanical Wolf**!
 
@@ -12,7 +12,7 @@ The wolf is summoned by equipping the **<span style="color: #e67e23;">Mechanical
 
 You can right click it to open the __module interface__ or use a wrench to heal it.
 
-![](https://media.forgecdn.net/attachments/description/null/description_5fe3003d-bdce-4789-9e57-6da36a7db890.png)
+![](https://media.forgecdn.net/attachments/description/1264989/description_6d484c79-cd77-45c2-96ba-bef38ab1c98c.png)
 
 Here you can equip the wolf with the modules that best fit the situation. There are currently 4 module categories:
 
@@ -76,7 +76,40 @@ Gives the **Mechanical Wolf** a portable light. Doesn't work underwater or in d
 
 Gives the **Mechanical Wolf** a slow regeneration effect so you don't have to manually heal it.
 
- 
+## **NEW FEATURES**
+**Version 1.4**
+As of version 1.4. there's a new way to acquire the pieces for the **Mechanical Wolf**, The **Illager Workshop**. A map to the **Illager Workshop** can be found by trading with cartographers or wandering traders.
+
+![](https://media.forgecdn.net/attachments/description/1264989/description_acc42d8c-6b02-46a3-b54e-993558a3ffe8.png)![](https://media.forgecdn.net/attachments/description/1264989/description_ebdd3dca-04c3-496d-9ba1-b81916725c92.png)![](https://media.forgecdn.net/attachments/description/1264989/description_0a771bd5-2ad4-4ef8-b77f-1ae0f3cf8ce9.png)
+
+The **Illager Workshop** introduces two new **Illager** mobs. The **Illager Engineer** and the **Illager Supervisor**.
+
+The **Illager Engineer** attacks with a wrench, dealing powerful melee damage to whoever gets close.
+
+![](https://media.forgecdn.net/attachments/description/1264989/description_cfeab18b-30c8-4843-880f-257a584ac992.png)
+
+The **Illager Supervisor** uses a potato cannon to strike from a safe distance. It fires a variery of ammunitions so be prepared for unexpected projectiles!
+
+![](https://media.forgecdn.net/attachments/description/1264989/description_31d4f2d9-24e7-4809-83ff-7f33ffb422cf.png)
+
+The **Illager Workshop** is filled with valuable loot and new items essential for the creation of the **Mechanical Wolf**. It also houses captured villagers and Create blocks, making it a great place to settle once the occupants are cleared out.
+
+**Version 1.5**
+
+Version 1.5. introduces a new decoration block: the Blueprint Schematic.
+
+![](https://media.forgecdn.net/attachments/description/1264989/description_80929c3f-7ed0-4341-8faf-83662c6301ec.png)
+
+It can be found in **Illager Workshops** or crafted with schematics.
+
+There are currently five variants, each with a different size 1×1, 1×2, 2×1, 2×2, and 3×4.
+
+## **Additional features**
+- The module menu can't be opened by other players.
+- You can name the Mechanical Wolf using a nametag.
+- There are currently 2 easter eggs skins.
+
+![Easter egg skins](https://cdn.modrinth.com/data/cached_images/822b68043bf9f8f7eefa8573930c886fe1d1409e_0.webp)
 
 ***
 
@@ -90,4 +123,12 @@ Q: Are you going to add additional languages.
 
 A: If you're fluent in a language and want to give me a .json file with the translation I'll be more than happy to add it.
 
+Q: Are you going to add additional easter egg textures?
+
+A: If you have any ideas/textures I'd be glad to add them in the next update.
+
 ***
+
+## Check out my other mods!
+[![image](https://media.forgecdn.net/attachments/description/1264989/description_609b037b-78cb-4497-8b4f-c95c77def773.png)](https://modrinth.com/mod/create-totem-factory)
+[![image](https://media.forgecdn.net/attachments/description/1264989/description_9fc42ad4-806e-4042-b519-31962433848d.png)](https://modrinth.com/mod/create-immersive-tacz-integration)
