@@ -2,7 +2,8 @@
   "item.createmechanicalcompanion.shift": "§8按住[§7Shift§8]可查看概要。",
   "item.createmechanicalcompanion.shift2": "§8按住[§7Shift§8]可查看概要。",
 
-  "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8生成一只保护穿戴者的§7动力狼§r§8。\n使用扳手右击它打开模块交互界面或治疗它。\n当§7动力狼§r§8死亡，在冷却结束后，它会带着模块重生。",
+  "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8生成一只保护穿戴者的§7动力狼§r§8。\n使用扳手右击它打开模块交互界面或治疗它。\n当§7动力狼§r§8死亡，复活冷却结束后，它会带着模块重生。",
+  "item.createmechanicalcompanion.mechanical_wolf_processor.tooltip": "§8能够在§6灾厄工坊§8中找到§8.\n§6灾厄工坊地图§8能够通过与制图师或流浪商人交易获得。\n§8用于制造§7动力狼§8。",
 
   "item.createmechanicalcompanion.defensive_module": "§3防御模块",
   "item.createmechanicalcompanion.reinforced_plates.tooltip": "§8为§7动力狼§r§8增加额外的护甲值。",
@@ -20,7 +21,7 @@
   "item.createmechanicalcompanion.utility_module": "§5实用模块",
   "item.createmechanicalcompanion.regenerative_casing.tooltip": "§8使§7动力狼§r§8获得生命恢复效果。",
   "item.createmechanicalcompanion.mounted_light.tooltip": "§8使§7动力狼§r§8获得移动光源。",
-  "item.createmechanicalcompanion.mob_radar.tooltip": "§8哪怕隔着墙，§7动力狼§r§8会高亮附近的生物，。",
+  "item.createmechanicalcompanion.mob_radar.tooltip": "§8哪怕隔着墙，§7动力狼§r§8会高亮附近的生物。",
 
   "item.createmechanicalcompanion.reinforced_plates": "加固板",
   "item.createmechanicalcompanion.netherite_plates": "下届合金板",
@@ -32,9 +33,26 @@
   "item.createmechanicalcompanion.regenerative_casing": "再生外壳",
   "item.createmechanicalcompanion.mounted_light": "挂载灯",
   "item.createmechanicalcompanion.mob_radar": "生物雷达",
+
   "item.createmechanicalcompanion.mechanical_wolf_link": "§6动力狼连接器",
+  "item.createmechanicalcompanion.blueprint_painting": "蓝图简图",
+  "item.createmechanicalcompanion.blueprint_painting_tooltip": "§8D能放置于墙上的装饰性物品。",
+  "item.createmechanicalcompanion.illager_workshop_map": "§6§o灾厄工坊地图",
+  "item.createmechanicalcompanion.mechanical_wolf_processor": "动力狼加工器",
+  "item.createmechanicalcompanion.mechanical_wolf_motherboard": "动力狼主板",
+  "item.createmechanicalcompanion.rose_quartz_lens": "玫瑰石英透镜",
+  "item.createmechanicalcompanion.optical_sensor": "光学传感器",
+  "item.createmechanicalcompanion.incomplete_optical_sensor": "光学传感器（半成品）",
+  "item.createmechanicalcompanion.incomplete_mechanical_wolf_motherboard": "动力狼主板（半成品）",
+  "item.createmechanicalcompanion.illager_engineer_spawn_egg": "灾厄工程师刷怪蛋",
+  "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "灾厄监工刷怪蛋",
 
-  "entity.createmechanicalcompanion.ownership_warning": "§c这只机械狼不属于你。",
+  "entity.createmechanicalcompanion.ownership_warning": "§c这只动力狼不属于你。",
+  "entity.createmechanicalcompanion.custom_wolf": "动力狼",
+  "entity.createmechanicalcompanion.illager_engineer": "灾厄工程师",
+  "entity.createmechanicalcompanion.potato_cannon_illager": "灾厄监工",
 
-  "creativetab.create_mechanical_companion_tab": "机械动力：动力伙伴"
+  "creativetab.create_mechanical_companion_tab": "机械动力：动力伙伴",
+
+  "createmechanicalcompanion.tip.map_tip": "据说在黑森林中藏有前往§6灾厄工坊§r的路。与制图师或流浪商人确认这个消息！"
 }
