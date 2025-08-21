@@ -47,10 +47,20 @@
   "item.createmechanicalcompanion.illager_engineer_spawn_egg": "Huevo de Ingeniero Maldeano",
   "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "Huevo de Supervisor Maldeano",
 
+  "painting.createmechanicalcompanion.blueprint_art_1.title": "Plano de Pata de Lobo Mecánico",
+  "painting.createmechanicalcompanion.blueprint_art_2.title": "Plano de Visor de Lobo Mecánico",
+  "painting.createmechanicalcompanion.blueprint_art_3.title": "Plano de Placa Base de Lobo Mecánico",
+  "painting.createmechanicalcompanion.blueprint_art_4.title": "Plano Pequeño",
+  "painting.createmechanicalcompanion.blueprint_art_1.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_2.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_3.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_4.author": "Marcos",
+
   "entity.createmechanicalcompanion.ownership_warning": "§cEste Lobo Mecánico no te pertenece.",
   "entity.createmechanicalcompanion.custom_wolf": "Lobo Mecánico",
   "entity.createmechanicalcompanion.illager_engineer": "Ingeniero Maldeano",
   "entity.createmechanicalcompanion.potato_cannon_illager": "Supervisor Maldeano",
+  "entity.createmechanicalcompanion.blueprint_painting": "Plano decorativo",
 
   "creativetab.create_mechanical_companion_tab": "Create: Compañero Mecánico",
 

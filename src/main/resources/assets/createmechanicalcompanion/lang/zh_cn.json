@@ -47,10 +47,20 @@
   "item.createmechanicalcompanion.illager_engineer_spawn_egg": "灾厄工程师刷怪蛋",
   "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "灾厄监工刷怪蛋",
 
+  "painting.createmechanicalcompanion.blueprint_art_1.title": "机械狼腿蓝图",
+  "painting.createmechanicalcompanion.blueprint_art_2.title": "机械狼目镜蓝图",
+  "painting.createmechanicalcompanion.blueprint_art_3.title": "机械狼主板蓝图",
+  "painting.createmechanicalcompanion.blueprint_art_4.title": "小型蓝图",
+  "painting.createmechanicalcompanion.blueprint_art_1.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_2.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_3.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_4.author": "Marcos",
+
   "entity.createmechanicalcompanion.ownership_warning": "§c这只动力狼不属于你。",
   "entity.createmechanicalcompanion.custom_wolf": "动力狼",
   "entity.createmechanicalcompanion.illager_engineer": "灾厄工程师",
   "entity.createmechanicalcompanion.potato_cannon_illager": "灾厄监工",
+  "entity.createmechanicalcompanion.blueprint_painting": "蓝图示意图",
 
   "creativetab.create_mechanical_companion_tab": "机械动力：动力伙伴",
 

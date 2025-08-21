@@ -47,10 +47,20 @@
   "item.createmechanicalcompanion.illager_engineer_spawn_egg": "Illager Engineer Spawn Egg",
   "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "Illager Supervisor Spawn Egg",
 
+  "painting.createmechanicalcompanion.blueprint_art_1.title": "Mechanical Wolf Leg Blueprint",
+  "painting.createmechanicalcompanion.blueprint_art_2.title": "Mechanical Wolf Visor Blueprint",
+  "painting.createmechanicalcompanion.blueprint_art_3.title": "Mechanical Wolf Motherboard Blueprint",
+  "painting.createmechanicalcompanion.blueprint_art_4.title": "Small Blueprint",
+  "painting.createmechanicalcompanion.blueprint_art_1.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_2.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_3.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_4.author": "Marcos",
+
   "entity.createmechanicalcompanion.ownership_warning": "§cThis Mechanical Wolf doesn't belong to you.",
   "entity.createmechanicalcompanion.custom_wolf": "Mechanical Wolf",
   "entity.createmechanicalcompanion.illager_engineer": "Illager Engineer",
   "entity.createmechanicalcompanion.potato_cannon_illager": "Illager Supervisor",
+  "entity.createmechanicalcompanion.blueprint_painting": "Blueprint Schematic",
 
   "creativetab.create_mechanical_companion_tab": "Create: Mechanical Companion",
 

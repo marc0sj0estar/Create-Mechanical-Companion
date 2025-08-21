@@ -47,10 +47,20 @@
   "item.createmechanicalcompanion.illager_engineer_spawn_egg": "Guebo de Inheniero Mardeano",
   "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "Guebo de Çuperbiçor Mardeano",
 
+  "painting.createmechanicalcompanion.blueprint_art_1.title": "Plano de Pata de Lobo Mecánico",
+  "painting.createmechanicalcompanion.blueprint_art_2.title": "Plano de Biçôh de Lobo Mecánico",
+  "painting.createmechanicalcompanion.blueprint_art_3.title": "Plano de Placa Baçe de Lobo Mecánico",
+  "painting.createmechanicalcompanion.blueprint_art_4.title": "Plano Pequeño",
+  "painting.createmechanicalcompanion.blueprint_art_1.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_2.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_3.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_4.author": "Marcos",
+
   "entity.createmechanicalcompanion.ownership_warning": "§çÊtte Lobo Mecánico no te perteneçe.",
   "entity.createmechanicalcompanion.custom_wolf": "Lobo Mecánico",
   "entity.createmechanicalcompanion.illager_engineer": "Inheniero Mardeano",
   "entity.createmechanicalcompanion.potato_cannon_illager": "Çuperbiçor Mardeano",
+  "entity.createmechanicalcompanion.blueprint_painting": "Plano decoratibo",
 
   "creativetab.create_mechanical_companion_tab": "Create: Compañero Mecánico",
 
