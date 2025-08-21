@@ -1,16 +1,14 @@
 package net.myr.createmechanicalcompanion.item;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.myr.createmechanicalcompanion.BlueprintPaintingEntity;
 import net.myr.createmechanicalcompanion.BlueprintPaintingItem;
 import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 import net.myr.createmechanicalcompanion.entity.ModEntity;
@@ -25,6 +23,7 @@ public class ModItems {
     public static final RegistryObject<Item> ICON_ITEM = ITEMS.register("tab_icon", () -> new Item(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> BLUEPRINT_PAINTING_ITEM = ITEMS.register("blueprint_painting", () -> new BlueprintPaintingItem(new Item.Properties().stacksTo(16)));
+
 
     public static final RegistryObject<Item> MECHANICAL_WOLF_LINK = ITEMS.register("mechanical_wolf_link",
             () -> new MechanicalWolfLink(new Item.Properties().stacksTo(1)));

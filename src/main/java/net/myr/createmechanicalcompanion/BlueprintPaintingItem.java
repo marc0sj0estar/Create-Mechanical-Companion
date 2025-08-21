@@ -35,8 +35,7 @@ public class BlueprintPaintingItem extends Item {
         BlockPos pos = pContext.getClickedPos();
         Direction face = pContext.getClickedFace();
 
-        if (face == Direction.DOWN || face == Direction.UP || level.getBlockState(pos.relative(face.getOpposite()))
-                .isFaceSturdy(level, pos.relative(face.getOpposite()), face)){
+        if (face == Direction.DOWN || face == Direction.UP) {
             return InteractionResult.FAIL;
         }
 
