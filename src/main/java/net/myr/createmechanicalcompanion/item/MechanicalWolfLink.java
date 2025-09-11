@@ -1,8 +1,11 @@
 package net.myr.createmechanicalcompanion.item;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.nbt.CompoundTag;
@@ -11,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -19,13 +23,17 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
 import net.myr.createmechanicalcompanion.entity.CustomWolf;
 import net.myr.createmechanicalcompanion.entity.ModEntity;
 import net.myr.createmechanicalcompanion.sounds.ModSounds;
 import org.jetbrains.annotations.Nullable;
+import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
 public class MechanicalWolfLink extends Item implements ICurioItem {
 
@@ -36,6 +44,29 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
 
     private CompoundTag previousModuleTag;
 
+    @Override
+    public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+        LivingEntity playerEntity = slotContext.entity();
+
+        if(!(playerEntity instanceof Player player)) {return false;}
+
+        ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(playerEntity).orElse(null);
+
+        if(curiosInventory == null) {return true;}
+
+        ICurioStacksHandler headSlotHandler = curiosInventory.getCurios().get("head");
+
+        if (headSlotHandler == null) {return false;}
+
+        for (int i = 0; i < headSlotHandler.getSlots(); i++) {
+            ItemStack itemStack = headSlotHandler.getStacks().getStackInSlot(i);
+            if (itemStack.getItem() instanceof MechanicalWolfLink) {
+                player.displayClientMessage(Component.translatable("item.createmechanicalcompanion.mechanical_wolf_link.duplicate_warning"), true);
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {

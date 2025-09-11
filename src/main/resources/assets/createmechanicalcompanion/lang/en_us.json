@@ -3,6 +3,7 @@
   "item.createmechanicalcompanion.shift2": "§8Hold [§fShift§8] for Summary.",
 
   "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8Spawns a §7Mechanical Wolf§r§8 to protect the wearer.\nYou can open the module interface by right-clicking it or heal it by using a wrench.\nWhen the §7Mechanical Wolf§r§8 dies, it will respawn with the modules equipped after a short cooldown.",
+  "item.createmechanicalcompanion.mechanical_wolf_link.duplicate_warning": "§cYou already have a Mechanical Wolf Link equipped!",
   "item.createmechanicalcompanion.mechanical_wolf_processor.tooltip": "§8Found in §6Illager Workshops§8.\nYou can find §6Illager Workshop Maps§8 when trading with cartographers or wandering traders.\n§8Used to make the §7Mechanical Wolf§8.",
 
   "item.createmechanicalcompanion.defensive_module": "§3Defensive Module",

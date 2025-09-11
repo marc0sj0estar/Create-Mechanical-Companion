@@ -418,14 +418,21 @@ public class CustomWolf extends Wolf implements MenuProvider {
         }
     }
 
+    @Override
+    public boolean canChangeDimensions() {
+        return false;
+    }
+
     private void checkForDuplicate(){
         if(this.getOwner() instanceof Player player){
             ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(player).orElse(null);
             if(curiosInventory == null){
+                discard();
                 return;
             }
             Optional<SlotResult> item = curiosInventory.findCurio("head", 0);
             if(item.isEmpty()) {
+                discard();
                 return;
             }
             CompoundTag compoundTag = item.get().stack().getTag();

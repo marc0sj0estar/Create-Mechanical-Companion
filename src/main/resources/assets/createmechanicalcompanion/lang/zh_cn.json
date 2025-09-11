@@ -3,6 +3,7 @@
   "item.createmechanicalcompanion.shift2": "§8按住[§7Shift§8]可查看概要。",
 
   "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8生成一只保护穿戴者的§7动力狼§r§8。\n使用扳手右击它打开模块交互界面或治疗它。\n当§7动力狼§r§8死亡，复活冷却结束后，它会带着模块重生。",
+  "item.createmechanicalcompanion.mechanical_wolf_link.duplicate_warning": "§c你已经装备了动力狼连接器！",
   "item.createmechanicalcompanion.mechanical_wolf_processor.tooltip": "§8能够在§6灾厄工坊§8中找到§8.\n§6灾厄工坊地图§8能够通过与制图师或流浪商人交易获得。\n§8用于制造§7动力狼§8。",
 
   "item.createmechanicalcompanion.defensive_module": "§3防御模块",

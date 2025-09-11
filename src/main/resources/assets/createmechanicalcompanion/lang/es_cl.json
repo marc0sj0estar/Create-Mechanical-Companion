@@ -3,6 +3,7 @@
   "item.createmechanicalcompanion.shift2": "§8Mantenga presionado [§fShift§8] para ver el Resumen.",
 
   "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8Crea un §7Lobo Mecánico§r§8 que protege al portador.\nPuedes abrir el menú de módulos haciendo clic derecho o curarlo con una llave inglesa,\nCuando el §7Lobo Mecánico§r§8 muere, reaparece después de un tiempo con los módulos equipados.",
+  "item.createmechanicalcompanion.mechanical_wolf_link.duplicate_warning": "§c¡Ya tienes un Vínculo de Lobo Mecánico equipado!",
   "item.createmechanicalcompanion.mechanical_wolf_processor.tooltip": "§8Encontrado en §6Talleres Maldeanos§8.\nPuedes encontrar §6Mapas a Talleres Maldeanos§8 comerciando con cartógrafos o vendedores amobulantes.\n§8Usado para crear al §7Lobo Mecánico§8.",
 
   "item.createmechanicalcompanion.defensive_module": "§3Módulos defensivos",

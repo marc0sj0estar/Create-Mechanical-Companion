@@ -32,8 +32,6 @@ import net.myr.createmechanicalcompanion.PotatoCannonAttackGoal;
 
 public class PotatoCannonIllager extends Pillager {
 
-
-
     private static final EntityDataAccessor<Boolean> ATTACKING = SynchedEntityData.defineId(PotatoCannonIllager.class, EntityDataSerializers.BOOLEAN);
 
     private final SimpleContainer inventory = new SimpleContainer(5);
@@ -96,9 +94,7 @@ public class PotatoCannonIllager extends Pillager {
         super.tick();
         if(!(level().isClientSide())){
             this.setAttacking(this.getTarget() != null && this.getTarget().isAlive());
-
         }
-
     }
 
     @Override
@@ -120,5 +116,10 @@ public class PotatoCannonIllager extends Pillager {
         if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.PUMPKIN);
         if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.BEETROOT);
         if (this.random.nextFloat() < 0.2F) this.spawnAtLocation(Items.APPLE);
+    }
+
+    @Override
+    public boolean removeWhenFarAway(double pDistanceToClosestPlayer) {
+        return false;
     }
 }

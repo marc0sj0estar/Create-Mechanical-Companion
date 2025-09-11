@@ -46,4 +46,9 @@ public class IllagerEngineer extends Vindicator {
     public boolean canBeLeader() {
         return false;
     }
+
+    @Override
+    public boolean removeWhenFarAway(double pDistanceToClosestPlayer) {
+        return false;
+    }
 }
