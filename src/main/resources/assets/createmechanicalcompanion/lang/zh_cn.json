@@ -8,7 +8,8 @@
 
   "item.createmechanicalcompanion.defensive_module": "§3防御模块",
   "item.createmechanicalcompanion.reinforced_plates.tooltip": "§8为§7动力狼§r§8增加额外的护甲值。",
-  "item.createmechanicalcompanion.netherite_plates.tooltip": "§8为§7动力狼§r§8增加额外护甲值，额外生命值以及火焰免疫。",
+  "item.createmechanicalcompanion.netherite_plates.tooltip": "§8为§7机械狼§r§8增加护甲值、击退抗性、额外生命值以及火焰免疫。",
+
 
   "item.createmechanicalcompanion.offensive_module": "§4进攻模块",
   "item.createmechanicalcompanion.mounted_crossbow.tooltip": "§8为§7动力狼§r§8添加挂载弩，其能对目标造成伤害。",

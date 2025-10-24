@@ -1,4 +1,4 @@
-package net.myr.createmechanicalcompanion;
+package net.myr.createmechanicalcompanion.item;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,6 +12,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.RegistryObject;
+import net.myr.createmechanicalcompanion.entity.BlueprintPaintingEntity;
 import net.myr.createmechanicalcompanion.entity.ModEntity;
 import org.jetbrains.annotations.Nullable;
 

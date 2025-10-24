@@ -1,27 +1,14 @@
-package net.myr.createmechanicalcompanion;
+package net.myr.createmechanicalcompanion.entity;
 
 
 import com.simibubi.create.AllEntityTypes;
 import com.simibubi.create.content.equipment.potatoCannon.PotatoProjectileEntity;
-import net.minecraft.util.TimeUtil;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.goal.RangedCrossbowAttackGoal;
-import net.minecraft.world.entity.monster.CrossbowAttackMob;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.entity.projectile.SmallFireball;
-import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
-import net.myr.createmechanicalcompanion.entity.PotatoCannonIllager;
 
 import java.util.EnumSet;
 

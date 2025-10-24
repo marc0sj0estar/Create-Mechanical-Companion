@@ -1,10 +1,11 @@
-package net.myr.createmechanicalcompanion;
+package net.myr.createmechanicalcompanion.item;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 
 import java.util.List;
 

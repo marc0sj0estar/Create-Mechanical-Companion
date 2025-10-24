@@ -8,9 +8,8 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.myr.createmechanicalcompanion.BlueprintPaintingEntity;
-import net.myr.createmechanicalcompanion.BlueprintPaintingItem;
 import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
+import net.myr.createmechanicalcompanion.entity.BlueprintPaintingEntity;
 import net.myr.createmechanicalcompanion.entity.ModEntity;
 import org.jetbrains.annotations.Nullable;
 

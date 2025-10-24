@@ -7,6 +7,7 @@ import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.myr.createmechanicalcompanion.entity.IllagerWorkshopMapTrade;
 
 import java.util.LinkedList;
 import java.util.List;

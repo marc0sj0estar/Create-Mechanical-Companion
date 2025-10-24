@@ -7,7 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -19,9 +18,6 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.*;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
-import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -35,7 +31,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LightBlock;
@@ -48,9 +43,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.myr.createmechanicalcompanion.CustomLeapAtTargetGoal;
 import net.myr.createmechanicalcompanion.ModConfig;
-import net.myr.createmechanicalcompanion.StrollUnlessMenuOpenGoal;
 import net.myr.createmechanicalcompanion.sounds.ModSounds;
 import net.myr.createmechanicalcompanion.item.ModItems;
 import net.myr.createmechanicalcompanion.screen.WolfMenu;
@@ -75,9 +68,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
     private static final int UTILITY_SLOT2 = 4;
 
     private static final double movementSpeed = 0.35D;
-
-    private static final int reinforcedPlatesArmorValue = 4;
-    private static final int netheritePlatesArmorValue = 6;
 
     private BlockPos previousLightPos = null;
     private float currentTorchTick = 0;
@@ -152,6 +142,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, movementSpeed)
                 .add(Attributes.ATTACK_DAMAGE, 6.0D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0)
                 .add(Attributes.FOLLOW_RANGE, 16.0D);
     }
 
@@ -229,7 +220,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
     public @NotNull InteractionResult mobInteract(Player player, InteractionHand hand) {
         if (!this.level().isClientSide && player instanceof ServerPlayer serverPlayer) {
             if(player.getItemInHand(hand).getItem() == AllItems.WRENCH.get()){
-                this.heal(5);
+                this.heal(ModConfig.COMMON.wrenchHealAmount.get().floatValue());
                 this.level().playSound(this, this.blockPosition(), SoundEvents.IRON_GOLEM_REPAIR, SoundSource.NEUTRAL, 1, 1);
                 return InteractionResult.SUCCESS;
             }
@@ -271,7 +262,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
     @Override
     public void tick() {
         super.tick();
-        double boosterSpeedIncrease = 0.3D;
+        double boosterSpeedIncrease = ModConfig.COMMON.boosterRocketSpeedIncrease.get();
         if (!this.level().isClientSide) {
             if(getOwner() == null){
                 discard();
@@ -280,15 +271,25 @@ public class CustomWolf extends Wolf implements MenuProvider {
             checkForDuplicate();
 
             double defaultHealthValue = 30;
+            if(isModuleEquipped(ModItems.REINFORCED_PLATES.get()))
+            {
+                double reinforcedPlatesHealthIncrease = ModConfig.COMMON.reinforcedPlatesHealthIncrease.get();
+                if(this.getAttribute(Attributes.MAX_HEALTH).getBaseValue() != (defaultHealthValue + reinforcedPlatesHealthIncrease)) {
+                    this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(defaultHealthValue + reinforcedPlatesHealthIncrease);
+                    this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(ModConfig.COMMON.reinforcedPlatesKnockBackResistance.get());
+                }
+            }
             if(isModuleEquipped(ModItems.NETHERITE_PLATES.get()))
             {
-                double netheritePlatesHealthIncrease = 10;
+                double netheritePlatesHealthIncrease = ModConfig.COMMON.netheritePlatesHealthIncrease.get();
                 if(this.getAttribute(Attributes.MAX_HEALTH).getBaseValue() != (defaultHealthValue + netheritePlatesHealthIncrease)) {
                    this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(defaultHealthValue + netheritePlatesHealthIncrease);
+                    this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(ModConfig.COMMON.netheritePlatesKnockBackResistance.get());
                }
             }else{
                 if(this.getAttribute(Attributes.MAX_HEALTH).getBaseValue() != defaultHealthValue) {
                     this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(defaultHealthValue);
+                    this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0);
                     if(this.getHealth() > this.getMaxHealth())
                     {
                         this.setHealth(this.getMaxHealth());
@@ -297,7 +298,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
             }
 
             if (isModuleEquipped(ModItems.REGENERATIVE_CASING.get()) && this.getHealth() < this.getMaxHealth()) {
-                this.heal(0.05f);
+                this.heal(ModConfig.COMMON.regenerativeCasingHealAmount.get().floatValue());
             }
 
             if (isModuleEquipped(ModItems.MOUNTED_LIGHT.get())) {
@@ -316,7 +317,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 removePreviousLightBlock();
             }
 
-            float mountedCrossbowCooldown = 60;
+            float mountedCrossbowCooldown = ModConfig.COMMON.mountedCrossbowCooldown.get();
             if(isModuleEquipped(ModItems.MOUNTED_CROSSBOW.get()) && this.getTarget() != null && mountedCrossbowTick >= mountedCrossbowCooldown){
                 mountedCrossbowTick = 0;
                 TargetedArrowEntity arrow = new TargetedArrowEntity(this.level(), this, this.getTarget());
@@ -339,14 +340,14 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
             AttributeInstance movementAttribute = this.getAttribute(Attributes.MOVEMENT_SPEED);
 
-            float boosterCooldown = 180;
+            float boosterCooldown = ModConfig.COMMON.boosterRocketCooldown.get();
             if(isModuleEquipped(ModItems.BOOSTER_ROCKET.get()) && this.getTarget() != null && boosterTimer >= boosterCooldown){
                 if(movementAttribute.getBaseValue() == movementSpeed){
                     movementAttribute.setBaseValue(movementSpeed + boosterSpeedIncrease);
                     boosterTimer = 0;
                 }
             }else{
-                float boosterDuration = 40;
+                float boosterDuration = ModConfig.COMMON.boosterRocketDuration.get();
                 if(boosterTimer >= boosterDuration && movementAttribute.getBaseValue() != movementSpeed){
                     movementAttribute.setBaseValue(movementSpeed);
                 }
@@ -356,7 +357,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 boosterTimer++;
             }
 
-            float quantumDriveCooldown = 40;
+            float quantumDriveCooldown = ModConfig.COMMON.quantumDriveCooldown.get();
             if(quantumDriveTimer >= quantumDriveCooldown && this.getTarget() != null && isModuleEquipped(ModItems.QUANTUM_DRIVE.get())) {
                 Entity target = this.getTarget();
                 Vec3 targetPosition = target.position();
@@ -374,7 +375,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 quantumDriveTimer++;
             }
 
-            float mobRadarCooldown = 200;
+            float mobRadarCooldown = ModConfig.COMMON.mobRadarCooldown.get();
             if(mobRadarTimer >= mobRadarCooldown && isModuleEquipped(ModItems.MOB_RADAR.get()))
             {
                 applyGlowingToHostileMobs();
@@ -406,7 +407,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
 
     private void applyGlowingToHostileMobs() {
-        float radarRadius = 20;
+        float radarRadius = ModConfig.COMMON.mobRadarRange.get();
         List<Entity> nearbyEntities = level().getEntities(this, this.getBoundingBox().inflate(radarRadius), entity -> entity instanceof Mob mob && mob.getType().getCategory() == MobCategory.MONSTER);
 
         for (Entity entity : nearbyEntities) {
@@ -519,7 +520,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
     @Override
     public boolean doHurtTarget(Entity pEntity) {
         if(isModuleEquipped(ModItems.SMELTING_FANGS.get())) {
-            pEntity.setSecondsOnFire(5);
+            pEntity.setSecondsOnFire(ModConfig.COMMON.smeltingFangsFireDuration.get());
         }
         float pitch = 0.8F + this.random.nextFloat() * 0.4F;
         this.level().playSound(this, this.blockPosition(), ModSounds.BITE_SOUND.get(), SoundSource.NEUTRAL, 0.6f, pitch);
@@ -532,7 +533,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
         {
             if(pSource.getEntity() != null)
             {
-                pSource.getEntity().hurt(pSource.getEntity().damageSources().mobAttack(this), 1);
+                pSource.getEntity().hurt(pSource.getEntity().damageSources().mobAttack(this), ModConfig.COMMON.teslaTailDamage.get().floatValue());
                 pSource.getEntity().invulnerableTime = 0;
             }
             spawnTeslaTailParticles();
@@ -564,10 +565,10 @@ public class CustomWolf extends Wolf implements MenuProvider {
     @Override
     public int getArmorValue() {
         if (isModuleEquipped(ModItems.REINFORCED_PLATES.get())) {
-            return reinforcedPlatesArmorValue;
+            return ModConfig.COMMON.reinforcedPlatesArmorValue.get();
         }
         if(isModuleEquipped(ModItems.NETHERITE_PLATES.get())) {
-            return netheritePlatesArmorValue;
+            return ModConfig.COMMON.netheritePlatesArmorValue.get();
         }
         return super.getArmorValue();
     }

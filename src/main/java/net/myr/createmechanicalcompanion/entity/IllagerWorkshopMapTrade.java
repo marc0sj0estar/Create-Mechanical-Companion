@@ -1,9 +1,8 @@
-package net.myr.createmechanicalcompanion;
+package net.myr.createmechanicalcompanion.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
@@ -17,9 +16,8 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
+import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
 
 public class IllagerWorkshopMapTrade implements VillagerTrades.ItemListing{
 

@@ -21,6 +21,7 @@ import net.myr.createmechanicalcompanion.client.MechanicalWolfLinkRenderer;
 import net.myr.createmechanicalcompanion.client.ModModelLayers;
 import net.myr.createmechanicalcompanion.sounds.ModSounds;
 import net.myr.createmechanicalcompanion.entity.ModEntity;
+import net.myr.createmechanicalcompanion.item.BlueprintPaintingVariants;
 import net.myr.createmechanicalcompanion.item.ModCreativeModeTabs;
 import net.myr.createmechanicalcompanion.item.ModItems;
 import net.myr.createmechanicalcompanion.screen.ModMenuTypes;

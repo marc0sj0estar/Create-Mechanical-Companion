@@ -5,7 +5,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.myr.createmechanicalcompanion.BlueprintPaintingRenderer;
 import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 import net.myr.createmechanicalcompanion.entity.ModEntity;
 

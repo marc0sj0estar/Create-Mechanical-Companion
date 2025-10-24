@@ -1,9 +1,8 @@
-package net.myr.createmechanicalcompanion;
+package net.myr.createmechanicalcompanion.entity;
 
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
-import net.myr.createmechanicalcompanion.entity.CustomWolf;
 import net.myr.createmechanicalcompanion.screen.WolfMenu;
 
 public class StrollUnlessMenuOpenGoal extends WaterAvoidingRandomStrollGoal {

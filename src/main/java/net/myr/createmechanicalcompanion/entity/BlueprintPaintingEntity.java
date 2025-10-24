@@ -1,4 +1,4 @@
-package net.myr.createmechanicalcompanion;
+package net.myr.createmechanicalcompanion.entity;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
