@@ -1,0 +1,69 @@
+{
+  "item.createmechanicalcompanion.shift": "§8[§7Shift§8]を押して詳細を表示",
+  "item.createmechanicalcompanion.shift2": "§8[§fShift§8]を押して詳細を表示",
+
+  "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8装備者を守る§7メカニカルウルフ§r§8を召喚する\n右クリックでモジュール画面を開くことができ、レンチで殴ると回復できる\n§7メカニカルウルフ§r§8が倒されると、短いクールダウン後に装備していたモジュールを維持したまま再出現する",
+  "item.createmechanicalcompanion.mechanical_wolf_link.duplicate_warning": "§cすでにメカニカルウルフリンクを装備しています！",
+  "item.createmechanicalcompanion.mechanical_wolf_processor.tooltip": "§8§6イリジャーの作業場§8で見つかる\n§6作業場の地図§8は、製図家や行商人との取引で入手できる\n§8§7メカニカルウルフ§8の作成に使用する",
+
+  "item.createmechanicalcompanion.defensive_module": "§3防御モジュール",
+  "item.createmechanicalcompanion.reinforced_plates.tooltip": "§8§7メカニカルウルフ§8に追加の防御力を与える",
+  "item.createmechanicalcompanion.netherite_plates.tooltip": "§8§7メカニカルウルフ§8に防御力、ノックバック耐性、追加の体力、火炎耐性を与える",
+
+  "item.createmechanicalcompanion.offensive_module": "§4攻撃モジュール",
+  "item.createmechanicalcompanion.mounted_crossbow.tooltip": "§8§7メカニカルウルフ§8に搭載型クロスボウを追加する\n§8攻撃対象のみにダメージを与える",
+  "item.createmechanicalcompanion.tesla_tail.tooltip": "§8§7メカニカルウルフ§8にテスラテイルを追加し、攻撃してきた敵にダメージを与える",
+  "item.createmechanicalcompanion.smelting_fangs.tooltip": "§8§7メカニカルウルフ§8の攻撃に火炎ダメージを付与し、火炎耐性を与える",
+
+  "item.createmechanicalcompanion.movement_module": "§2移動モジュール",
+  "item.createmechanicalcompanion.booster_rocket.tooltip": "§8§7メカニカルウルフ§8が敵を見つけたとき、移動速度が上昇する",
+  "item.createmechanicalcompanion.quantum_drive.tooltip": "§8§7メカニカルウルフ§8が攻撃対象の元へテレポートできるようになる",
+
+  "item.createmechanicalcompanion.utility_module": "§5ユーティリティモジュール",
+  "item.createmechanicalcompanion.regenerative_casing.tooltip": "§8§7メカニカルウルフ§8に再生能力を与える",
+  "item.createmechanicalcompanion.mounted_light.tooltip": "§8§7メカニカルウルフ§8に携帯型の光源を与える",
+  "item.createmechanicalcompanion.mob_radar.tooltip": "§8壁越しに§7メカニカルウルフ§8周辺の敵対的なモブを強調表示する",
+
+  "item.createmechanicalcompanion.reinforced_plates": "強化プレート",
+  "item.createmechanicalcompanion.netherite_plates": "ネザライトプレート",
+  "item.createmechanicalcompanion.mounted_crossbow": "搭載型クロスボウ",
+  "item.createmechanicalcompanion.tesla_tail": "テスラテイル",
+  "item.createmechanicalcompanion.smelting_fangs": "炎の牙",
+  "item.createmechanicalcompanion.booster_rocket": "ロケットブースター",
+  "item.createmechanicalcompanion.quantum_drive": "量子ドライブ",
+  "item.createmechanicalcompanion.regenerative_casing": "再生ケーシング",
+  "item.createmechanicalcompanion.mounted_light": "携帯ライト",
+  "item.createmechanicalcompanion.mob_radar": "モブレーダー",
+
+  "item.createmechanicalcompanion.mechanical_wolf_link": "§6メカニカルウルフリンク",
+  "item.createmechanicalcompanion.blueprint_painting": "設計図の絵画",
+  "item.createmechanicalcompanion.blueprint_painting_tooltip": "§8壁に設置できる装飾用アイテム",
+  "item.createmechanicalcompanion.illager_workshop_map": "§6§oイリジャーの作業場の地図",
+  "item.createmechanicalcompanion.mechanical_wolf_processor": "メカニカルウルフプロセッサー",
+  "item.createmechanicalcompanion.mechanical_wolf_motherboard": "メカニカルウルフのマザーボード",
+  "item.createmechanicalcompanion.rose_quartz_lens": "ローズクォーツのレンズ",
+  "item.createmechanicalcompanion.optical_sensor": "光学センサー",
+  "item.createmechanicalcompanion.incomplete_optical_sensor": "未完成の光学センサー",
+  "item.createmechanicalcompanion.incomplete_mechanical_wolf_motherboard": "未完成のメカニカルウルフのマザーボード",
+  "item.createmechanicalcompanion.illager_engineer_spawn_egg": "エンジニアピリジャーのスポーンエッグ",
+  "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "ピリジャースーパーバイザーのスポーンエッグ",
+
+  "painting.createmechanicalcompanion.blueprint_art_1.title": "メカニカルウルフの脚部設計図",
+  "painting.createmechanicalcompanion.blueprint_art_2.title": "メカニカルウルフのバイザー設計図",
+  "painting.createmechanicalcompanion.blueprint_art_3.title": "メカニカルウルフのマザーボード設計図",
+  "painting.createmechanicalcompanion.blueprint_art_4.title": "小型設計図",
+  "painting.createmechanicalcompanion.blueprint_art_1.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_2.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_3.author": "Marcos",
+  "painting.createmechanicalcompanion.blueprint_art_4.author": "Marcos",
+
+  "entity.createmechanicalcompanion.ownership_warning": "§cこのメカニカルウルフはあなたの所有物ではありません",
+  "entity.createmechanicalcompanion.custom_wolf": "メカニカルウルフ",
+  "entity.createmechanicalcompanion.illager_engineer": "エンジニアピリジャー",
+  "entity.createmechanicalcompanion.potato_cannon_illager": "ピリジャースーパーバイザー",
+  "entity.createmechanicalcompanion.blueprint_painting": "設計図の絵画",
+
+  "creativetab.create_mechanical_companion_tab": "create:mechanicalcompanion",
+
+  "createmechanicalcompanion.tip.map_tip": "§6イリジャーの作業場§rへの地図が、暗い森の奥深くに隠されているという噂がある製図家や行商人を確認しよう！"
+}
