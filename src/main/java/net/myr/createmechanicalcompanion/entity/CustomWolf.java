@@ -2,7 +2,9 @@ package net.myr.createmechanicalcompanion.entity;
 
 import com.simibubi.create.AllItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -17,32 +19,26 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.*;
 import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.myr.createmechanicalcompanion.ModConfig;
 import net.myr.createmechanicalcompanion.sounds.ModSounds;
 import net.myr.createmechanicalcompanion.item.ModItems;
@@ -63,9 +59,13 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
     private static final int DEFENSIVE_SLOT = 0;
     private static final int ATTACK_SLOT = 1;
-    private static final int MOVEMENT_SLOT = 2;
-    private static final int UTILITY_SLOT = 3;
-    private static final int UTILITY_SLOT2 = 4;
+    private static final int ATTACK_SLOT2 = 2;
+    private static final int MOVEMENT_SLOT = 3;
+    private static final int MOVEMENT_SLOT2 = 4;
+    private static final int UTILITY_SLOT = 5;
+    private static final int UTILITY_SLOT2 = 6;
+    private static final int UTILITY_SLOT3 = 7;
+    private static final int UTILITY_SLOT4 = 8;
 
     private static final double movementSpeed = 0.35D;
 
@@ -79,10 +79,9 @@ public class CustomWolf extends Wolf implements MenuProvider {
     private float quantumDriveTimer = 0;
     private float quantumDriveParticleTimer = 0;
     private float mobRadarTimer = 0;
-    private final int slotAmount = 5;
+    private final int slotAmount = 9;
 
     private ItemStackHandler itemHandler = new ItemStackHandler(slotAmount);
-    private LazyOptional<IItemHandler> lazyItemHandler;
 
     protected final ContainerData data;
 
@@ -90,7 +89,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
     public CustomWolf(EntityType<? extends Wolf> entityType, Level level) {
         super(entityType, level);
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
 
         data = new ContainerData() {
             private final int[] values = new int[slotAmount];
@@ -119,6 +117,20 @@ public class CustomWolf extends Wolf implements MenuProvider {
         };
     }
 
+    /**
+     * Custom taming method to ensure the wolf is properly set up as a tamed companion.
+     * This handles 1.21.1 taming requirements including owner UUID and tame flag.
+     */
+    public void tameToPlayer(Player player) {
+        this.setTame(true, true); // Set tame with sound
+        this.setOwnerUUID(player.getUUID());
+        this.setTarget(null);
+        this.navigation.stop();
+        // Ensure the wolf is in a valid state for combat
+        this.setOrderedToSit(false);
+        this.setPersistenceRequired();
+    }
+
     @Override
     public boolean wantsToAttack(LivingEntity pTarget, LivingEntity pOwner) {
         if (!isBlacklisted(pTarget)) {
@@ -143,20 +155,13 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 .add(Attributes.MOVEMENT_SPEED, movementSpeed)
                 .add(Attributes.ATTACK_DAMAGE, 6.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0)
-                .add(Attributes.FOLLOW_RANGE, 16.0D);
+                .add(Attributes.FOLLOW_RANGE, 16.0D)
+                .add(Attributes.ARMOR, 0.0D);
     }
 
     @Override
-    public float maxUpStep() {
-        return 1;
-    }
-
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
-        }
-        return super.getCapability(cap, side);
+    protected double getDefaultGravity() {
+        return 0.08D;
     }
 
     @Override
@@ -167,27 +172,25 @@ public class CustomWolf extends Wolf implements MenuProvider {
             int[] coordinates = pCompound.getIntArray("previousLightPosition");
             previousLightPos = new BlockPos(coordinates[0], coordinates[1], coordinates[2]);
         }
-        itemHandler.deserializeNBT(pCompound.getCompound(("inventory")));
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
+        if (pCompound.contains("inventory")) {
+            itemHandler.deserializeNBT(this.registryAccess(), pCompound.getCompound("inventory"));
+        }
         removeLightBlocksAround(this, 3);
     }
 
     public boolean isBlacklisted(Entity entity) {
-        ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType());
+        ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
         if (id == null) return false;
         return ModConfig.COMMON.wolfBlacklist.get().contains(id.toString());
     }
 
-
     @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
-        pCompound.put("inventory", itemHandler.serializeNBT());
+        pCompound.put("inventory", itemHandler.serializeNBT(this.registryAccess()));
         if(previousLightPos != null)
         {
             int[] previousLightPositionCoordinates = {previousLightPos.getX(), previousLightPos.getY(), previousLightPos.getZ()};
-            if(pCompound.contains("previousLightPosition")){
-                pCompound.putIntArray("previousLightPosition", previousLightPositionCoordinates);
-            }
+            pCompound.putIntArray("previousLightPosition", previousLightPositionCoordinates);
         }
         super.addAdditionalSaveData(pCompound);
     }
@@ -199,15 +202,8 @@ public class CustomWolf extends Wolf implements MenuProvider {
     public void setItemHandler(ItemStackHandler handler) {
         if (handler != null) {
             this.itemHandler = handler;
-            lazyItemHandler = LazyOptional.of(() -> itemHandler);
             syncItemHandler();
         }
-    }
-
-    @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        lazyItemHandler.invalidate();
     }
 
     @Nullable
@@ -227,7 +223,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
             if(this.getOwner() != null && player.getUUID().equals(this.getOwner().getUUID()))
             {
-                NetworkHooks.openScreen(serverPlayer, this, buf -> buf.writeVarInt(this.getId()));
+                serverPlayer.openMenu(this, buf -> buf.writeVarInt(this.getId()));
             }else{
                 serverPlayer.displayClientMessage(Component.translatable("entity.createmechanicalcompanion.ownership_warning"), true);
             }
@@ -236,11 +232,16 @@ public class CustomWolf extends Wolf implements MenuProvider {
     }
 
     public boolean isModuleEquipped(Item item){
-        return itemHandler.getStackInSlot(DEFENSIVE_SLOT).getItem() == item
-                || itemHandler.getStackInSlot(MOVEMENT_SLOT).getItem() == item
-                || itemHandler.getStackInSlot(UTILITY_SLOT).getItem() == item
-                || itemHandler.getStackInSlot(ATTACK_SLOT).getItem() == item
-                || itemHandler.getStackInSlot(UTILITY_SLOT2).getItem() == item;
+        if(itemHandler.getSlots() != slotAmount){
+            return false;
+        }
+
+        for (int i = 0; i < slotAmount; i++) {
+            if (itemHandler.getStackInSlot(i).getItem() == item) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -248,7 +249,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(4, new CustomLeapAtTargetGoal(this, 0.3F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
-        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
+        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
         this.goalSelector.addGoal(8, new StrollUnlessMenuOpenGoal(this, 0.6D));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
@@ -256,6 +257,9 @@ public class CustomWolf extends Wolf implements MenuProvider {
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
         this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, true, this::isAngryAt));
+        // Add proactive hostile mob targeting - wolf will attack nearby hostile mobs
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Monster.class, 5, false, false, 
+            (target) -> target instanceof LivingEntity && this.getOwner() != null && this.wantsToAttack((LivingEntity) target, this.getOwner())));
         this.targetSelector.addGoal(8, new ResetUniversalAngerTargetGoal<>(this, true));
     }
 
@@ -271,21 +275,33 @@ public class CustomWolf extends Wolf implements MenuProvider {
             checkForDuplicate();
 
             double defaultHealthValue = 30;
+            double defaultArmorValue = 0;
+            
             if(isModuleEquipped(ModItems.REINFORCED_PLATES.get()))
             {
                 double reinforcedPlatesHealthIncrease = ModConfig.COMMON.reinforcedPlatesHealthIncrease.get();
+                int reinforcedArmorValue = ModConfig.COMMON.reinforcedPlatesArmorValue.get();
                 if(this.getAttribute(Attributes.MAX_HEALTH).getBaseValue() != (defaultHealthValue + reinforcedPlatesHealthIncrease)) {
                     this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(defaultHealthValue + reinforcedPlatesHealthIncrease);
                     this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(ModConfig.COMMON.reinforcedPlatesKnockBackResistance.get());
                 }
+                // Set armor attribute for 1.21.1
+                if(this.getAttribute(Attributes.ARMOR).getBaseValue() != reinforcedArmorValue) {
+                    this.getAttribute(Attributes.ARMOR).setBaseValue(reinforcedArmorValue);
+                }
             }
-            if(isModuleEquipped(ModItems.NETHERITE_PLATES.get()))
+            else if(isModuleEquipped(ModItems.NETHERITE_PLATES.get()))
             {
                 double netheritePlatesHealthIncrease = ModConfig.COMMON.netheritePlatesHealthIncrease.get();
+                int netheriteArmorValue = ModConfig.COMMON.netheritePlatesArmorValue.get();
                 if(this.getAttribute(Attributes.MAX_HEALTH).getBaseValue() != (defaultHealthValue + netheritePlatesHealthIncrease)) {
                    this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(defaultHealthValue + netheritePlatesHealthIncrease);
                     this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(ModConfig.COMMON.netheritePlatesKnockBackResistance.get());
                }
+                // Set armor attribute for 1.21.1
+                if(this.getAttribute(Attributes.ARMOR).getBaseValue() != netheriteArmorValue) {
+                    this.getAttribute(Attributes.ARMOR).setBaseValue(netheriteArmorValue);
+                }
             }else{
                 if(this.getAttribute(Attributes.MAX_HEALTH).getBaseValue() != defaultHealthValue) {
                     this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(defaultHealthValue);
@@ -295,6 +311,10 @@ public class CustomWolf extends Wolf implements MenuProvider {
                         this.setHealth(this.getMaxHealth());
                     }
                 }
+                // Reset armor when no plates equipped
+                if(this.getAttribute(Attributes.ARMOR).getBaseValue() != defaultArmorValue) {
+                    this.getAttribute(Attributes.ARMOR).setBaseValue(defaultArmorValue);
+                }
             }
 
             if (isModuleEquipped(ModItems.REGENERATIVE_CASING.get()) && this.getHealth() < this.getMaxHealth()) {
@@ -303,7 +323,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
             if (isModuleEquipped(ModItems.MOUNTED_LIGHT.get())) {
                 BlockPos torchPosition = new BlockPos(this.getBlockX(), this.getBlockY() + 1, this.getBlockZ());
-                Block currentBlock = this.level().getBlockState(torchPosition).getBlock();
                 if(torchPosition != previousLightPos)
                 {
                     removePreviousLightBlock();
@@ -322,7 +341,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 mountedCrossbowTick = 0;
                 TargetedArrowEntity arrow = new TargetedArrowEntity(this.level(), this, this.getTarget());
                 arrow.setBaseDamage(4);
-                arrow.setKnockback(1);
+                // Knockback handled differently in 1.21.1
 
                 Vec3 direction = this.getTarget().getEyePosition().subtract(this.getEyePosition());
                 direction = direction.normalize();
@@ -420,7 +439,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
     }
 
     @Override
-    public boolean canChangeDimensions() {
+    public boolean canChangeDimensions(Level level, Level level1) {
         return false;
     }
 
@@ -436,11 +455,16 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 discard();
                 return;
             }
-            CompoundTag compoundTag = item.get().stack().getTag();
-            if(compoundTag != null && compoundTag.contains("WolfUUID"))
-            {
-                if(!this.getUUID().equals(compoundTag.getUUID("WolfUUID"))){
-                    discard();
+            // Use DataComponents for 1.21.1 instead of getTag()
+            ItemStack stack = item.get().stack();
+            net.minecraft.world.item.component.CustomData customData = stack.get(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
+            if(customData != null) {
+                CompoundTag compoundTag = customData.copyTag();
+                if(compoundTag.contains("WolfUUID"))
+                {
+                    if(!this.getUUID().equals(compoundTag.getUUID("WolfUUID"))){
+                        discard();
+                    }
                 }
             }
         }
@@ -520,7 +544,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
     @Override
     public boolean doHurtTarget(Entity pEntity) {
         if(isModuleEquipped(ModItems.SMELTING_FANGS.get())) {
-            pEntity.setSecondsOnFire(ModConfig.COMMON.smeltingFangsFireDuration.get());
+            pEntity.setRemainingFireTicks(ModConfig.COMMON.smeltingFangsFireDuration.get() * 20);
         }
         float pitch = 0.8F + this.random.nextFloat() * 0.4F;
         this.level().playSound(this, this.blockPosition(), ModSounds.BITE_SOUND.get(), SoundSource.NEUTRAL, 0.6f, pitch);
@@ -531,7 +555,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
     public boolean hurt(DamageSource pSource, float pAmount) {
         if(isModuleEquipped(ModItems.TESLA_TAIL.get()))
         {
-            if(pSource.getEntity() != null)
+            if(pSource.getEntity() != null && pSource.getEntity() != this)
             {
                 pSource.getEntity().hurt(pSource.getEntity().damageSources().mobAttack(this), ModConfig.COMMON.teslaTailDamage.get().floatValue());
                 pSource.getEntity().invulnerableTime = 0;
@@ -579,14 +603,14 @@ public class CustomWolf extends Wolf implements MenuProvider {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(ITEM_HANDLER_DATA, new CompoundTag());
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ITEM_HANDLER_DATA, new CompoundTag());
     }
 
     private void syncItemHandler() {
         if (!this.level().isClientSide) {
-            CompoundTag tag = itemHandler.serializeNBT();
+            CompoundTag tag = itemHandler.serializeNBT(this.registryAccess());
             this.entityData.set(ITEM_HANDLER_DATA, tag);
         }
     }
@@ -596,7 +620,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
         super.onSyncedDataUpdated(key);
         if (key.equals(ITEM_HANDLER_DATA)) {
             CompoundTag tag = this.entityData.get(ITEM_HANDLER_DATA);
-            itemHandler.deserializeNBT(tag);
+            itemHandler.deserializeNBT(this.registryAccess(), tag);
         }
     }
 
@@ -622,4 +646,3 @@ public class CustomWolf extends Wolf implements MenuProvider {
         return;
     }
 }
-

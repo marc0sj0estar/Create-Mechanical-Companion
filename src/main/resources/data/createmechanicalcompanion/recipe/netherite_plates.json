@@ -5,12 +5,12 @@
       "item": "createmechanicalcompanion:reinforced_plates"
     },
     {
-      "item": "create:precision_mechanism"
+      "item": "minecraft:netherite_ingot"
     }
   ],
   "results": [
     {
-      "item": "createmechanicalcompanion:regenerative_casing"
+      "id": "createmechanicalcompanion:netherite_plates"
     }
   ]
 }

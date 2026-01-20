@@ -11,10 +11,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.RegistryObject;
 import net.myr.createmechanicalcompanion.entity.BlueprintPaintingEntity;
 import net.myr.createmechanicalcompanion.entity.ModEntity;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -25,9 +23,9 @@ public class BlueprintPaintingItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(Component.translatable("item.createmechanicalcompanion.blueprint_painting_tooltip"));
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pIsAdvanced);
     }
 
     @Override
@@ -42,32 +40,32 @@ public class BlueprintPaintingItem extends Item {
 
         if (!level.isClientSide) {
             BlockPos placePos = pos.relative(face);
-            List<Holder<PaintingVariant>> variants = BlueprintPaintingVariants.getAllVariants();
+            List<Holder<PaintingVariant>> variants = BlueprintPaintingVariants.getAllVariants(level);
 
             for (Holder<PaintingVariant> variant : variants) {
                 BlueprintPaintingEntity painting = ModEntity.BLUEPRINT_ENTITY.get().create(level);
-                painting.setVariant(variant);
-                painting.setDirectionPublic(face);
-                painting.moveTo(
-                        placePos.getX() + 0.5,
-                        placePos.getY() + 0.5,
-                        placePos.getZ() + 0.5,
-                        face.toYRot(),
-                        0.0F
-                );
-                if (painting.survives()) {
-                    level.addFreshEntity(painting);
-                    if (!pContext.getPlayer().getAbilities().instabuild) {
-                        pContext.getItemInHand().shrink(1);
+                if (painting != null) {
+                    painting.setVariant(variant);
+                    painting.setDirectionPublic(face);
+                    painting.moveTo(
+                            placePos.getX() + 0.5,
+                            placePos.getY() + 0.5,
+                            placePos.getZ() + 0.5,
+                            face.toYRot(),
+                            0.0F
+                    );
+                    if (painting.survives()) {
+                        level.addFreshEntity(painting);
+                        if (pContext.getPlayer() != null && !pContext.getPlayer().getAbilities().instabuild) {
+                            pContext.getItemInHand().shrink(1);
+                        }
+                        return InteractionResult.SUCCESS;
                     }
-                    return InteractionResult.SUCCESS;
                 }
             }
             return InteractionResult.FAIL;
         }
         return InteractionResult.CONSUME;
-
     }
-
 
 }

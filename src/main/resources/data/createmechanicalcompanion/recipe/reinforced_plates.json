@@ -1,5 +1,8 @@
 {
   "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "accept_mirrored": true,
+  "category": "misc",
   "key": {
     "B": {
       "item": "create:brass_ingot"
@@ -14,6 +17,7 @@
     "BBB"
   ],
   "result": {
-    "item": "createmechanicalcompanion:reinforced_plates"
+    "id": "createmechanicalcompanion:reinforced_plates",
+    "count": 1
   }
 }

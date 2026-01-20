@@ -4,13 +4,11 @@
       "structure": "createmechanicalcompanion:illager_workshop",
       "weight": 1
     }
-
   ],
   "placement": {
     "type": "minecraft:random_spread",
-    "spacing": 80,
-    "separation": 20,
-    "salt": 1646207470,
-    "spread_type": "triangular"
+    "spacing": 40,
+    "separation": 10,
+    "salt": 1646207470
   }
 }

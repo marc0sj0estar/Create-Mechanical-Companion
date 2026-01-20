@@ -2,20 +2,18 @@ package net.myr.createmechanicalcompanion;
 
 import com.simibubi.create.compat.curios.GogglesCurioRenderer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.myr.createmechanicalcompanion.client.CustomWolfModel;
 import net.myr.createmechanicalcompanion.client.MechanicalWolfLinkRenderer;
 import net.myr.createmechanicalcompanion.client.ModModelLayers;
@@ -30,41 +28,34 @@ import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 
 @Mod(CreateMechanicalCompanion.MOD_ID)
-public class CreateMechanicalCompanion
-{
+public class CreateMechanicalCompanion {
     public static final String MOD_ID = "createmechanicalcompanion";
 
-    public CreateMechanicalCompanion(FMLJavaModLoadingContext context)
-    {
-        IEventBus modEventBus = context.getModEventBus();
+    public CreateMechanicalCompanion(IEventBus modEventBus, ModContainer modContainer) {
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
         ModMenuTypes.register(modEventBus);
-        ModEntity.ENTITIES.register(modEventBus);
-        ModSounds.SOUND_EVENTS.register(modEventBus);
-        BlueprintPaintingVariants.BLUEPRINT_PAINTINGS.register(modEventBus);
-        MinecraftForge.EVENT_BUS.register(this);
-        context.registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ModConfig.COMMON_SPEC);
+        ModEntity.register(modEventBus);
+        ModSounds.register(modEventBus);
+        BlueprintPaintingVariants.register(modEventBus);
 
-        modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::addCreative);
+        modContainer.registerConfig(ModConfig.Type.COMMON, net.myr.createmechanicalcompanion.ModConfig.COMMON_SPEC);
+
+        NeoForge.EVENT_BUS.register(ForgeEventHandler.class);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {}
-
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {}
-
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event){}
-
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
+    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientModEvents {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-            MenuScreens.register(ModMenuTypes.WOLF_MENU.get(), WolfScreen::new);
-            CuriosRendererRegistry.register(ModItems.MECHANICAL_WOLF_LINK.get(), () -> new MechanicalWolfLinkRenderer(Minecraft.getInstance().getEntityModels().bakeLayer(GogglesCurioRenderer.LAYER)));
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            event.enqueueWork(() -> {
+                CuriosRendererRegistry.register(ModItems.MECHANICAL_WOLF_LINK.get(), () -> new MechanicalWolfLinkRenderer(Minecraft.getInstance().getEntityModels().bakeLayer(GogglesCurioRenderer.LAYER)));
+            });
+        }
+
+        @SubscribeEvent
+        public static void registerScreens(RegisterMenuScreensEvent event) {
+            event.register(ModMenuTypes.WOLF_MENU.get(), WolfScreen::new);
         }
 
         @SubscribeEvent
@@ -74,6 +65,6 @@ public class CreateMechanicalCompanion
     }
 
     public static ResourceLocation genRL(String name) {
-        return new ResourceLocation(MOD_ID, name);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
 }

@@ -1,5 +1,6 @@
 {
   "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
   "key": {
     "B": {
       "item": "create:brass_ingot"
@@ -18,6 +19,6 @@
     " B "
   ],
   "result": {
-    "item": "createmechanicalcompanion:tesla_tail"
+    "id": "createmechanicalcompanion:tesla_tail"
   }
 }

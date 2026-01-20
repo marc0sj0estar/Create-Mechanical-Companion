@@ -1,5 +1,6 @@
 {
   "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
   "key": {
     "B": {
       "item": "create:brass_sheet"
@@ -27,6 +28,7 @@
     "BBBBB"
   ],
   "result": {
-    "item": "createmechanicalcompanion:mechanical_wolf_link"
+    "id": "createmechanicalcompanion:mechanical_wolf_link",
+    "count": 1
   }
 }

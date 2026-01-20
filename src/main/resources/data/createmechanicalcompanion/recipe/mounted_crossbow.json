@@ -1,5 +1,6 @@
 {
   "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
   "key": {
     "P": {
       "item": "create:precision_mechanism"
@@ -17,6 +18,7 @@
     "B"
   ],
   "result": {
-    "item": "createmechanicalcompanion:mounted_crossbow"
+    "id": "createmechanicalcompanion:mounted_crossbow",
+    "count": 1
   }
 }

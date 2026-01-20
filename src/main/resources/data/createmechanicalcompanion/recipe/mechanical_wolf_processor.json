@@ -10,7 +10,8 @@
   ],
   "results": [
     {
-      "item": "createmechanicalcompanion:mechanical_wolf_processor"
+      "id": "createmechanicalcompanion:mechanical_wolf_processor",
+      "count": 1
     }
   ]
 }

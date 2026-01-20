@@ -1,34 +1,25 @@
 package net.myr.createmechanicalcompanion.item;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.resources.sounds.Sound;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.myr.createmechanicalcompanion.entity.CustomWolf;
 import net.myr.createmechanicalcompanion.entity.ModEntity;
-import net.myr.createmechanicalcompanion.sounds.ModSounds;
-import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
@@ -37,26 +28,45 @@ import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
 public class MechanicalWolfLink extends Item implements ICurioItem {
 
-
     public MechanicalWolfLink(Properties properties) {
         super(properties);
     }
 
     private CompoundTag previousModuleTag;
 
+    // Helper method to get custom data from item (1.21.1 way)
+    private CompoundTag getCustomTag(ItemStack stack) {
+        CustomData customData = stack.get(DataComponents.CUSTOM_DATA);
+        if (customData != null) {
+            return customData.copyTag();
+        }
+        return new CompoundTag();
+    }
+
+    // Helper method to set custom data on item (1.21.1 way)
+    private void setCustomTag(ItemStack stack, CompoundTag tag) {
+        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+    }
+
     @Override
     public boolean canEquip(SlotContext slotContext, ItemStack stack) {
         LivingEntity playerEntity = slotContext.entity();
 
-        if(!(playerEntity instanceof Player player)) {return false;}
+        if (!(playerEntity instanceof Player player)) {
+            return false;
+        }
 
         ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(playerEntity).orElse(null);
 
-        if(curiosInventory == null) {return true;}
+        if (curiosInventory == null) {
+            return true;
+        }
 
         ICurioStacksHandler headSlotHandler = curiosInventory.getCurios().get("head");
 
-        if (headSlotHandler == null) {return false;}
+        if (headSlotHandler == null) {
+            return true;
+        }
 
         for (int i = 0; i < headSlotHandler.getSlots(); i++) {
             ItemStack itemStack = headSlotHandler.getStacks().getStackInSlot(i);
@@ -72,71 +82,74 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         Entity entity = slotContext.entity();
         Level level = entity.level();
-        CompoundTag tag = stack.getOrCreateTag();
+        CompoundTag tag = getCustomTag(stack);
         if (!level.isClientSide && tag.contains("WolfUUID") && newStack.getItem().equals(Items.AIR)) {
             dismissWolf(level, tag);
+            setCustomTag(stack, tag);
         }
     }
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         Level level = slotContext.entity().level();
-        if (level.isClientSide || !((slotContext.entity() instanceof Player player))) {
+        if (level.isClientSide || !(slotContext.entity() instanceof Player player)) {
             return;
         }
 
-        CompoundTag tag = stack.getOrCreateTag();
+        CompoundTag tag = getCustomTag(stack);
 
-        if(tag.contains("WolfUUID")){
+        if (tag.contains("WolfUUID")) {
             UUID wolfUUID = tag.getUUID("WolfUUID");
-            CustomWolf entity =(CustomWolf) ((ServerLevel) level).getEntity(wolfUUID);
-            if(entity == null) {
+            Entity entity = ((ServerLevel) level).getEntity(wolfUUID);
+            if (entity == null || !(entity instanceof CustomWolf)) {
                 summonWolf(level, player, tag);
+                setCustomTag(stack, tag);
                 return;
             }
 
-            if(entity.getHealth() <= 0){
+            CustomWolf wolf = (CustomWolf) entity;
+
+            if (wolf.getHealth() <= 0) {
                 tag.putInt("SpawnCooldown", 200);
+                setCustomTag(stack, tag);
             }
 
-            if(entity.getCustomName() != null){
-                String wolfName = entity.getCustomName().getString();
+            if (wolf.getCustomName() != null) {
+                String wolfName = wolf.getCustomName().getString();
                 tag.putString("Nametag", wolfName);
+                setCustomTag(stack, tag);
             }
 
-            saveWolfModulesToTrinket(tag, ((CustomWolf) entity).getItemHandler());
-        }else{
+            saveWolfModulesToTrinket(stack, wolf.getItemHandler());
+        } else {
             summonWolf(level, player, tag);
+            setCustomTag(stack, tag);
         }
     }
 
     private void summonWolf(Level level, Player player, CompoundTag tag) {
-        if(tag.contains("SpawnCooldown"))
-        {
+        if (tag.contains("SpawnCooldown")) {
             int spawnCooldown = tag.getInt("SpawnCooldown");
             spawnCooldown--;
-            if(spawnCooldown == 0){
+            if (spawnCooldown == 0) {
                 tag.remove("SpawnCooldown");
-            }else{
+            } else {
                 tag.putInt("SpawnCooldown", spawnCooldown);
             }
             return;
-
         }
 
         CustomWolf newWolf = new CustomWolf(ModEntity.CUSTOM_WOLF.get(), level);
-        newWolf.tame(player);
+        newWolf.tameToPlayer(player);
         newWolf.setPos(player.getX(), player.getY(), player.getZ());
         level.addFreshEntity(newWolf);
-        if(tag.contains("Nametag")){
+        if (tag.contains("Nametag")) {
             newWolf.setCustomName(Component.literal(tag.getString("Nametag")));
         }
 
         ItemStackHandler wolfInventory = loadWolfModulesFromTrinket(tag, newWolf.getItemHandler().getSlots());
         newWolf.setItemHandler(wolfInventory);
         tag.putUUID("WolfUUID", newWolf.getUUID());
-
-
     }
 
     private void dismissWolf(Level level, CompoundTag tag) {
@@ -145,9 +158,7 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
             Entity entity = ((ServerLevel) level).getEntity(wolfUUID);
 
             if (entity instanceof CustomWolf wolf) {
-
-                saveWolfModulesToTrinket(tag, wolf.getItemHandler());
-
+                saveWolfModulesToTrinketTag(tag, wolf.getItemHandler());
                 wolf.discard();
             }
             tag.remove("WolfUUID");
@@ -155,49 +166,85 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag nbt) {
-        return super.initCapabilities(stack, nbt);
-    }
-
-    @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        CompoundTag tag = pStack.getTag();
-        if(Screen.hasShiftDown()){
-            pTooltipComponents.add(Component.translatable("item.createmechanicalcompanion.shift2"));
-            pTooltipComponents.add(Component.translatable("item.createmechanicalcompanion.mechanical_wolf_link.tooltip"));
-        }else{
-            pTooltipComponents.add(Component.translatable("item.createmechanicalcompanion.shift"));
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        CompoundTag tag = getCustomTag(stack);
+        if (Screen.hasShiftDown()) {
+            tooltipComponents.add(Component.translatable("item.createmechanicalcompanion.shift2"));
+            tooltipComponents.add(Component.translatable("item.createmechanicalcompanion.mechanical_wolf_link.tooltip"));
+        } else {
+            tooltipComponents.add(Component.translatable("item.createmechanicalcompanion.shift"));
         }
-        if (tag != null && tag.contains("SpawnCooldown")) {
+        if (tag.contains("SpawnCooldown")) {
             int cooldownTicks = tag.getInt("SpawnCooldown");
             int seconds = cooldownTicks / 20;
-            pTooltipComponents.add(Component.literal("§7Spawn Cooldown: §c" + seconds + "s"));
+            tooltipComponents.add(Component.literal("§7Spawn Cooldown: §c" + seconds + "s"));
         }
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 
-    public void saveWolfModulesToTrinket(CompoundTag tag, ItemStackHandler handler) {
-        if(tag == null || handler == null){
+    public void saveWolfModulesToTrinket(ItemStack stack, ItemStackHandler handler) {
+        if (handler == null) {
             return;
         }
 
-        CompoundTag serialized = handler.serializeNBT();
+        CompoundTag tag = getCustomTag(stack);
+        CompoundTag serialized = serializeHandler(handler);
 
-        if(serialized.equals(previousModuleTag)){
+        if (serialized.equals(previousModuleTag)) {
             return;
         }
 
         tag.put("WolfModules", serialized);
         previousModuleTag = serialized;
+        setCustomTag(stack, tag);
+    }
 
+    private void saveWolfModulesToTrinketTag(CompoundTag tag, ItemStackHandler handler) {
+        if (tag == null || handler == null) {
+            return;
+        }
+        tag.put("WolfModules", serializeHandler(handler));
+    }
+
+    private CompoundTag serializeHandler(ItemStackHandler handler) {
+        CompoundTag tag = new CompoundTag();
+        tag.putInt("Size", handler.getSlots());
+        net.minecraft.nbt.ListTag items = new net.minecraft.nbt.ListTag();
+        for (int i = 0; i < handler.getSlots(); i++) {
+            ItemStack slotStack = handler.getStackInSlot(i);
+            if (!slotStack.isEmpty()) {
+                CompoundTag itemTag = new CompoundTag();
+                itemTag.putInt("Slot", i);
+                itemTag.putString("id", net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(slotStack.getItem()).toString());
+                itemTag.putInt("count", slotStack.getCount());
+                items.add(itemTag);
+            }
+        }
+        tag.put("Items", items);
+        return tag;
     }
 
     public ItemStackHandler loadWolfModulesFromTrinket(CompoundTag tag, int size) {
         ItemStackHandler handler = new ItemStackHandler(size);
 
         if (tag != null && tag.contains("WolfModules")) {
-            CompoundTag serialized = tag.getCompound("WolfModules");
-            handler.deserializeNBT(serialized);
+            CompoundTag modulesTag = tag.getCompound("WolfModules");
+            if (modulesTag.contains("Items")) {
+                net.minecraft.nbt.ListTag items = modulesTag.getList("Items", 10);
+                for (int i = 0; i < items.size(); i++) {
+                    CompoundTag itemTag = items.getCompound(i);
+                    int slot = itemTag.getInt("Slot");
+                    if (slot >= 0 && slot < size) {
+                        net.minecraft.resources.ResourceLocation itemId = net.minecraft.resources.ResourceLocation.tryParse(itemTag.getString("id"));
+                        if (itemId != null) {
+                            Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(itemId);
+                            if (item != Items.AIR) {
+                                handler.setStackInSlot(slot, new ItemStack(item, itemTag.getInt("count")));
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         return handler;

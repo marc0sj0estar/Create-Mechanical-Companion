@@ -1,18 +1,19 @@
 {
   "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
   "key": {
-    "T": {
-      "item": "minecraft:torch"
+    "R": {
+      "item": "minecraft:blaze_rod"
     },
     "B": {
       "item": "create:brass_ingot"
     }
   },
   "pattern": [
-    "T  T",
-    "BBBB"
+    "BBB",
+    "R R"
   ],
   "result": {
-    "item": "createmechanicalcompanion:mounted_light"
+    "id": "createmechanicalcompanion:smelting_fangs"
   }
 }

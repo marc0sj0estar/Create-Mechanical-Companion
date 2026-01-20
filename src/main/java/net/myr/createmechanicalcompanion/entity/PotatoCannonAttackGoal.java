@@ -17,7 +17,7 @@ public class PotatoCannonAttackGoal extends Goal {
     private final Mob mob;
     private int cooldown = 0;
     private final double speed = 1.0D;
-    private final double attackRange =10D;
+    private final double attackRange = 10D;
     private ItemStack[] projectileList;
 
     public PotatoCannonAttackGoal(Mob mob) {
@@ -75,13 +75,15 @@ public class PotatoCannonAttackGoal extends Goal {
         Vec3 dir = to.subtract(from).normalize().scale(1.5);
 
         PotatoProjectileEntity proj = AllEntityTypes.POTATO_PROJECTILE.create(mob.level());
-        proj.setItem(getRandomProjectile());
-        proj.setPos(from.x, from.y, from.z);
-        proj.setDeltaMovement(dir);
-        mob.level().addFreshEntity(proj);
+        if (proj != null) {
+            proj.setItem(getRandomProjectile());
+            proj.setPos(from.x, from.y, from.z);
+            proj.setDeltaMovement(dir);
+            mob.level().addFreshEntity(proj);
+        }
     }
 
-    private ItemStack getRandomProjectile(){
+    private ItemStack getRandomProjectile() {
         int rand = mob.getRandom().nextInt(projectileList.length);
         return projectileList[rand];
     }

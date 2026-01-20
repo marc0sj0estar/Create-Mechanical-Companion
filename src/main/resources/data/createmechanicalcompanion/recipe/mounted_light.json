@@ -1,0 +1,20 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "key": {
+    "T": {
+      "item": "minecraft:torch"
+    },
+    "B": {
+      "item": "create:brass_ingot"
+    }
+  },
+  "pattern": [
+    "T  T",
+    "BBBB"
+  ],
+  "result": {
+    "id": "createmechanicalcompanion:mounted_light",
+    "count": 1
+  }
+}

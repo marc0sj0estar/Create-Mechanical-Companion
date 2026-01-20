@@ -1,17 +1,10 @@
 package net.myr.createmechanicalcompanion;
 
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.client.renderer.entity.IllagerRenderer;
 import net.minecraft.client.renderer.entity.PaintingRenderer;
-import net.minecraft.client.renderer.entity.PillagerRenderer;
-import net.minecraft.client.renderer.entity.VindicatorRenderer;
-import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.entity.npc.VillagerTrades;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.village.VillagerTradesEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.myr.createmechanicalcompanion.client.IllagerEngineerRenderer;
 import net.myr.createmechanicalcompanion.client.PotatoCannonIllagerRenderer;
 import net.myr.createmechanicalcompanion.client.WolfRenderer;
@@ -19,10 +12,7 @@ import net.myr.createmechanicalcompanion.entity.CustomWolf;
 import net.myr.createmechanicalcompanion.entity.IllagerEngineer;
 import net.myr.createmechanicalcompanion.entity.ModEntity;
 
-import java.util.LinkedList;
-import java.util.List;
-
-@Mod.EventBusSubscriber(modid = CreateMechanicalCompanion.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = CreateMechanicalCompanion.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class EventHandler {
 
     @SubscribeEvent
@@ -39,5 +29,4 @@ public class EventHandler {
         event.registerEntityRenderer(ModEntity.POTATO_CANNON_ILLAGER.get(), PotatoCannonIllagerRenderer::new);
         event.registerEntityRenderer(ModEntity.BLUEPRINT_ENTITY.get(), PaintingRenderer::new);
     }
-
 }

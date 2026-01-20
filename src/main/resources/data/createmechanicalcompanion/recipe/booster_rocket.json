@@ -1,5 +1,6 @@
 {
   "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
   "key": {
     "B": {
       "item": "create:brass_ingot"
@@ -12,6 +13,7 @@
     "FBF"
   ],
   "result": {
-    "item": "createmechanicalcompanion:booster_rocket"
+    "id": "createmechanicalcompanion:booster_rocket",
+    "count": 1
   }
 }

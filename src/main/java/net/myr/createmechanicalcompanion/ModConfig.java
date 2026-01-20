@@ -1,52 +1,52 @@
 package net.myr.createmechanicalcompanion;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
 
 public class ModConfig {
-    public static final ForgeConfigSpec COMMON_SPEC;
+    public static final ModConfigSpec COMMON_SPEC;
     public static final Common COMMON;
 
     static {
-        final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+        final ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
         COMMON = new Common(builder);
         COMMON_SPEC = builder.build();
     }
 
     public static class Common {
-        public final ForgeConfigSpec.ConfigValue<List<? extends String>> wolfBlacklist;
+        public final ModConfigSpec.ConfigValue<List<? extends String>> wolfBlacklist;
 
-        public final ForgeConfigSpec.DoubleValue wrenchHealAmount;
+        public final ModConfigSpec.DoubleValue wrenchHealAmount;
 
         //Module stats
-        public final ForgeConfigSpec.IntValue reinforcedPlatesArmorValue;
-        public final ForgeConfigSpec.IntValue reinforcedPlatesHealthIncrease;
-        public final ForgeConfigSpec.DoubleValue reinforcedPlatesKnockBackResistance;
+        public final ModConfigSpec.IntValue reinforcedPlatesArmorValue;
+        public final ModConfigSpec.IntValue reinforcedPlatesHealthIncrease;
+        public final ModConfigSpec.DoubleValue reinforcedPlatesKnockBackResistance;
 
-        public final ForgeConfigSpec.IntValue netheritePlatesArmorValue;
-        public final ForgeConfigSpec.IntValue netheritePlatesHealthIncrease;
-        public final ForgeConfigSpec.DoubleValue netheritePlatesKnockBackResistance;
+        public final ModConfigSpec.IntValue netheritePlatesArmorValue;
+        public final ModConfigSpec.IntValue netheritePlatesHealthIncrease;
+        public final ModConfigSpec.DoubleValue netheritePlatesKnockBackResistance;
 
-        public final ForgeConfigSpec.IntValue mountedCrossbowCooldown;
-        public final ForgeConfigSpec.DoubleValue teslaTailDamage;
-        public final ForgeConfigSpec.IntValue smeltingFangsFireDuration;
+        public final ModConfigSpec.IntValue mountedCrossbowCooldown;
+        public final ModConfigSpec.DoubleValue teslaTailDamage;
+        public final ModConfigSpec.IntValue smeltingFangsFireDuration;
 
-        public final ForgeConfigSpec.DoubleValue boosterRocketSpeedIncrease;
-        public final ForgeConfigSpec.IntValue boosterRocketDuration;
-        public final ForgeConfigSpec.IntValue boosterRocketCooldown;
-        public final ForgeConfigSpec.IntValue quantumDriveCooldown;
+        public final ModConfigSpec.DoubleValue boosterRocketSpeedIncrease;
+        public final ModConfigSpec.IntValue boosterRocketDuration;
+        public final ModConfigSpec.IntValue boosterRocketCooldown;
+        public final ModConfigSpec.IntValue quantumDriveCooldown;
 
-        public final ForgeConfigSpec.DoubleValue regenerativeCasingHealAmount;
-        public final ForgeConfigSpec.IntValue mobRadarRange;
-        public final ForgeConfigSpec.IntValue mobRadarCooldown;
+        public final ModConfigSpec.DoubleValue regenerativeCasingHealAmount;
+        public final ModConfigSpec.IntValue mobRadarRange;
+        public final ModConfigSpec.IntValue mobRadarCooldown;
 
-        public Common(ForgeConfigSpec.Builder builder) {
+        public Common(ModConfigSpec.Builder builder) {
             wolfBlacklist = builder
                     .comment("List of entities the wolf won't attack")
                     .defineListAllowEmpty(
                             List.of("wolfBlacklist"),
-                            List.of("minecraft:creeper", "minecraft:ghast", "mekanism:robit"),
+                            () -> List.of("minecraft:creeper", "minecraft:ghast", "mekanism:robit"),
                             o -> o instanceof String
                     );
 
@@ -67,16 +67,16 @@ public class ModConfig {
                     .defineInRange("reinforcedPlatesKnockBackResistance", 0.1, 0.0, 1.0);
 
             netheritePlatesArmorValue = builder
-                    .comment("Armor value provided by Netherite Plates [0-20] (Default value = 6)")
-                    .defineInRange("netheritePlatesArmorValue", 6, 0, 20);
+                    .comment("Armor value provided by Netherite Plates [0-20] (Default value = 12)")
+                    .defineInRange("netheritePlatesArmorValue", 12, 0, 20);
 
             netheritePlatesHealthIncrease = builder
-                    .comment("Health increase provided by Netherite Plates (Default value = 10)")
-                    .defineInRange("netheritePlatesHealthIncrease", 10, 0, Integer.MAX_VALUE);
+                    .comment("Health increase provided by Netherite Plates (Default value = 20)")
+                    .defineInRange("netheritePlatesHealthIncrease", 20, 0, Integer.MAX_VALUE);
 
             netheritePlatesKnockBackResistance = builder
-                    .comment("Knockback resistance provided by Netherite Plates [0.0 - 1.0] (Default value = 0.2)")
-                    .defineInRange("netheritePlatesKnockBackResistance", 0.2, 0.0, 1.0);
+                    .comment("Knockback resistance provided by Netherite Plates [0.0 - 1.0] (Default value = 0.4)")
+                    .defineInRange("netheritePlatesKnockBackResistance", 0.4, 0.0, 1.0);
 
             mountedCrossbowCooldown = builder
                     .comment("Cooldown time of the Mounted Crossbow (Default value = 60)")
@@ -117,10 +117,6 @@ public class ModConfig {
             mobRadarCooldown = builder
                     .comment("Cooldown time for the Mob Radar (Default value = 200)")
                     .defineInRange("mobRadarCooldown", 200, 0, Integer.MAX_VALUE);
-
-
         }
-
-
     }
 }

@@ -49,9 +49,6 @@ public class CustomWolfModel extends HierarchicalModel<CustomWolf> {
     private final ModelPart radarSpinner;
     private final ModelPart radarSpinner2;
 
-
-
-
     public CustomWolfModel(ModelPart root) {
         this.root = root;
         this.head = root.getChild("head");
@@ -87,14 +84,11 @@ public class CustomWolfModel extends HierarchicalModel<CustomWolf> {
         this.radar = head.getChild("radar");
         this.radarSpinner = radar.getChild("radarSpinner");
         this.radarSpinner2 = radar.getChild("radarSpinner2");
-
-
     }
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
-
 
         PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(-3.0F, -3.0F, -2.0F, 6.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false)
                 .texOffs(20, 29).addBox(-3.0F, -5.0F, 0.0F, 2.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
@@ -241,35 +235,7 @@ public class CustomWolfModel extends HierarchicalModel<CustomWolf> {
                 .texOffs(44, 60).addBox(-1.5F, -4.0F, -1.5F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
                 .texOffs(44, 60).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(8.0F, 0.0F, 0.0F));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         return LayerDefinition.create(meshdefinition, 64, 64);
-
-
     }
 
     @Override
@@ -285,7 +251,6 @@ public class CustomWolfModel extends HierarchicalModel<CustomWolf> {
         float healthPercentage = entity.getHealth() / entity.getMaxHealth();
         float tailAngle = healthPercentage * 70.0F;
         tail.xRot = (float) Math.toRadians(tailAngle);
-
 
         boolean hasReinforcedPlates = entity.isModuleEquipped(ModItems.REINFORCED_PLATES.get());
 
@@ -312,8 +277,6 @@ public class CustomWolfModel extends HierarchicalModel<CustomWolf> {
         this.radarSpinner.yRot = this.radarSpinner.yRot + 0.01f;
         this.radarSpinner2.yRot = this.radarSpinner2.yRot - 0.01f;
     }
-
-
 
     @Override
     public @NotNull ModelPart root() {

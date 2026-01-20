@@ -1,18 +1,19 @@
 package net.myr.createmechanicalcompanion.item;
 
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 
-public class ModCreativeModeTabs {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CreateMechanicalCompanion.MOD_ID);
+import java.util.function.Supplier;
 
-    public static final RegistryObject<CreativeModeTab> MOD_TAB = CREATIVE_MODE_TABS.register("createmechanicalcompaniontab",
+public class ModCreativeModeTabs {
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, CreateMechanicalCompanion.MOD_ID);
+
+    public static final Supplier<CreativeModeTab> MOD_TAB = CREATIVE_MODE_TABS.register("createmechanicalcompaniontab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.REINFORCED_PLATES.get()))
                     .title(Component.translatable("creativetab.create_mechanical_companion_tab"))
                     .displayItems((ItemDisplayParameters, output) ->

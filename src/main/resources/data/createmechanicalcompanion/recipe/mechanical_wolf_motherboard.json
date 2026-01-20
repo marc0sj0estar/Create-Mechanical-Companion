@@ -1,12 +1,12 @@
 {
   "type": "create:sequenced_assembly",
   "ingredient": {
-    "tag": "forge:plates/copper"
+    "tag": "c:plates/copper"
   },
   "loops": 1,
   "results": [
     {
-      "item": "createmechanicalcompanion:mechanical_wolf_motherboard"
+      "id": "createmechanicalcompanion:mechanical_wolf_motherboard"
     }
   ],
   "sequence": [
@@ -22,7 +22,7 @@
       ],
       "results": [
         {
-          "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+          "id": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
         }
       ]
     },
@@ -35,7 +35,7 @@
       ],
       "results": [
         {
-          "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+          "id": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
         }
       ]
     },
@@ -51,7 +51,7 @@
       ],
       "results": [
         {
-          "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+          "id": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
         }
       ]
     },
@@ -67,12 +67,13 @@
       ],
       "results": [
         {
-          "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+          "id": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard",
+          "count": 1
         }
       ]
     }
   ],
-  "transitionalItem": {
-    "item": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
+  "transitional_item": {
+    "id": "createmechanicalcompanion:incomplete_mechanical_wolf_motherboard"
   }
 }

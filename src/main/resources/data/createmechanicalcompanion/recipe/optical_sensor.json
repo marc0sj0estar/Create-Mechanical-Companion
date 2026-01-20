@@ -6,7 +6,7 @@
   "loops": 1,
   "results": [
     {
-      "item": "createmechanicalcompanion:optical_sensor"
+      "id": "createmechanicalcompanion:optical_sensor"
     }
   ],
   "sequence": [
@@ -19,7 +19,7 @@
       ],
       "results": [
         {
-          "item": "createmechanicalcompanion:incomplete_optical_sensor"
+          "id": "createmechanicalcompanion:incomplete_optical_sensor"
         }
       ]
     },
@@ -32,7 +32,7 @@
       ],
       "results": [
         {
-          "item": "createmechanicalcompanion:incomplete_optical_sensor"
+          "id": "createmechanicalcompanion:incomplete_optical_sensor"
         }
       ]
     },
@@ -48,12 +48,12 @@
       ],
       "results": [
         {
-          "item": "createmechanicalcompanion:incomplete_optical_sensor"
+          "id": "createmechanicalcompanion:incomplete_optical_sensor"
         }
       ]
     }
   ],
-  "transitionalItem": {
-    "item": "createmechanicalcompanion:incomplete_optical_sensor"
+  "transitional_item": {
+    "id": "createmechanicalcompanion:incomplete_optical_sensor"
   }
 }
