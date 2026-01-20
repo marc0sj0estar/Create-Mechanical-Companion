@@ -11,18 +11,18 @@
   "item.createmechanicalcompanion.netherite_plates.tooltip": "§8§7メカニカルウルフ§8に防御力、ノックバック耐性、追加の体力、火炎耐性を与える",
 
   "item.createmechanicalcompanion.offensive_module": "§4攻撃モジュール",
-  "item.createmechanicalcompanion.mounted_crossbow.tooltip": "§8§7メカニカルウルフ §8に搭載型クロスボウを追加する\n§8攻撃対象のみにダメージを与える",
-  "item.createmechanicalcompanion.tesla_tail.tooltip": "§8§7メカニカルウルフ §8にテスラテイルを追加し、攻撃してきた敵にダメージを与える",
+  "item.createmechanicalcompanion.mounted_crossbow.tooltip": "§8§7メカニカルウルフ§8に搭載型クロスボウを追加する\n§8攻撃対象のみにダメージを与える",
+  "item.createmechanicalcompanion.tesla_tail.tooltip": "§8§7メカニカルウルフ§8にテスラテイルを追加し、攻撃してきた敵にダメージを与える",
   "item.createmechanicalcompanion.smelting_fangs.tooltip": "§8§7メカニカルウルフ§8の攻撃に火炎ダメージを付与し、火炎耐性を与える",
 
   "item.createmechanicalcompanion.movement_module": "§2移動モジュール",
-  "item.createmechanicalcompanion.booster_rocket.tooltip": "§8§7メカニカルウルフ §8が敵を見つけたとき、移動速度が上昇する",
-  "item.createmechanicalcompanion.quantum_drive.tooltip": "§8§7メカニカルウルフ §8が攻撃対象の元へテレポートできるようになる",
+  "item.createmechanicalcompanion.booster_rocket.tooltip": "§8§7メカニカルウルフ§8が敵を見つけたとき、移動速度が上昇する",
+  "item.createmechanicalcompanion.quantum_drive.tooltip": "§8§7メカニカルウルフ§8が攻撃対象の元へテレポートできるようになる",
 
   "item.createmechanicalcompanion.utility_module": "§5ユーティリティモジュール",
-  "item.createmechanicalcompanion.regenerative_casing.tooltip": "§8§7メカニカルウルフ §8に再生能力を与える",
-  "item.createmechanicalcompanion.mounted_light.tooltip": "§8§7メカニカルウルフ §8に携帯型の光源を与える",
-  "item.createmechanicalcompanion.mob_radar.tooltip": "§8壁越しに§7メカニカルウルフ §8周辺の敵対的なモブを強調表示する",
+  "item.createmechanicalcompanion.regenerative_casing.tooltip": "§8§7メカニカルウルフ§8に再生能力を与える",
+  "item.createmechanicalcompanion.mounted_light.tooltip": "§8§7メカニカルウルフ§8に携帯型の光源を与える",
+  "item.createmechanicalcompanion.mob_radar.tooltip": "§8壁越しに§7メカニカルウルフ§8周辺の敵対的なモブを強調表示する",
 
   "item.createmechanicalcompanion.reinforced_plates": "強化プレート",
   "item.createmechanicalcompanion.netherite_plates": "ネザライトプレート",
@@ -63,7 +63,7 @@
   "entity.createmechanicalcompanion.potato_cannon_illager": "ピリジャースーパーバイザー",
   "entity.createmechanicalcompanion.blueprint_painting": "設計図の絵画",
 
-  "creativetab.create_mechanical_companion_tab": "Create：メカニカル・コンパニオン",
+  "creativetab.create_mechanical_companion_tab": "create:mechanicalcompanion",
 
   "createmechanicalcompanion.tip.map_tip": "§6イリジャーの作業場§rへの地図が、暗い森の奥深くに隠されているという噂がある製図家や行商人を確認しよう！"
 }
