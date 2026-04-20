@@ -27,6 +27,8 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
+import static net.myr.createmechanicalcompanion.CreateMechanicalCompanion.MOD_ID;
+
 public class MechanicalWolfLink extends Item implements ICurioItem {
 
     public MechanicalWolfLink(Properties properties) {
@@ -169,6 +171,25 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         CompoundTag tag = getCustomTag(stack);
+
+        if (tag.contains("WolfModules")) {
+            CompoundTag modulesTag = tag.getCompound("WolfModules");
+            net.minecraft.nbt.ListTag items = modulesTag.getList("Items", 10);
+            if (!items.isEmpty()) {
+                tooltipComponents.add(Component.empty());
+                tooltipComponents.add(Component.literal("§e§nEquipped Modules§r"));
+                for (int i = 0; i < items.size(); i++) {
+                    String itemId = items.getCompound(i).getString("id");
+                    net.minecraft.resources.ResourceLocation resourceLocation = net.minecraft.resources.ResourceLocation.tryParse(itemId);
+                    Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(resourceLocation);
+                    tooltipComponents.add(
+                            Component.literal("§6> §r").append(item.getDescription())
+                    );
+                }
+                tooltipComponents.add(Component.empty());
+            }
+        }
+
         if (Screen.hasShiftDown()) {
             tooltipComponents.add(Component.translatable("item.createmechanicalcompanion.shift2"));
             tooltipComponents.add(Component.translatable("item.createmechanicalcompanion.mechanical_wolf_link.tooltip"));
@@ -180,6 +201,7 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
             int seconds = cooldownTicks / 20;
             tooltipComponents.add(Component.literal("§7Spawn Cooldown: §c" + seconds + "s"));
         }
+
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 
