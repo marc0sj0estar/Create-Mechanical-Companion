@@ -15,8 +15,10 @@ public class ModConfig {
     }
 
     public static class Common {
-        public final ModConfigSpec.ConfigValue<List<? extends String>> wolfBlacklist;
 
+        //Wolf stats
+        public final ModConfigSpec.ConfigValue<List<? extends String>> wolfBlacklist;
+        public final ModConfigSpec.IntValue mechanicalWolfRespawnCooldown;
         public final ModConfigSpec.DoubleValue wrenchHealAmount;
 
         //Module stats
@@ -53,6 +55,10 @@ public class ModConfig {
             wrenchHealAmount = builder
                     .comment("Amount of health restored by using the Wrench on the Mechanical Companion (Default value = 2.0)")
                     .defineInRange("wrenchHealAmount", 2.0, 0.0, Double.MAX_VALUE);
+
+            mechanicalWolfRespawnCooldown = builder
+                    .comment("Cooldown time (in ticks) for the Mechanical Wolf (Default value = 1200)")
+                    .defineInRange("mechanicalWolfRespawnCooldown", 1200, 0, Integer.MAX_VALUE);
 
             reinforcedPlatesArmorValue = builder
                     .comment("Armor value provided by Reinforced Plates [0-20] (Default value = 4)")

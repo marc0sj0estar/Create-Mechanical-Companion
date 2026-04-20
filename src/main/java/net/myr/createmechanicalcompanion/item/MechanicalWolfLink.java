@@ -17,6 +17,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
+import net.myr.createmechanicalcompanion.ModConfig;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.myr.createmechanicalcompanion.entity.CustomWolf;
 import net.myr.createmechanicalcompanion.entity.ModEntity;
@@ -110,7 +111,7 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
             CustomWolf wolf = (CustomWolf) entity;
 
             if (wolf.getHealth() <= 0) {
-                tag.putInt("SpawnCooldown", 200);
+                tag.putInt("SpawnCooldown", ModConfig.COMMON.mechanicalWolfRespawnCooldown.get());
                 setCustomTag(stack, tag);
             }
 
