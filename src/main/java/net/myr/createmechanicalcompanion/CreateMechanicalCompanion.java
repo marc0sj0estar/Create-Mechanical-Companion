@@ -1,6 +1,5 @@
 package net.myr.createmechanicalcompanion;
 
-import com.simibubi.create.compat.curios.GogglesCurioRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -49,7 +48,7 @@ public class CreateMechanicalCompanion {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
-                CuriosRendererRegistry.register(ModItems.MECHANICAL_WOLF_LINK.get(), () -> new MechanicalWolfLinkRenderer(Minecraft.getInstance().getEntityModels().bakeLayer(GogglesCurioRenderer.LAYER)));
+                CuriosRendererRegistry.register(ModItems.MECHANICAL_WOLF_LINK.get(), MechanicalWolfLinkRenderer::new);
             });
         }
 
