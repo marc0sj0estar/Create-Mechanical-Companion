@@ -21,7 +21,6 @@ public class WolfMenu extends AbstractContainerMenu {
 
     public final CustomWolf wolf;
 
-    // Changed slots from 5 to 9
     public static final int slotAmount = 9;
     private int firstColumnXPosition = 84;
     private int secondColumnXPosition = 108;

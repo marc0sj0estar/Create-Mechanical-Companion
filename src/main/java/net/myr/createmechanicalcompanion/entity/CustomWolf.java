@@ -57,16 +57,6 @@ import java.util.Optional;
 
 public class CustomWolf extends Wolf implements MenuProvider {
 
-    private static final int DEFENSIVE_SLOT = 0;
-    private static final int ATTACK_SLOT = 1;
-    private static final int ATTACK_SLOT2 = 2;
-    private static final int MOVEMENT_SLOT = 3;
-    private static final int MOVEMENT_SLOT2 = 4;
-    private static final int UTILITY_SLOT = 5;
-    private static final int UTILITY_SLOT2 = 6;
-    private static final int UTILITY_SLOT3 = 7;
-    private static final int UTILITY_SLOT4 = 8;
-
     private static final double movementSpeed = 0.35D;
 
     private BlockPos previousLightPos = null;
@@ -117,16 +107,11 @@ public class CustomWolf extends Wolf implements MenuProvider {
         };
     }
 
-    /**
-     * Custom taming method to ensure the wolf is properly set up as a tamed companion.
-     * This handles 1.21.1 taming requirements including owner UUID and tame flag.
-     */
     public void tameToPlayer(Player player) {
         this.setTame(true, true); // Set tame with sound
         this.setOwnerUUID(player.getUUID());
         this.setTarget(null);
         this.navigation.stop();
-        // Ensure the wolf is in a valid state for combat
         this.setOrderedToSit(false);
         this.setPersistenceRequired();
     }
@@ -257,8 +242,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
         this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, true, this::isAngryAt));
-        // Add proactive hostile mob targeting - wolf will attack nearby hostile mobs
-        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Monster.class, 5, false, false, 
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Monster.class, 5, false, false,
             (target) -> target instanceof LivingEntity && this.getOwner() != null && this.wantsToAttack((LivingEntity) target, this.getOwner())));
         this.targetSelector.addGoal(8, new ResetUniversalAngerTargetGoal<>(this, true));
     }
@@ -285,7 +269,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
                     this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(defaultHealthValue + reinforcedPlatesHealthIncrease);
                     this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(ModConfig.COMMON.reinforcedPlatesKnockBackResistance.get());
                 }
-                // Set armor attribute for 1.21.1
                 if(this.getAttribute(Attributes.ARMOR).getBaseValue() != reinforcedArmorValue) {
                     this.getAttribute(Attributes.ARMOR).setBaseValue(reinforcedArmorValue);
                 }
@@ -341,7 +324,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 mountedCrossbowTick = 0;
                 TargetedArrowEntity arrow = new TargetedArrowEntity(this.level(), this, this.getTarget());
                 arrow.setBaseDamage(4);
-                // Knockback handled differently in 1.21.1
 
                 Vec3 direction = this.getTarget().getEyePosition().subtract(this.getEyePosition());
                 direction = direction.normalize();
@@ -444,6 +426,9 @@ public class CustomWolf extends Wolf implements MenuProvider {
     }
 
     private void checkForDuplicate(){
+        if(this.tickCount < 2){
+            return;
+        }
         if(this.getOwner() instanceof Player player){
             ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(player).orElse(null);
             if(curiosInventory == null){
@@ -455,18 +440,22 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 discard();
                 return;
             }
-            // Use DataComponents for 1.21.1 instead of getTag()
             ItemStack stack = item.get().stack();
             net.minecraft.world.item.component.CustomData customData = stack.get(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
-            if(customData != null) {
-                CompoundTag compoundTag = customData.copyTag();
-                if(compoundTag.contains("WolfUUID"))
-                {
-                    if(!this.getUUID().equals(compoundTag.getUUID("WolfUUID"))){
-                        discard();
-                    }
-                }
+            if(customData == null){
+                discard();
+                return;
             }
+            CompoundTag compoundTag = customData.copyTag();
+            if(!compoundTag.contains("WolfUUID")){
+                discard();
+                return;
+            }
+            if(!this.getUUID().equals(compoundTag.getUUID("WolfUUID"))){
+                discard();
+            }
+        }else{
+            discard();
         }
     }
 
@@ -643,6 +632,5 @@ public class CustomWolf extends Wolf implements MenuProvider {
     @Override
     public void die(DamageSource pCause) {
         removeLightBlocksAround(this, 5);
-        return;
     }
 }

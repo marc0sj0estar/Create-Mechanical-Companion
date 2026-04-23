@@ -1,29 +1,23 @@
 {
   "item.createmechanicalcompanion.shift": "§8Mantenga presionado [§7Shift§8] para ver el Resumen.",
   "item.createmechanicalcompanion.shift2": "§8Mantenga presionado [§fShift§8] para ver el Resumen.",
-
   "item.createmechanicalcompanion.mechanical_wolf_link.tooltip": "\n§8Crea un §7Lobo Mecánico§r§8 que protege al portador.\nPuedes abrir el menú de módulos haciendo clic derecho o curarlo con una llave inglesa,\nCuando el §7Lobo Mecánico§r§8 muere, reaparece después de un tiempo con los módulos equipados.",
   "item.createmechanicalcompanion.mechanical_wolf_link.duplicate_warning": "§c¡Ya tienes un Vínculo de Lobo Mecánico equipado!",
   "item.createmechanicalcompanion.mechanical_wolf_processor.tooltip": "§8Encontrado en §6Talleres Maldeanos§8.\nPuedes encontrar §6Mapas a Talleres Maldeanos§8 comerciando con cartógrafos o vendedores amobulantes.\n§8Usado para crear al §7Lobo Mecánico§8.",
-
   "item.createmechanicalcompanion.defensive_module": "§3Módulos defensivos",
   "item.createmechanicalcompanion.reinforced_plates.tooltip": "§8Añade armadura adicional al §7Lobo Mecánico.",
   "item.createmechanicalcompanion.netherite_plates.tooltip": "§8Añade armadura, resistencia al retroceso, vida adicional e inmunidad al fuego al §7Lobo Mecánico.",
-
   "item.createmechanicalcompanion.offensive_module": "§4Módulos de ataque",
   "item.createmechanicalcompanion.mounted_crossbow.tooltip": "§8Añade una ballesta inteligente encima del §7Lobo Mecánico §8que solo le hace daño a su objetivo.",
   "item.createmechanicalcompanion.tesla_tail.tooltip": "§8Añade una cola eléctrica al §7Lobo Mecánico §8que daña a sus atacantes.",
   "item.createmechanicalcompanion.smelting_fangs.tooltip": "§8Añade daño de fuego e al §7Lobo Mecánico§8 y le otorga inmunidad al fuego.",
-
   "item.createmechanicalcompanion.movement_module": "§2Módulos de movimiento",
   "item.createmechanicalcompanion.booster_rocket.tooltip": "§8Añade un impulso de velocidad al §7Lobo Mecánico §8cuando encuentra un objetivo.",
   "item.createmechanicalcompanion.quantum_drive.tooltip": "§8Le otorga al §7Lobo Mecánico §8la capacidad de teletransportarse.",
-
   "item.createmechanicalcompanion.utility_module": "§5Módulos de utilidad",
   "item.createmechanicalcompanion.regenerative_casing.tooltip": "§8Le otorga al §7Lobo Mecánico §8la capacidad de regenerarse.",
   "item.createmechanicalcompanion.mounted_light.tooltip": "§8Le da al §7Lobo Mecánico §8una luz portátil.",
   "item.createmechanicalcompanion.mob_radar.tooltip": "§8Destaca a las entidades hostiles cerca del §7Lobo Mecánico§8, incluso detras de las paredes.",
-
   "item.createmechanicalcompanion.reinforced_plates": "Placas Reforzadas",
   "item.createmechanicalcompanion.netherite_plates": "Placas Reforzadas de Netherita",
   "item.createmechanicalcompanion.mounted_crossbow": "Ballesta Montada",
@@ -34,7 +28,6 @@
   "item.createmechanicalcompanion.regenerative_casing": "Carcasa Regenerativa",
   "item.createmechanicalcompanion.mounted_light": "Arnés con Antorcha",
   "item.createmechanicalcompanion.mob_radar": "Radar de Criaturas",
-
   "item.createmechanicalcompanion.mechanical_wolf_link": "Vínculo del Lobo Mecánico",
   "item.createmechanicalcompanion.blueprint_painting": "Plano decorativo",
   "item.createmechanicalcompanion.blueprint_painting_tooltip": "§8Objeto decorativo que se puede colocar en las paredes.",
@@ -47,7 +40,6 @@
   "item.createmechanicalcompanion.incomplete_mechanical_wolf_motherboard": "Placa Base de Lobo Mecánico Incompleta",
   "item.createmechanicalcompanion.illager_engineer_spawn_egg": "Huevo de Ingeniero Maldeano",
   "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "Huevo de Supervisor Maldeano",
-
   "painting.createmechanicalcompanion.blueprint_art_1.title": "Plano de Pata de Lobo Mecánico",
   "painting.createmechanicalcompanion.blueprint_art_2.title": "Plano de Visor de Lobo Mecánico",
   "painting.createmechanicalcompanion.blueprint_art_3.title": "Plano de Placa Base de Lobo Mecánico",
@@ -56,14 +48,12 @@
   "painting.createmechanicalcompanion.blueprint_art_2.author": "Marcos",
   "painting.createmechanicalcompanion.blueprint_art_3.author": "Marcos",
   "painting.createmechanicalcompanion.blueprint_art_4.author": "Marcos",
-
   "entity.createmechanicalcompanion.ownership_warning": "§cEste Lobo Mecánico no te pertenece.",
   "entity.createmechanicalcompanion.custom_wolf": "Lobo Mecánico",
   "entity.createmechanicalcompanion.illager_engineer": "Ingeniero Maldeano",
   "entity.createmechanicalcompanion.potato_cannon_illager": "Supervisor Maldeano",
   "entity.createmechanicalcompanion.blueprint_painting": "Plano decorativo",
-
   "creativetab.create_mechanical_companion_tab": "Create: Compañero Mecánico",
-
-  "createmechanicalcompanion.tip.map_tip": "Existen rumores de mapas a §6Talleres Maldeanos§r ocultos en lo profundo de los bosques oscuros. ¡Consulta con un cartógrafo o vendedor ambulante!"
+  "createmechanicalcompanion.tip.map_tip": "Existen rumores de mapas a §6Talleres Maldeanos§r ocultos en lo profundo de los bosques oscuros. ¡Consulta con un cartógrafo o vendedor ambulante!",
+  "item.createmechanicalcompanion.mechanical_wolf_link.spawn_cooldown": "Tiempo de reaparción: "
 }

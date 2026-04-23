@@ -65,5 +65,6 @@
 
   "creativetab.create_mechanical_companion_tab": "Create: Mechanical Companion",
 
-  "createmechanicalcompanion.tip.map_tip": "Rumors speak of maps to §6Illager Workshops§r hidden deep in dark forests. Check with a cartographer or wandering trader!"
+  "createmechanicalcompanion.tip.map_tip": "Rumors speak of maps to §6Illager Workshops§r hidden deep in dark forests. Check with a cartographer or wandering trader!",
+  "item.createmechanicalcompanion.mechanical_wolf_link.spawn_cooldown": "Spawn cooldown: "
 }

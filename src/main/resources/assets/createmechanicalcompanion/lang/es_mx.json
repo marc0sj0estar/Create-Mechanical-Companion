@@ -65,5 +65,6 @@
 
   "creativetab.create_mechanical_companion_tab": "Create: Compañero Mecánico",
 
-  "createmechanicalcompanion.tip.map_tip": "Existen rumores de mapas a §6Talleres Maldeanos§r ocultos en lo profundo de los bosques oscuros. ¡Consulta con un cartógrafo o vendedor ambulante!"
+  "createmechanicalcompanion.tip.map_tip": "Existen rumores de mapas a §6Talleres Maldeanos§r ocultos en lo profundo de los bosques oscuros. ¡Consulta con un cartógrafo o vendedor ambulante!",
+  "item.createmechanicalcompanion.mechanical_wolf_link.spawn_cooldown": "Tiempo de reaparción: "
 }

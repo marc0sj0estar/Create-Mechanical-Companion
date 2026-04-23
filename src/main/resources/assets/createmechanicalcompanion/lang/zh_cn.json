@@ -66,5 +66,6 @@
 
   "creativetab.create_mechanical_companion_tab": "机械动力：动力伙伴",
 
-  "createmechanicalcompanion.tip.map_tip": "据说在黑森林中藏有前往§6灾厄工坊§r的路。与制图师或流浪商人确认这个消息！"
+  "createmechanicalcompanion.tip.map_tip": "据说在黑森林中藏有前往§6灾厄工坊§r的路。与制图师或流浪商人确认这个消息！",
+  "item.createmechanicalcompanion.mechanical_wolf_link.spawn_cooldown": "重生冷却: "
 }

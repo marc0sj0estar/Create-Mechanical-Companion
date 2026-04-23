@@ -34,7 +34,6 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
 
     private CompoundTag previousModuleTag;
 
-    // Helper method to get custom data from item (1.21.1 way)
     private CompoundTag getCustomTag(ItemStack stack) {
         CustomData customData = stack.get(DataComponents.CUSTOM_DATA);
         if (customData != null) {
@@ -43,7 +42,6 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
         return new CompoundTag();
     }
 
-    // Helper method to set custom data on item (1.21.1 way)
     private void setCustomTag(ItemStack stack, CompoundTag tag) {
         stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
     }
@@ -53,6 +51,12 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
         LivingEntity playerEntity = slotContext.entity();
 
         if (!(playerEntity instanceof Player player)) {
+            return false;
+        }
+
+
+        if(!slotContext.identifier().equals("head")) {
+            player.displayClientMessage(Component.translatable("item.createmechanicalcompanion.mechanical_wolf_link.duplicate_warning"), true);
             return false;
         }
 
@@ -177,7 +181,7 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
         if (tag.contains("SpawnCooldown")) {
             int cooldownTicks = tag.getInt("SpawnCooldown");
             int seconds = cooldownTicks / 20;
-            tooltipComponents.add(Component.literal("§7Spawn Cooldown: §c" + seconds + "s"));
+            tooltipComponents.add(Component.translatable("item.createmechanicalcompanion.mechanical_wolf_link.spawn_cooldown").append(Component.literal(seconds + "s")));
         }
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }

@@ -65,5 +65,6 @@
 
   "creativetab.create_mechanical_companion_tab": "create:mechanicalcompanion",
 
-  "createmechanicalcompanion.tip.map_tip": "§6イリジャーの作業場§rへの地図が、暗い森の奥深くに隠されているという噂がある製図家や行商人を確認しよう！"
+  "createmechanicalcompanion.tip.map_tip": "§6イリジャーの作業場§rへの地図が、暗い森の奥深くに隠されているという噂がある製図家や行商人を確認しよう！",
+  "item.createmechanicalcompanion.mechanical_wolf_link.spawn_cooldown": "再出現クールダウン: "
 }

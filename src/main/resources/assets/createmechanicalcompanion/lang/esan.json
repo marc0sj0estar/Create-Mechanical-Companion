@@ -65,5 +65,6 @@
 
   "creativetab.create_mechanical_companion_tab": "Create: Compañero Mecánico",
 
-  "createmechanicalcompanion.tip.map_tip": "Êççîtten rumorê de mapâ a §6Tayerê Mardeanô§r ocurtô en lo profundo de lô bôqquê ôccurô. ¡Conçurta con un cartógrafo o bendedôh ambulante!"
+  "createmechanicalcompanion.tip.map_tip": "Êççîtten rumorê de mapâ a §6Tayerê Mardeanô§r ocurtô en lo profundo de lô bôqquê ôccurô. ¡Conçurta con un cartógrafo o bendedôh ambulante!",
+  "item.createmechanicalcompanion.mechanical_wolf_link.spawn_cooldown": "Tiempo de reaparçión: "
 }
