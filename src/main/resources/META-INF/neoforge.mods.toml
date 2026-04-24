@@ -10,8 +10,8 @@ displayName="Create Mechanical Companion"
 updateJSONURL=""
 displayURL="https://github.com/MyR-bot/Create-Mechanical-Companion"
 logoFile="mod_icon.png"
-credits="MyR"
-authors="MyR"
+credits="Marcos Joestar"
+authors="Marcos Joestar"
 description='''
 A Create addon that adds mechanical companions to the game.
 '''
