@@ -55,5 +55,6 @@
   "entity.createmechanicalcompanion.blueprint_painting": "Plano decorativo",
   "creativetab.create_mechanical_companion_tab": "Create: Compañero Mecánico",
   "createmechanicalcompanion.tip.map_tip": "Existen rumores de mapas a §6Talleres Maldeanos§r ocultos en lo profundo de los bosques oscuros. ¡Consulta con un cartógrafo o vendedor ambulante!",
+  "item.createmechanicalcompanion.mechanical_wolf_link.equipped_modules": "§e§nMódulos equipados§r",
   "item.createmechanicalcompanion.mechanical_wolf_link.spawn_cooldown": "Tiempo de reaparción: "
 }

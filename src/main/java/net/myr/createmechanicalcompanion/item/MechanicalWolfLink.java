@@ -181,7 +181,7 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
             net.minecraft.nbt.ListTag items = modulesTag.getList("Items", 10);
             if (!items.isEmpty()) {
                 tooltipComponents.add(Component.empty());
-                tooltipComponents.add(Component.literal("§e§nEquipped Modules§r"));
+                tooltipComponents.add(Component.translatable("item.createmechanicalcompanion.mechanical_wolf_link.equipped_modules"));
                 for (int i = 0; i < items.size(); i++) {
                     String itemId = items.getCompound(i).getString("id");
                     net.minecraft.resources.ResourceLocation resourceLocation = net.minecraft.resources.ResourceLocation.tryParse(itemId);
