@@ -1,7 +1,9 @@
 package net.myr.createmechanicalcompanion;
 
-import net.minecraft.client.Minecraft;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.resources.ResourceLocation;
+import net.myr.createmechanicalcompanion.blocks.ModBlockEntities;
+import net.myr.createmechanicalcompanion.blocks.ModBlocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -30,13 +32,18 @@ import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 public class CreateMechanicalCompanion {
     public static final String MOD_ID = "createmechanicalcompanion";
 
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
+
     public CreateMechanicalCompanion(IEventBus modEventBus, ModContainer modContainer) {
-        ModCreativeModeTabs.register(modEventBus);
+        ModCreativeModeTabs.register();
         ModItems.register(modEventBus);
         ModMenuTypes.register(modEventBus);
         ModEntity.register(modEventBus);
         ModSounds.register(modEventBus);
+        ModBlocks.register();
+        ModBlockEntities.register();
         BlueprintPaintingVariants.register(modEventBus);
+        REGISTRATE.registerEventListeners(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, net.myr.createmechanicalcompanion.ModConfig.COMMON_SPEC);
 

@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 public class ModItems {
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, CreateMechanicalCompanion.MOD_ID);
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CreateMechanicalCompanion.MOD_ID);
 
     public static final Supplier<Item> ICON_ITEM = ITEMS.register("tab_icon", () -> new Item(new Item.Properties().stacksTo(1)));
 
