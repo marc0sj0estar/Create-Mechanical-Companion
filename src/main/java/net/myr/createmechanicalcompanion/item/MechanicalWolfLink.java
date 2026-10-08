@@ -45,6 +45,36 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
         return new CompoundTag();
     }
 
+    private ItemStack getLinkFromPlayer(Player player) {
+        ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(player).orElse(null);
+        if (curiosInventory == null) {
+            return ItemStack.EMPTY;
+        }
+
+        ICurioStacksHandler headSlotHandler = curiosInventory.getCurios().get("head");
+        ICurioStacksHandler curioSlotHandler = curiosInventory.getCurios().get("curio");
+
+        if (headSlotHandler != null) {
+            for (int i = 0; i < headSlotHandler.getSlots(); i++) {
+                ItemStack itemStack = headSlotHandler.getStacks().getStackInSlot(i);
+                if (itemStack.getItem() instanceof MechanicalWolfLink) {
+                    return itemStack;
+                }
+            }
+        }
+
+        if (curioSlotHandler != null) {
+            for (int i = 0; i < curioSlotHandler.getSlots(); i++) {
+                ItemStack itemStack = curioSlotHandler.getStacks().getStackInSlot(i);
+                if (itemStack.getItem() instanceof MechanicalWolfLink) {
+                    return itemStack;
+                }
+            }
+        }
+
+        return ItemStack.EMPTY;
+    }
+
     private void setCustomTag(ItemStack stack, CompoundTag tag) {
         stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
     }
@@ -57,31 +87,11 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
             return false;
         }
 
-
-        if(!slotContext.identifier().equals("head")) {
+        if(getLinkFromPlayer(player) != ItemStack.EMPTY) {
             player.displayClientMessage(Component.translatable("item.createmechanicalcompanion.mechanical_wolf_link.duplicate_warning"), true);
             return false;
         }
 
-        ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(playerEntity).orElse(null);
-
-        if (curiosInventory == null) {
-            return true;
-        }
-
-        ICurioStacksHandler headSlotHandler = curiosInventory.getCurios().get("head");
-
-        if (headSlotHandler == null) {
-            return true;
-        }
-
-        for (int i = 0; i < headSlotHandler.getSlots(); i++) {
-            ItemStack itemStack = headSlotHandler.getStacks().getStackInSlot(i);
-            if (itemStack.getItem() instanceof MechanicalWolfLink) {
-                player.displayClientMessage(Component.translatable("item.createmechanicalcompanion.mechanical_wolf_link.duplicate_warning"), true);
-                return false;
-            }
-        }
         return true;
     }
 

@@ -2,7 +2,6 @@ package net.myr.createmechanicalcompanion.entity;
 
 import com.simibubi.create.AllItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -38,6 +37,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
+import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.myr.createmechanicalcompanion.ModConfig;
 import net.myr.createmechanicalcompanion.sounds.ModSounds;
@@ -61,8 +62,9 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
     private BlockPos previousLightPos = null;
     private float currentTorchTick = 0;
-
     private float mountedCrossbowTick = 0;
+    private float regenerativeCasingHealTick = 0;
+
 
     private float boosterTimer = 0;
     private float boosterAnimationTick = 0;
@@ -234,8 +236,8 @@ public class CustomWolf extends Wolf implements MenuProvider {
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(4, new CustomLeapAtTargetGoal(this, 0.3F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
-        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
-        this.goalSelector.addGoal(8, new StrollUnlessMenuOpenGoal(this, 0.6D));
+        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 4.0F));
+        this.goalSelector.addGoal(8, new StrollUnlessMenuOpenGoal(this, 0.6D, 4.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
@@ -301,7 +303,12 @@ public class CustomWolf extends Wolf implements MenuProvider {
             }
 
             if (isModuleEquipped(ModItems.REGENERATIVE_CASING.get()) && this.getHealth() < this.getMaxHealth()) {
-                this.heal(ModConfig.COMMON.regenerativeCasingHealAmount.get().floatValue());
+                regenerativeCasingHealTick++;
+                CreateMechanicalCompanion.LOGGER.info("Regenerative Casing: " + regenerativeCasingHealTick + " ticks since last heal, " + ModConfig.COMMON.regenerativeCasingHealDelay.get() + " regen delay, " + ModConfig.COMMON.regenerativeCasingHealAmount.get() + " heal amount");
+                if (regenerativeCasingHealTick >= ModConfig.COMMON.regenerativeCasingHealDelay.get()) {
+                    this.heal(ModConfig.COMMON.regenerativeCasingHealAmount.get().floatValue());
+                    regenerativeCasingHealTick = 0;
+                }
             }
 
             if (isModuleEquipped(ModItems.MOUNTED_LIGHT.get())) {
@@ -406,6 +413,18 @@ public class CustomWolf extends Wolf implements MenuProvider {
         }
     }
 
+    @Override
+    public boolean canDrownInFluidType(FluidType type) {
+        return false;
+    }
+
+    @Override
+    protected boolean canRide(Entity vehicle) {
+        return false;
+    }
+
+    @Override
+    protected void pushEntities() {}
 
     private void applyGlowingToHostileMobs() {
         float radarRadius = ModConfig.COMMON.mobRadarRange.get();
