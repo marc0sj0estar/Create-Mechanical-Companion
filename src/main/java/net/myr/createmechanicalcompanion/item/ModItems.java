@@ -33,6 +33,7 @@ public class ModItems {
         }
     });
 
+    public static final Supplier<Item> MECHANICAL_WOLF_CHASSIS = ITEMS.register("mechanical_wolf_chassis", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> MECHANICAL_WOLF_MOTHERBOARD = ITEMS.register("mechanical_wolf_motherboard", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ROSE_QUARTZ_LENS = ITEMS.register("rose_quartz_lens", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> OPTICAL_SENSOR = ITEMS.register("optical_sensor", () -> new Item(new Item.Properties().stacksTo(1)));
