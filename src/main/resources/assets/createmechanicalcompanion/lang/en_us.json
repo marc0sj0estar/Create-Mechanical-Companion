@@ -48,10 +48,12 @@
   "item.createmechanicalcompanion.illager_engineer_spawn_egg": "Illager Engineer Spawn Egg",
   "item.createmechanicalcompanion.potato_cannon_illager_spawn_egg": "Illager Supervisor Spawn Egg",
 
+    "painting.createmechanicalcompanion.blueprint_art_0.title": "Mechanical Wolf Head Blueprint",
   "painting.createmechanicalcompanion.blueprint_art_1.title": "Mechanical Wolf Leg Blueprint",
   "painting.createmechanicalcompanion.blueprint_art_2.title": "Mechanical Wolf Visor Blueprint",
   "painting.createmechanicalcompanion.blueprint_art_3.title": "Mechanical Wolf Motherboard Blueprint",
   "painting.createmechanicalcompanion.blueprint_art_4.title": "Small Blueprint",
+  "painting.createmechanicalcompanion.blueprint_art_0.author": "Marcos",
   "painting.createmechanicalcompanion.blueprint_art_1.author": "Marcos",
   "painting.createmechanicalcompanion.blueprint_art_2.author": "Marcos",
   "painting.createmechanicalcompanion.blueprint_art_3.author": "Marcos",
@@ -67,5 +69,9 @@
 
   "createmechanicalcompanion.tip.map_tip": "Rumors speak of maps to §6Illager Workshops§r hidden deep in dark forests. Check with a cartographer or wandering trader!",
   "item.createmechanicalcompanion.mechanical_wolf_link.equipped_modules": "§e§nEquipped Modules§r",
-  "item.createmechanicalcompanion.mechanical_wolf_link.spawn_cooldown": "Spawn cooldown: "
+  "item.createmechanicalcompanion.mechanical_wolf_link.spawn_cooldown": "Spawn cooldown: ",
+  "gui.createmechanicalcompanion.wolf_slot.defensive_tooltip": "§7Defensive Module Slot",
+  "gui.createmechanicalcompanion.wolf_slot.offensive_tooltip": "§7Offensive Module Slot",
+  "gui.createmechanicalcompanion.wolf_slot.movement_tooltip": "§7Movement Module Slot",
+  "gui.createmechanicalcompanion.wolf_slot.utility_tooltip": "§7Utility Module Slot"
 }

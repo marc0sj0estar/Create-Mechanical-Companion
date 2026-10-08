@@ -1,6 +1,5 @@
 {
-  "type": "create:mechanical_crafting",
-  "accept_mirrored": true,
+  "type": "minecraft:crafting_shaped",
   "key": {
     "T": {
       "item": "minecraft:torch"
@@ -10,8 +9,8 @@
     }
   },
   "pattern": [
-    "T  T",
-    "BBBB"
+    "T T",
+    "BBB"
   ],
   "result": {
     "id": "createmechanicalcompanion:mounted_light",

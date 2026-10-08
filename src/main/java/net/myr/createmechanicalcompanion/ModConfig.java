@@ -39,6 +39,7 @@ public class ModConfig {
         public final ModConfigSpec.IntValue boosterRocketCooldown;
         public final ModConfigSpec.IntValue quantumDriveCooldown;
 
+        public final ModConfigSpec.IntValue regenerativeCasingHealDelay;
         public final ModConfigSpec.DoubleValue regenerativeCasingHealAmount;
         public final ModConfigSpec.IntValue mobRadarRange;
         public final ModConfigSpec.IntValue mobRadarCooldown;
@@ -105,23 +106,27 @@ public class ModConfig {
                     .defineInRange("boosterRocketDuration", 40, 0, Integer.MAX_VALUE);
 
             boosterRocketCooldown = builder
-                    .comment("Cooldown time for the Booster Rocket (Default value = 180)")
+                    .comment("Cooldown time (in ticks) for the Booster Rocket (Default value = 180)")
                     .defineInRange("boosterRocketCooldown", 180, 0, Integer.MAX_VALUE);
 
             quantumDriveCooldown = builder
-                    .comment("Cooldown time (in seconds) for the Quantum Drive (Default value = 40)")
-                    .defineInRange("quantumDriveCooldown", 40, 0, Integer.MAX_VALUE);
+                    .comment("Cooldown time (in ticks) for the Quantum Drive (Default value = 200)")
+                    .defineInRange("quantumDriveCooldown", 200, 0, Integer.MAX_VALUE);
 
             regenerativeCasingHealAmount = builder
-                    .comment("Amount of health restored by the Regenerative Casing (Default value = 0.05)")
-                    .defineInRange("regenerativeCasingHealAmount", 0.05, 0.0, Double.MAX_VALUE);
+                    .comment("Amount of health restored by the Regenerative Casing (Default value = 0.5)")
+                    .defineInRange("regenerativeCasingHealAmount", 0.5, 0.0, Double.MAX_VALUE);
+
+            regenerativeCasingHealDelay = builder
+                    .comment("Delay (in ticks) between each heal from the Regenerative Casing (Default value = 60)")
+                    .defineInRange("regenerativeCasingHealDelay", 60, 0, Integer.MAX_VALUE);
 
             mobRadarRange = builder
                     .comment("Detection range of the Mob Radar (Default value = 32)")
                     .defineInRange("mobRadarRange", 32, 0, Integer.MAX_VALUE);
 
             mobRadarCooldown = builder
-                    .comment("Cooldown time for the Mob Radar (Default value = 200)")
+                    .comment("Cooldown time (in ticks) for the Mob Radar (Default value = 200)")
                     .defineInRange("mobRadarCooldown", 200, 0, Integer.MAX_VALUE);
         }
     }

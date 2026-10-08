@@ -1,6 +1,5 @@
 {
-  "type": "create:mechanical_crafting",
-  "accept_mirrored": true,
+  "type": "minecraft:crafting_shaped",
   "key": {
     "R": {
       "item": "minecraft:blaze_rod"
