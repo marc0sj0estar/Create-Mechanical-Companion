@@ -45,7 +45,6 @@ public class WolfScreen extends AbstractContainerScreen<WolfMenu> {
             }
         }
         
-        // Render wolf entity in the background (before items/tooltips)
         int xOffset = 51;
         int yOffset = 61;
         int renderX = (this.width - this.imageWidth) / 2 + xOffset;
@@ -70,7 +69,33 @@ public class WolfScreen extends AbstractContainerScreen<WolfMenu> {
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
-        // Render tooltip LAST so it appears on top of everything including the wolf
         renderTooltip(guiGraphics, mouseX, mouseY);
+    }
+
+    @Override
+    protected void renderTooltip(GuiGraphics guiGraphics, int x, int y) {
+        super.renderTooltip(guiGraphics, x, y);
+
+        for (int i = 0; i < WolfMenu.slotAmount; i++) {
+            Slot currentSlot = menu.slots.get(i);
+
+            if (!currentSlot.hasItem() && isHovering(currentSlot.x, currentSlot.y, 16, 16, x, y)) {
+                Component tooltip = switch (i) {
+                    case 0 -> Component.translatable(
+                            "gui.createmechanicalcompanion.wolf_slot.defensive_tooltip");
+                    case 1, 2, 3 -> Component.translatable(
+                            "gui.createmechanicalcompanion.wolf_slot.offensive_tooltip");
+                    case 4, 5 -> Component.translatable(
+                            "gui.createmechanicalcompanion.wolf_slot.movement_tooltip");
+                    case 6, 7, 8 -> Component.translatable(
+                            "gui.createmechanicalcompanion.wolf_slot.utility_tooltip");
+                    default -> Component.empty();
+                };
+
+
+                guiGraphics.renderTooltip(font, tooltip, x, y);
+                return;
+            }
+        }
     }
 }
