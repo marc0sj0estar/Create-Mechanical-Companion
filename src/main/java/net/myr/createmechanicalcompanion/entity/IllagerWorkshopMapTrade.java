@@ -48,7 +48,7 @@ public class IllagerWorkshopMapTrade implements VillagerTrades.ItemListing{
 
         ItemStack map = MapItem.create(world, target.getX(), target.getZ(), (byte)2, true, true);
         MapItem.renderBiomePreviewMap(world, map);
-        MapItemSavedData.addTargetDecoration(map, target, "+", MapDecorationTypes.TARGET_X);
+        MapItemSavedData.addTargetDecoration(map, target, "+", MapDecorationTypes.RED_X);
         map.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME, Component.translatable("item.createmechanicalcompanion.illager_workshop_map"));
 
         return new MerchantOffer(
