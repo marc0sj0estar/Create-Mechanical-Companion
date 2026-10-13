@@ -2,9 +2,12 @@ package net.myr.createmechanicalcompanion;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.resources.ResourceLocation;
 import net.myr.createmechanicalcompanion.blocks.ModBlockEntities;
 import net.myr.createmechanicalcompanion.blocks.ModBlocks;
+import net.myr.createmechanicalcompanion.ponder.ModPonderPlugin;
+import net.myr.createmechanicalcompanion.ponder.ModPonderScenes;
 import net.myr.createmechanicalcompanion.screen.TestBlockScreen;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -72,6 +75,7 @@ public class CreateMechanicalCompanion {
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 CuriosRendererRegistry.register(ModItems.MECHANICAL_WOLF_LINK.get(), MechanicalWolfLinkRenderer::new);
+                PonderIndex.addPlugin(new ModPonderPlugin());
             });
         }
 
