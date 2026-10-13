@@ -11,6 +11,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
@@ -38,7 +39,9 @@ public class CreateMechanicalCompanion {
 
 
     public CreateMechanicalCompanion(IEventBus modEventBus, ModContainer modContainer) {
+
         ModCreativeModeTabs.register();
+
         ModItems.register(modEventBus);
         ModMenuTypes.register(modEventBus);
         ModEntity.register(modEventBus);
@@ -48,7 +51,11 @@ public class CreateMechanicalCompanion {
         BlueprintPaintingVariants.register(modEventBus);
         REGISTRATE.registerEventListeners(modEventBus);
 
-        modContainer.registerConfig(ModConfig.Type.COMMON, net.myr.createmechanicalcompanion.ModConfig.COMMON_SPEC);
+        modContainer.registerConfig(ModConfig.Type.SERVER, ServerConfig.SERVER_SPEC);
+        modEventBus.addListener((ModConfigEvent.Loading event) ->
+                ServerConfig.onConfigLoad(modContainer.getModInfo().getVersion().toString())
+        );
+
         modEventBus.addListener(ClientModEvents::onClientSetup);
         modEventBus.addListener(ClientModEvents::registerScreens);
         modEventBus.addListener(ClientModEvents::onRegisterLayerDefinitions);

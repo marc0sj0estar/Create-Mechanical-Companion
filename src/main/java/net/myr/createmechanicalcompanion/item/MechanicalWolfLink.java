@@ -5,8 +5,10 @@ import java.util.UUID;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,7 +19,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
-import net.myr.createmechanicalcompanion.ModConfig;
+import net.myr.createmechanicalcompanion.ServerConfig;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.myr.createmechanicalcompanion.entity.CustomWolf;
 import net.myr.createmechanicalcompanion.entity.ModEntity;
@@ -26,8 +28,6 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
-
-import static net.myr.createmechanicalcompanion.CreateMechanicalCompanion.MOD_ID;
 
 public class MechanicalWolfLink extends Item implements ICurioItem {
 
@@ -127,7 +127,7 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
             CustomWolf wolf = (CustomWolf) entity;
 
             if (wolf.getHealth() <= 0) {
-                tag.putInt("SpawnCooldown", ModConfig.COMMON.mechanicalWolfRespawnCooldown.get());
+                tag.putInt("SpawnCooldown", ServerConfig.mechanicalWolfRespawnCooldown.get());
                 setCustomTag(stack, tag);
             }
 
@@ -263,22 +263,25 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
 
     public ItemStackHandler loadWolfModulesFromTrinket(CompoundTag tag, int size) {
         ItemStackHandler handler = new ItemStackHandler(size);
+        if(tag == null || !tag.contains("WolfModules")) {
+            return handler;
+        }
+        CompoundTag modulesTag = tag.getCompound("WolfModules");
+        if(!modulesTag.contains("Items")) {
+            return handler;
+        }
 
-        if (tag != null && tag.contains("WolfModules")) {
-            CompoundTag modulesTag = tag.getCompound("WolfModules");
-            if (modulesTag.contains("Items")) {
-                net.minecraft.nbt.ListTag items = modulesTag.getList("Items", 10);
-                for (int i = 0; i < items.size(); i++) {
-                    CompoundTag itemTag = items.getCompound(i);
-                    int slot = itemTag.getInt("Slot");
-                    if (slot >= 0 && slot < size) {
-                        net.minecraft.resources.ResourceLocation itemId = net.minecraft.resources.ResourceLocation.tryParse(itemTag.getString("id"));
-                        if (itemId != null) {
-                            Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(itemId);
-                            if (item != Items.AIR) {
-                                handler.setStackInSlot(slot, new ItemStack(item, itemTag.getInt("count")));
-                            }
-                        }
+        net.minecraft.nbt.ListTag items = modulesTag.getList("Items", 10);
+
+        for (int i = 0; i < items.size(); i++) {
+            CompoundTag itemTag = items.getCompound(i);
+            int slot = itemTag.getInt("Slot");
+            if (slot >= 0 && slot < size) {
+                ResourceLocation itemId = ResourceLocation.tryParse(itemTag.getString("id"));
+                if (itemId != null) {
+                    Item item = BuiltInRegistries.ITEM.get(itemId);
+                    if (item != Items.AIR) {
+                        handler.setStackInSlot(slot, new ItemStack(item, itemTag.getInt("count")));
                     }
                 }
             }
