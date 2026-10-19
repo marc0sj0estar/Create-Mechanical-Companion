@@ -45,7 +45,7 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
         return new CompoundTag();
     }
 
-    private ItemStack getLinkFromPlayer(Player player) {
+    public static ItemStack getLinkFromPlayer(Player player) {
         ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(player).orElse(null);
         if (curiosInventory == null) {
             return ItemStack.EMPTY;

@@ -38,6 +38,7 @@ import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
+import net.myr.createmechanicalcompanion.item.MechanicalWolfLink;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.myr.createmechanicalcompanion.ServerConfig;
@@ -49,9 +50,6 @@ import org.jetbrains.annotations.Nullable;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.SlotResult;
-import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 import java.util.List;
 import java.util.Optional;
@@ -449,18 +447,12 @@ public class CustomWolf extends Wolf implements MenuProvider {
             return;
         }
         if(this.getOwner() instanceof Player player){
-            ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(player).orElse(null);
-            if(curiosInventory == null){
+            ItemStack link = MechanicalWolfLink.getLinkFromPlayer(player);
+            if(link == ItemStack.EMPTY){
                 discard();
                 return;
             }
-            Optional<SlotResult> item = curiosInventory.findCurio("head", 0);
-            if(item.isEmpty()) {
-                discard();
-                return;
-            }
-            ItemStack stack = item.get().stack();
-            net.minecraft.world.item.component.CustomData customData = stack.get(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
+            net.minecraft.world.item.component.CustomData customData = link.get(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
             if(customData == null){
                 discard();
                 return;
