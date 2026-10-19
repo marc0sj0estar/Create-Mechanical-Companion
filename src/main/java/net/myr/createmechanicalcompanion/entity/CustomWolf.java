@@ -563,7 +563,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
     public boolean hurt(DamageSource pSource, float pAmount) {
         if(isModuleEquipped(ModItems.TESLA_TAIL.get()))
         {
-            if(pSource.getEntity() != null && pSource.getEntity() != this)
+            if(pSource.getEntity() != null && pSource.getEntity() != this && !(pSource.getEntity() instanceof CustomWolf))
             {
                 pSource.getEntity().hurt(pSource.getEntity().damageSources().mobAttack(this), ServerConfig.teslaTailDamage.get().floatValue());
                 pSource.getEntity().invulnerableTime = 0;
