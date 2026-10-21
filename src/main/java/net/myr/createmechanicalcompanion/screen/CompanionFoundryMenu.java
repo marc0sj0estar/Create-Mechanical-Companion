@@ -1,7 +1,6 @@
 package net.myr.createmechanicalcompanion.screen;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -9,21 +8,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.myr.createmechanicalcompanion.blocks.ModBlocks;
-import net.myr.createmechanicalcompanion.blocks.TestBlockEntity;
+import net.myr.createmechanicalcompanion.blocks.CompanionFoundryEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class TestBlockMenu extends AbstractContainerMenu {
-    public final TestBlockEntity blockEntity;
+public class CompanionFoundryMenu extends AbstractContainerMenu {
+    public final CompanionFoundryEntity blockEntity;
     private final Level level;
     private final ContainerData data;
 
-    public TestBlockMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+    public CompanionFoundryMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
     }
 
-    public TestBlockMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.TEST_BLOCK_MENU.get(), pContainerId);
-        this.blockEntity = ((TestBlockEntity) entity);
+    public CompanionFoundryMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(ModMenuTypes.COMPANION_FOUNDRY_MENU.get(), pContainerId);
+        this.blockEntity = ((CompanionFoundryEntity) entity);
         this.level = inv.player.level();
         this.data = data;
 
@@ -123,7 +122,7 @@ public class TestBlockMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.TEST_BLOCK.get());
+                pPlayer, ModBlocks.COMPANION_FOUNDRY.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

@@ -7,8 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.myr.createmechanicalcompanion.blocks.ModBlockEntities;
 import net.myr.createmechanicalcompanion.blocks.ModBlocks;
 import net.myr.createmechanicalcompanion.ponder.ModPonderPlugin;
-import net.myr.createmechanicalcompanion.ponder.ModPonderScenes;
-import net.myr.createmechanicalcompanion.screen.TestBlockScreen;
+import net.myr.createmechanicalcompanion.screen.CompanionFoundryScreen;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -82,7 +81,7 @@ public class CreateMechanicalCompanion {
         @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event) {
             event.register(ModMenuTypes.WOLF_MENU.get(), WolfScreen::new);
-            event.register(ModMenuTypes.TEST_BLOCK_MENU.get(), TestBlockScreen::new);
+            event.register(ModMenuTypes.COMPANION_FOUNDRY_MENU.get(), CompanionFoundryScreen::new);
         }
 
         @SubscribeEvent

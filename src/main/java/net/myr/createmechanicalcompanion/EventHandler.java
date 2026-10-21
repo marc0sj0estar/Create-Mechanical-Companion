@@ -3,9 +3,8 @@ package net.myr.createmechanicalcompanion;
 import net.minecraft.client.renderer.entity.PaintingRenderer;
 import net.minecraft.core.Direction;
 import net.myr.createmechanicalcompanion.blocks.ModBlockEntities;
-import net.myr.createmechanicalcompanion.blocks.TestBlockEntity;
+import net.myr.createmechanicalcompanion.blocks.CompanionFoundryEntity;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -37,8 +36,8 @@ public class EventHandler {
     @SubscribeEvent
     public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
-                Capabilities.FluidHandler.BLOCK, ModBlockEntities.TEST_BLOCK.get(),
-                (TestBlockEntity blockEntity, Direction side) -> blockEntity.fluidTank
+                Capabilities.FluidHandler.BLOCK, ModBlockEntities.COMPANION_FOUNDRY_ENTITY.get(),
+                (CompanionFoundryEntity blockEntity, Direction side) -> blockEntity.fluidTank
         );
     }
 }
