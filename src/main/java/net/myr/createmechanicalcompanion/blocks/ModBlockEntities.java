@@ -1,14 +1,19 @@
 package net.myr.createmechanicalcompanion.blocks;
 
+import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.content.kinetics.base.ShaftVisual;
+import com.simibubi.create.content.kinetics.base.SingleAxisRotatingVisual;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 
 
 public class ModBlockEntities {
 
-    public static final BlockEntityEntry<TestBlockEntity> TEST_BLOCK = CreateMechanicalCompanion.REGISTRATE
-            .blockEntity("test_block", TestBlockEntity::new)
-            .validBlocks(ModBlocks.TEST_BLOCK)
+    public static final BlockEntityEntry<CompanionFoundryEntity> COMPANION_FOUNDRY_ENTITY = CreateMechanicalCompanion.REGISTRATE
+            .blockEntity("companion_foundry", CompanionFoundryEntity::new)
+            .visual(() -> SingleAxisRotatingVisual.of(AllPartialModels.MILLSTONE_COG), false)
+            .validBlocks(ModBlocks.COMPANION_FOUNDRY)
+            .renderer(() -> CompanionFoundryRenderer::new)
             .register();
 
     public static void register() {}

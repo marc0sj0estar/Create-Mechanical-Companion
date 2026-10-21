@@ -18,8 +18,8 @@ public class ModMenuTypes {
     public static final Supplier<MenuType<WolfMenu>> WOLF_MENU = 
             registerMenuType("wolf_menu", WolfMenu::new);
 
-    public static final Supplier<MenuType<TestBlockMenu>> TEST_BLOCK_MENU =
-            registerMenuType("test_block_menu", TestBlockMenu::new);
+    public static final Supplier<MenuType<CompanionFoundryMenu>> COMPANION_FOUNDRY_MENU =
+            registerMenuType("companion_foundry_menu", CompanionFoundryMenu::new);
 
     private static <T extends AbstractContainerMenu> Supplier<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IMenuTypeExtension.create(factory));

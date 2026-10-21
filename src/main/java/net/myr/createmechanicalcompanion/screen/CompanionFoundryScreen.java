@@ -11,11 +11,11 @@ import net.minecraft.world.item.Items;
 import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 import net.myr.createmechanicalcompanion.item.ModItems;
 
-public class TestBlockScreen extends AbstractContainerScreen<TestBlockMenu> {
+public class CompanionFoundryScreen extends AbstractContainerScreen<CompanionFoundryMenu> {
 
-    public static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocation.fromNamespaceAndPath(CreateMechanicalCompanion.MOD_ID, "textures/gui/test_block.png");
+    public static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocation.fromNamespaceAndPath(CreateMechanicalCompanion.MOD_ID, "textures/gui/companion_foundry.png");
 
-    public TestBlockScreen(TestBlockMenu menu, Inventory playerInventory, Component title) {
+    public CompanionFoundryScreen(CompanionFoundryMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
 

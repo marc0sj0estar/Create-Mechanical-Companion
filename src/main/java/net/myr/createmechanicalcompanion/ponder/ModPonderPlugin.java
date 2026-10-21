@@ -14,7 +14,7 @@ public class ModPonderPlugin implements PonderPlugin {
 
     @Override
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        helper.forComponents(ModBlocks.TEST_BLOCK.getId())
+        helper.forComponents(ModBlocks.COMPANION_FOUNDRY.getId())
                 .addStoryBoard("companion_foundry", ModPonderScenes::companionFoundry);
 
     }

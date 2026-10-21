@@ -21,25 +21,25 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class TestBlock extends KineticBlock implements IBE<TestBlockEntity>, ICogWheel {
+public class CompanionFoundry extends KineticBlock implements IBE<CompanionFoundryEntity>, ICogWheel {
 
-    public TestBlock(BlockBehaviour.Properties properties) {
+    public CompanionFoundry(BlockBehaviour.Properties properties) {
         super(properties);
     }
 
     @Override
-    public Class<TestBlockEntity> getBlockEntityClass() {
-        return TestBlockEntity.class;
+    public Class<CompanionFoundryEntity> getBlockEntityClass() {
+        return CompanionFoundryEntity.class;
     }
 
     @Override
-    public BlockEntityType<? extends TestBlockEntity> getBlockEntityType() {
-        return ModBlockEntities.TEST_BLOCK.get();
+    public BlockEntityType<? extends CompanionFoundryEntity> getBlockEntityType() {
+        return ModBlockEntities.COMPANION_FOUNDRY_ENTITY.get();
     }
 
     @Override
     public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
-        return false;
+        return face.getAxis() == getRotationAxis(state);
     }
 
     @Override
@@ -58,8 +58,8 @@ public class TestBlock extends KineticBlock implements IBE<TestBlockEntity>, ICo
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!level.isClientSide()) {
             BlockEntity entity = level.getBlockEntity(pos);
-            if(entity instanceof TestBlockEntity testBlockEntity) {
-                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(testBlockEntity, Component.literal("Test Block")), pos);
+            if(entity instanceof CompanionFoundryEntity companionFoundryEntity) {
+                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(companionFoundryEntity, Component.literal("Test Block")), pos);
             } else {
                 throw new IllegalStateException("ERROR");
             }

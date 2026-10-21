@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.myr.createmechanicalcompanion.item.ModItems;
-import net.myr.createmechanicalcompanion.screen.TestBlockMenu;
+import net.myr.createmechanicalcompanion.screen.CompanionFoundryMenu;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 
-public class TestBlockEntity extends KineticBlockEntity implements MenuProvider {
+public class CompanionFoundryEntity extends KineticBlockEntity implements MenuProvider {
 
     protected final ContainerData data;
     private int progress = 0;
@@ -83,19 +83,19 @@ public class TestBlockEntity extends KineticBlockEntity implements MenuProvider 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new TestBlockMenu(i, inventory, this, this.data);
+        return new CompanionFoundryMenu(i, inventory, this, this.data);
     }
 
-    public TestBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public CompanionFoundryEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         data = new ContainerData() {
             @Override
             public int get(int i) {
                 return switch (i) {
-                    case 0 -> TestBlockEntity.this.progress;
-                    case 1 -> TestBlockEntity.this.buildingStep;
-                    case 2 -> TestBlockEntity.this.fluidTank.getFluidAmount();
-                    case 3 -> TestBlockEntity.this.fluidTank.getCapacity();
+                    case 0 -> CompanionFoundryEntity.this.progress;
+                    case 1 -> CompanionFoundryEntity.this.buildingStep;
+                    case 2 -> CompanionFoundryEntity.this.fluidTank.getFluidAmount();
+                    case 3 -> CompanionFoundryEntity.this.fluidTank.getCapacity();
                     default -> 0;
                 };
             }
@@ -103,8 +103,8 @@ public class TestBlockEntity extends KineticBlockEntity implements MenuProvider 
             @Override
             public void set(int i, int value) {
                 switch (i) {
-                    case 0 -> TestBlockEntity.this.progress = value;
-                    case 1 -> TestBlockEntity.this.buildingStep = value;
+                    case 0 -> CompanionFoundryEntity.this.progress = value;
+                    case 1 -> CompanionFoundryEntity.this.buildingStep = value;
                     case 2, 3 -> {}
                 }
             }

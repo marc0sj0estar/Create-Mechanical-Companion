@@ -73,5 +73,14 @@
   "gui.createmechanicalcompanion.wolf_slot.defensive_tooltip": "§7Defensive Module Slot",
   "gui.createmechanicalcompanion.wolf_slot.offensive_tooltip": "§7Offensive Module Slot",
   "gui.createmechanicalcompanion.wolf_slot.movement_tooltip": "§7Movement Module Slot",
-  "gui.createmechanicalcompanion.wolf_slot.utility_tooltip": "§7Utility Module Slot"
+  "gui.createmechanicalcompanion.wolf_slot.utility_tooltip": "§7Utility Module Slot",
+
+  "createmechanicalcompanion.ponder.companion_foundry.header" : "How to create a link with the Companion Foundry",
+  "createmechanicalcompanion.ponder.companion_foundry.text_1" : "The Companion Foundry is used to create and customize the loadout of your Mechanical Companion.",
+  "createmechanicalcompanion.ponder.companion_foundry.text_2" : "It requires rotational power to operate.",
+  "createmechanicalcompanion.ponder.companion_foundry.text_3" : "When it's empty, it will display the required items on the menu.",
+  "createmechanicalcompanion.ponder.companion_foundry.text_4" : "After each item is inserted, the Companion Foundry will begin to process.",
+  "createmechanicalcompanion.ponder.companion_foundry.text_5" : "The processing time can be reduced by increasing the rotational speed.",
+  "createmechanicalcompanion.ponder.companion_foundry.text_6" : "The creation process can also require fluids, which can be inserted with a fluid pipe.",
+  "createmechanicalcompanion.ponder.companion_foundry.text_7" : "After all the steps are complete, the link for the Mechanical Companion will be ready to collect."
 }
