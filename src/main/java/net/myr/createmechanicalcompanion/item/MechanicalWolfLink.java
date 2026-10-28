@@ -19,6 +19,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
+import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 import net.myr.createmechanicalcompanion.ServerConfig;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.myr.createmechanicalcompanion.entity.CustomWolf;
@@ -118,7 +119,7 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
         if (tag.contains("WolfUUID")) {
             UUID wolfUUID = tag.getUUID("WolfUUID");
             Entity entity = ((ServerLevel) level).getEntity(wolfUUID);
-            if (entity == null || !(entity instanceof CustomWolf)) {
+            if (!(entity instanceof CustomWolf)) {
                 summonWolf(level, player, tag);
                 setCustomTag(stack, tag);
                 return;
@@ -154,6 +155,12 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
                 tag.putInt("SpawnCooldown", spawnCooldown);
             }
             return;
+        }
+
+        if(!player.onGround()){
+            CreateMechanicalCompanion.LOGGER.debug("Player is not on the ground, cannot summon wolf.");
+            return;
+
         }
 
         CustomWolf newWolf = new CustomWolf(ModEntities.CUSTOM_WOLF.get(), level);
