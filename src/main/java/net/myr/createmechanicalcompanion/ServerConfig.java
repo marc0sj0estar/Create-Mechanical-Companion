@@ -21,7 +21,7 @@ public class ServerConfig {
             .comment("List of entities the wolf won't attack")
             .defineListAllowEmpty(
                     List.of("wolfBlacklist"),
-                    () -> List.of("minecraft:creeper", "minecraft:ghast", "mekanism:robit"),
+                    () -> List.of("minecraft:creeper", "minecraft:ghast", "minecraft:armor_stand", "mekanism:robit"),
                     o -> o instanceof String
             );
 

@@ -131,6 +131,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 return values.length;
             }
         };
+
     }
 
     private void getValuesFromConfig(){
@@ -164,24 +165,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
         this.navigation.stop();
         this.setOrderedToSit(false);
         this.setPersistenceRequired();
-    }
-
-    @Override
-    public boolean wantsToAttack(LivingEntity pTarget, LivingEntity pOwner) {
-        if (!isBlacklisted(pTarget)) {
-            if (pTarget instanceof Wolf) {
-                Wolf wolf = (Wolf)pTarget;
-                return !wolf.isTame() || wolf.getOwner() != pOwner;
-            } else if (pTarget instanceof Player && pOwner instanceof Player && !((Player)pOwner).canHarmPlayer((Player)pTarget)) {
-                return false;
-            } else if (pTarget instanceof AbstractHorse && ((AbstractHorse)pTarget).isTamed()) {
-                return false;
-            } else {
-                return !(pTarget instanceof TamableAnimal) || !((TamableAnimal)pTarget).isTame();
-            }
-        } else {
-            return false;
-        }
     }
 
     public static AttributeSupplier.@NotNull Builder createAttributes() {
@@ -289,11 +272,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, true, this::isAngryAt));
-        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Monster.class, 5, false, false,
-            (target) -> target instanceof LivingEntity && this.getOwner() != null && this.wantsToAttack((LivingEntity) target, this.getOwner())));
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Monster.class, 5, false, false, this::isValidAttackTarget));
         this.targetSelector.addGoal(8, new ResetUniversalAngerTargetGoal<>(this, true));
     }
 
@@ -327,18 +306,9 @@ public class CustomWolf extends Wolf implements MenuProvider {
             }
 
             if (isModuleEquipped(ModItems.MOUNTED_LIGHT.get())) {
-                BlockPos torchPosition = new BlockPos(this.getBlockX(), this.getBlockY() + 1, this.getBlockZ());
-                if(torchPosition != previousLightPos)
-                {
-                    removePreviousLightBlock();
-                    if(this.level().getBlockState(torchPosition).isAir() && this.isAlive())
-                    {
-                        this.level().setBlockAndUpdate(torchPosition, Blocks.LIGHT.defaultBlockState().setValue(LightBlock.LEVEL, 15));
-                        previousLightPos = torchPosition;
-                    }
-                }
-            }else{
-                removePreviousLightBlock();
+                if(this.getOffhandItem().isEmpty()){this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.LANTERN));}
+            }else if(this.getOffhandItem().is(Items.LANTERN)){
+                this.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
             }
 
             if (isModuleEquipped(ModItems.TESLA_TAIL.get()) && teslaTailTick < teslaTailCooldown) {
@@ -381,7 +351,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 boosterTimer++;
             }
 
-            float quantumDriveCooldown = ServerConfig.quantumDriveCooldown.get();
             if(quantumDriveTimer >= quantumDriveCooldown && this.getTarget() != null && isModuleEquipped(ModItems.QUANTUM_DRIVE.get())) {
                 Entity target = this.getTarget();
                 Vec3 targetPosition = target.position();
@@ -399,7 +368,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 quantumDriveTimer++;
             }
 
-            float mobRadarCooldown = ServerConfig.mobRadarCooldown.get();
             if(mobRadarTimer >= mobRadarCooldown && isModuleEquipped(ModItems.MOB_RADAR.get()))
             {
                 applyGlowingToHostileMobs();
@@ -429,6 +397,26 @@ public class CustomWolf extends Wolf implements MenuProvider {
         }
     }
 
+    private boolean isValidAttackTarget(LivingEntity target) {
+        LivingEntity owner = getOwner();
+        if(owner == null || target == null || target == owner || isBlacklisted(target)) {return false;}
+
+        if(target instanceof Player player && owner instanceof Player ownerPlayer) {
+            return player.canHarmPlayer(ownerPlayer);
+        }
+
+        if(target instanceof TamableAnimal tamableTarget && tamableTarget.isOwnedBy(owner)){
+            return false;
+        }
+
+        if(target instanceof Mob mob){
+            return mob.getTarget() == owner;
+        }
+
+        return false;
+    }
+
+
     private void applyModuleArmor(double healthIncrease, double knockBackResistance, double armorValue) {
         double currentMaxHealth = this.getAttribute(Attributes.MAX_HEALTH).getBaseValue();
         double newMaxHealth = defaultHealthValue + healthIncrease;
@@ -453,8 +441,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
     protected void pushEntities() {}
 
     private void applyGlowingToHostileMobs() {
-        float radarRadius = ServerConfig.mobRadarRange.get();
-        List<Entity> nearbyEntities = level().getEntities(this, this.getBoundingBox().inflate(radarRadius), entity -> entity instanceof Mob mob && mob.getType().getCategory() == MobCategory.MONSTER);
+        List<Entity> nearbyEntities = level().getEntities(this, this.getBoundingBox().inflate(mobRadarRange), entity -> entity instanceof Mob mob && mob.getType().getCategory() == MobCategory.MONSTER);
 
         for (Entity entity : nearbyEntities) {
             if(entity instanceof LivingEntity livingEntity)
