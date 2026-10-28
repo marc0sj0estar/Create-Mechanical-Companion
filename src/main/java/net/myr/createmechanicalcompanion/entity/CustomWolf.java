@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -26,6 +27,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -37,7 +39,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 import net.myr.createmechanicalcompanion.item.MechanicalWolfLink;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -52,17 +53,41 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 
 import java.util.List;
-import java.util.Optional;
 
 public class CustomWolf extends Wolf implements MenuProvider {
 
     private static final double movementSpeed = 0.35D;
+    private static final double defaultHealthValue = 30.0D;
+
+    // Config stats
+
+    private List<? extends String> wolfBlacklist;
+    private double wrenchHealAmount;
+    private int reinforcedPlatesArmorValue;
+    private int reinforcedPlatesHealthIncrease;
+    private double reinforcedPlatesKnockBackResistance;
+    private int netheritePlatesArmorValue;
+    private int netheritePlatesHealthIncrease;
+    private double netheritePlatesKnockBackResistance;
+    private int mountedCrossbowCooldown;
+    private double teslaTailDamage;
+    private int teslaTailCooldown;
+    private int smeltingFangsFireDuration;
+    private double boosterRocketSpeedIncrease;
+    private int boosterRocketDuration;
+    private int boosterRocketCooldown;
+    private int quantumDriveCooldown;
+    private double regenerativeCasingHealAmount;
+    private int regenerativeCasingHealDelay;
+    private int mobRadarRange;
+    private int mobRadarCooldown;
+
 
     private BlockPos previousLightPos = null;
     private float currentTorchTick = 0;
     private float mountedCrossbowTick = 0;
     private float regenerativeCasingHealTick = 0;
-
+    private float teslaTailTick = 0;
 
     private float boosterTimer = 0;
     private float boosterAnimationTick = 0;
@@ -79,6 +104,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
     public CustomWolf(EntityType<? extends Wolf> entityType, Level level) {
         super(entityType, level);
+        getValuesFromConfig();
 
         data = new ContainerData() {
             private final int[] values = new int[slotAmount];
@@ -105,6 +131,30 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 return values.length;
             }
         };
+    }
+
+    private void getValuesFromConfig(){
+        wolfBlacklist = ServerConfig.wolfBlacklist.get();
+        wrenchHealAmount = ServerConfig.wrenchHealAmount.get();
+        reinforcedPlatesArmorValue = ServerConfig.reinforcedPlatesArmorValue.get();
+        reinforcedPlatesHealthIncrease = ServerConfig.reinforcedPlatesHealthIncrease.get();
+        reinforcedPlatesKnockBackResistance = ServerConfig.reinforcedPlatesKnockBackResistance.get();
+        netheritePlatesArmorValue = ServerConfig.netheritePlatesArmorValue.get();
+        netheritePlatesHealthIncrease = ServerConfig.netheritePlatesHealthIncrease.get();
+        netheritePlatesKnockBackResistance = ServerConfig.netheritePlatesKnockBackResistance.get();
+        mountedCrossbowCooldown = ServerConfig.mountedCrossbowCooldown.get();
+        teslaTailDamage = ServerConfig.teslaTailDamage.get();
+        teslaTailCooldown = ServerConfig.teslaTailCooldown.get();
+        smeltingFangsFireDuration = ServerConfig.smeltingFangsFireDuration.get();
+        boosterRocketSpeedIncrease = ServerConfig.boosterRocketSpeedIncrease.get();
+        boosterRocketDuration = ServerConfig.boosterRocketDuration.get();
+        boosterRocketCooldown = ServerConfig.boosterRocketCooldown.get();
+        quantumDriveCooldown = ServerConfig.quantumDriveCooldown.get();
+        regenerativeCasingHealAmount = ServerConfig.regenerativeCasingHealAmount.get();
+        regenerativeCasingHealDelay = ServerConfig.regenerativeCasingHealDelay.get();
+        mobRadarRange = ServerConfig.mobRadarRange.get();
+        mobRadarCooldown = ServerConfig.mobRadarCooldown.get();
+
     }
 
     public void tameToPlayer(Player player) {
@@ -136,7 +186,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
     public static AttributeSupplier.@NotNull Builder createAttributes() {
         return Wolf.createAttributes()
-                .add(Attributes.MAX_HEALTH, 30.0D)
+                .add(Attributes.MAX_HEALTH, defaultHealthValue)
                 .add(Attributes.MOVEMENT_SPEED, movementSpeed)
                 .add(Attributes.ATTACK_DAMAGE, 6.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0)
@@ -166,7 +216,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
     public boolean isBlacklisted(Entity entity) {
         ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
         if (id == null) return false;
-        return ServerConfig.wolfBlacklist.get().contains(id.toString());
+        return wolfBlacklist.contains(id.toString());
     }
 
     @Override
@@ -201,7 +251,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
     public @NotNull InteractionResult mobInteract(Player player, InteractionHand hand) {
         if (!this.level().isClientSide && player instanceof ServerPlayer serverPlayer) {
             if(player.getItemInHand(hand).getItem() == AllItems.WRENCH.get()){
-                this.heal(ServerConfig.wrenchHealAmount.get().floatValue());
+                this.heal((float) wrenchHealAmount);
                 this.level().playSound(this, this.blockPosition(), SoundEvents.IRON_GOLEM_REPAIR, SoundSource.NEUTRAL, 1, 1);
                 return InteractionResult.SUCCESS;
             }
@@ -250,7 +300,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
     @Override
     public void tick() {
         super.tick();
-        double boosterSpeedIncrease = ServerConfig.boosterRocketSpeedIncrease.get();
         if (!this.level().isClientSide) {
             if(getOwner() == null){
                 discard();
@@ -258,53 +307,21 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
             checkForDuplicate();
 
-            double defaultHealthValue = 30;
-            double defaultArmorValue = 0;
-            
             if(isModuleEquipped(ModItems.REINFORCED_PLATES.get()))
             {
-                double reinforcedPlatesHealthIncrease = ServerConfig.reinforcedPlatesHealthIncrease.get();
-                int reinforcedArmorValue = ServerConfig.reinforcedPlatesArmorValue.get();
-                if(this.getAttribute(Attributes.MAX_HEALTH).getBaseValue() != (defaultHealthValue + reinforcedPlatesHealthIncrease)) {
-                    this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(defaultHealthValue + reinforcedPlatesHealthIncrease);
-                    this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(ServerConfig.reinforcedPlatesKnockBackResistance.get());
-                }
-                if(this.getAttribute(Attributes.ARMOR).getBaseValue() != reinforcedArmorValue) {
-                    this.getAttribute(Attributes.ARMOR).setBaseValue(reinforcedArmorValue);
-                }
+                applyModuleArmor(reinforcedPlatesHealthIncrease, reinforcedPlatesKnockBackResistance, reinforcedPlatesArmorValue);
             }
             else if(isModuleEquipped(ModItems.NETHERITE_PLATES.get()))
             {
-                double netheritePlatesHealthIncrease = ServerConfig.netheritePlatesHealthIncrease.get();
-                int netheriteArmorValue = ServerConfig.netheritePlatesArmorValue.get();
-                if(this.getAttribute(Attributes.MAX_HEALTH).getBaseValue() != (defaultHealthValue + netheritePlatesHealthIncrease)) {
-                   this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(defaultHealthValue + netheritePlatesHealthIncrease);
-                    this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(ServerConfig.netheritePlatesKnockBackResistance.get());
-               }
-                // Set armor attribute for 1.21.1
-                if(this.getAttribute(Attributes.ARMOR).getBaseValue() != netheriteArmorValue) {
-                    this.getAttribute(Attributes.ARMOR).setBaseValue(netheriteArmorValue);
-                }
+                applyModuleArmor(netheritePlatesHealthIncrease, netheritePlatesKnockBackResistance, netheritePlatesArmorValue);
             }else{
-                if(this.getAttribute(Attributes.MAX_HEALTH).getBaseValue() != defaultHealthValue) {
-                    this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(defaultHealthValue);
-                    this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0);
-                    if(this.getHealth() > this.getMaxHealth())
-                    {
-                        this.setHealth(this.getMaxHealth());
-                    }
-                }
-                // Reset armor when no plates equipped
-                if(this.getAttribute(Attributes.ARMOR).getBaseValue() != defaultArmorValue) {
-                    this.getAttribute(Attributes.ARMOR).setBaseValue(defaultArmorValue);
-                }
+                applyModuleArmor(0.0D, 0.0D, 0.0D);
             }
 
             if (isModuleEquipped(ModItems.REGENERATIVE_CASING.get()) && this.getHealth() < this.getMaxHealth()) {
                 regenerativeCasingHealTick++;
-                CreateMechanicalCompanion.LOGGER.info("Regenerative Casing: " + regenerativeCasingHealTick + " ticks since last heal, " + ServerConfig.regenerativeCasingHealDelay.get() + " regen delay, " + ServerConfig.regenerativeCasingHealAmount.get() + " heal amount");
-                if (regenerativeCasingHealTick >= ServerConfig.regenerativeCasingHealDelay.get()) {
-                    this.heal(ServerConfig.regenerativeCasingHealAmount.get().floatValue());
+                if (regenerativeCasingHealTick >= regenerativeCasingHealDelay) {
+                    this.heal((float) regenerativeCasingHealAmount);
                     regenerativeCasingHealTick = 0;
                 }
             }
@@ -324,7 +341,10 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 removePreviousLightBlock();
             }
 
-            float mountedCrossbowCooldown = ServerConfig.mountedCrossbowCooldown.get();
+            if (isModuleEquipped(ModItems.TESLA_TAIL.get()) && teslaTailTick < teslaTailCooldown) {
+                teslaTailTick++;
+            }
+
             if(isModuleEquipped(ModItems.MOUNTED_CROSSBOW.get()) && this.getTarget() != null && mountedCrossbowTick >= mountedCrossbowCooldown){
                 mountedCrossbowTick = 0;
                 TargetedArrowEntity arrow = new TargetedArrowEntity(this.level(), this, this.getTarget());
@@ -346,20 +366,18 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
             AttributeInstance movementAttribute = this.getAttribute(Attributes.MOVEMENT_SPEED);
 
-            float boosterCooldown = ServerConfig.boosterRocketCooldown.get();
-            if(isModuleEquipped(ModItems.BOOSTER_ROCKET.get()) && this.getTarget() != null && boosterTimer >= boosterCooldown){
+            if(isModuleEquipped(ModItems.BOOSTER_ROCKET.get()) && this.getTarget() != null && boosterTimer >= boosterRocketCooldown){
                 if(movementAttribute.getBaseValue() == movementSpeed){
-                    movementAttribute.setBaseValue(movementSpeed + boosterSpeedIncrease);
+                    movementAttribute.setBaseValue(movementSpeed + boosterRocketSpeedIncrease);
                     boosterTimer = 0;
                 }
             }else{
-                float boosterDuration = ServerConfig.boosterRocketDuration.get();
-                if(boosterTimer >= boosterDuration && movementAttribute.getBaseValue() != movementSpeed){
+                if(boosterTimer >= boosterRocketDuration && movementAttribute.getBaseValue() != movementSpeed){
                     movementAttribute.setBaseValue(movementSpeed);
                 }
             }
 
-            if(boosterTimer < boosterCooldown){
+            if(boosterTimer < boosterRocketCooldown){
                 boosterTimer++;
             }
 
@@ -397,7 +415,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 spawnMountedTorchParticles();
             }
 
-            if(this.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() == movementSpeed + boosterSpeedIncrease){
+            if(this.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() == movementSpeed + boosterRocketSpeedIncrease){
                 spawnRocketBoostParticles();
             }
             float quantumDriveParticleCooldown = 30;
@@ -408,6 +426,16 @@ public class CustomWolf extends Wolf implements MenuProvider {
             }else{
                 quantumDriveParticleTimer++;
             }
+        }
+    }
+
+    private void applyModuleArmor(double healthIncrease, double knockBackResistance, double armorValue) {
+        double currentMaxHealth = this.getAttribute(Attributes.MAX_HEALTH).getBaseValue();
+        double newMaxHealth = defaultHealthValue + healthIncrease;
+        if(currentMaxHealth != newMaxHealth){
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(newMaxHealth);
+            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(knockBackResistance);
+            this.getAttribute(Attributes.ARMOR).setBaseValue(armorValue);
         }
     }
 
@@ -544,7 +572,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
     @Override
     public boolean doHurtTarget(Entity pEntity) {
         if(isModuleEquipped(ModItems.SMELTING_FANGS.get())) {
-            pEntity.setRemainingFireTicks(ServerConfig.smeltingFangsFireDuration.get() * 20);
+            pEntity.setRemainingFireTicks(smeltingFangsFireDuration * 20);
         }
         float pitch = 0.8F + this.random.nextFloat() * 0.4F;
         this.level().playSound(this, this.blockPosition(), ModSounds.BITE_SOUND.get(), SoundSource.NEUTRAL, 0.6f, pitch);
@@ -552,33 +580,32 @@ public class CustomWolf extends Wolf implements MenuProvider {
     }
 
     @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
+    public boolean hurt(DamageSource source, float amount) {
+        if(level().isClientSide()){
+           return super.hurt(source, amount);
+        }
+
         if(isModuleEquipped(ModItems.TESLA_TAIL.get()))
         {
-            if(pSource.getEntity() != null && pSource.getEntity() != this && !(pSource.getEntity() instanceof CustomWolf))
+            if(teslaTailTick >= teslaTailCooldown && source.getEntity() != null && source.getEntity() != this)
             {
-                pSource.getEntity().hurt(pSource.getEntity().damageSources().mobAttack(this), ServerConfig.teslaTailDamage.get().floatValue());
-                pSource.getEntity().invulnerableTime = 0;
+                source.getEntity().hurt(source.getEntity().damageSources().mobAttack(this), (float) teslaTailDamage);
+                source.getEntity().invulnerableTime = 0;
+                teslaTailTick = 0;
+                spawnTeslaTailParticles();
             }
-            spawnTeslaTailParticles();
         }
-        return super.hurt(pSource, pAmount);
+        return super.hurt(source, amount);
     }
 
     private void spawnTeslaTailParticles(){
-        if(!level().isClientSide)
-        {
-            return;
-        }
+        if(!(level() instanceof ServerLevel serverLevel)){return;}
 
         for (int i = 0; i < 10; i++) {
-            this.level().addParticle(ParticleTypes.ELECTRIC_SPARK,
-                    this.getRandomX(1.5),
-                    this.getRandomY(),
-                    this.getRandomZ(1.5),
-                    0.0, 0.2, 0.0);
+            serverLevel.sendParticles(ParticleTypes.ELECTRIC_SPARK,
+                    getX(), getY() + 0.5D, getZ(), 8,
+                    0.5D, 0.5D, 0.5D, 0.2D);
         }
-
     }
 
     @Override
@@ -589,10 +616,10 @@ public class CustomWolf extends Wolf implements MenuProvider {
     @Override
     public int getArmorValue() {
         if (isModuleEquipped(ModItems.REINFORCED_PLATES.get())) {
-            return ServerConfig.reinforcedPlatesArmorValue.get();
+            return reinforcedPlatesArmorValue;
         }
         if(isModuleEquipped(ModItems.NETHERITE_PLATES.get())) {
-            return ServerConfig.netheritePlatesArmorValue.get();
+            return netheritePlatesArmorValue;
         }
         return super.getArmorValue();
     }
@@ -643,5 +670,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
     @Override
     public void die(DamageSource pCause) {
         removeLightBlocksAround(this, 5);
+        super.die(pCause);
     }
 }

@@ -12,6 +12,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 
+import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
 public class ModBlocks {
@@ -20,8 +21,8 @@ public class ModBlocks {
            .block("companion_foundry", CompanionFoundry::new)
            .initialProperties(() -> Blocks.STONE)
            .properties(p -> p.noOcclusion())
-           .transform(pickaxeOnly())
-           .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+           .transform(axeOrPickaxe())
+           .blockstate((c, p) -> p.simpleBlock(c.getEntry()))
            .onRegister(b -> BlockStressValues.IMPACTS.register(b, () -> 128))
            .item()
            .build()

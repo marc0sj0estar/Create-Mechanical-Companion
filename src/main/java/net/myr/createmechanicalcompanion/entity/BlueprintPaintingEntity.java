@@ -15,39 +15,22 @@ import net.myr.createmechanicalcompanion.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
 public class BlueprintPaintingEntity extends Painting {
-    public BlueprintPaintingEntity(EntityType<? extends Painting> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+    public BlueprintPaintingEntity(
+            EntityType<? extends BlueprintPaintingEntity> type,
+            Level level
+    ) {
+        super(type, level);
     }
 
     @Override
-    public void setVariant(Holder<PaintingVariant> pVariant) {
-        super.setVariant(pVariant);
-    }
-
-    public void setDirectionPublic(Direction direction) {
-        this.setDirection(direction);
-    }
-
-
-    @Override
-    public ItemStack getPickResult() {
-        return new ItemStack(ModItems.BLUEPRINT_PAINTING_ITEM.get());
-    }
-
-    @Override
-    public void dropItem(@Nullable Entity pBrokenEntity) {
-        if (this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
-            this.playSound(SoundEvents.PAINTING_BREAK, 1.0F, 1.0F);
-            if (pBrokenEntity instanceof Player) {
-                Player player = (Player)pBrokenEntity;
-                if (player.getAbilities().instabuild) {
-                    return;
-                }
-            }
-
-            this.spawnAtLocation(ModItems.BLUEPRINT_PAINTING_ITEM.get());
+    public void dropItem(Entity breaker) {
+        if(level().isClientSide || (breaker instanceof Player player && player.isCreative())) {
+            return;
         }
+        spawnAtLocation(new ItemStack(ModItems.BLUEPRINT_PAINTING_ITEM.get()));
     }
 
-
+    public void setFacing(Direction direction){
+        setDirection(direction);
+    }
 }

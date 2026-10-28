@@ -1,13 +1,12 @@
 package net.myr.createmechanicalcompanion.item;
 
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
-import net.myr.createmechanicalcompanion.entity.ModEntity;
+import net.myr.createmechanicalcompanion.entity.ModEntities;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -46,7 +45,7 @@ public class ModItems {
     public static final Supplier<SpawnEggItem> ILLAGER_ENGINEER_SPAWN_EGG =
             ITEMS.register("illager_engineer_spawn_egg", () ->
                     new DeferredSpawnEggItem(
-                            ModEntity.ILLAGER_ENGINEER,
+                            ModEntities.ILLAGER_ENGINEER,
                             0x737373,
                             0xb2b55c,
                             new Item.Properties()));
@@ -54,7 +53,7 @@ public class ModItems {
     public static final Supplier<SpawnEggItem> POTATO_CANNON_ILLAGER_SPAWN_EGG =
             ITEMS.register("potato_cannon_illager_spawn_egg", () ->
                     new DeferredSpawnEggItem(
-                            ModEntity.POTATO_CANNON_ILLAGER,
+                            ModEntities.POTATO_CANNON_ILLAGER,
                             0x41354a,
                             0xb2b55c,
                             new Item.Properties()));

@@ -22,7 +22,7 @@ import net.myr.createmechanicalcompanion.client.CustomWolfModel;
 import net.myr.createmechanicalcompanion.client.MechanicalWolfLinkRenderer;
 import net.myr.createmechanicalcompanion.client.ModModelLayers;
 import net.myr.createmechanicalcompanion.sounds.ModSounds;
-import net.myr.createmechanicalcompanion.entity.ModEntity;
+import net.myr.createmechanicalcompanion.entity.ModEntities;
 import net.myr.createmechanicalcompanion.item.BlueprintPaintingVariants;
 import net.myr.createmechanicalcompanion.item.ModCreativeModeTabs;
 import net.myr.createmechanicalcompanion.item.ModItems;
@@ -46,11 +46,11 @@ public class CreateMechanicalCompanion {
 
         ModItems.register(modEventBus);
         ModMenuTypes.register(modEventBus);
-        ModEntity.register(modEventBus);
+        ModEntities.register(modEventBus);
         ModSounds.register(modEventBus);
         ModBlocks.register();
         ModBlockEntities.register();
-        BlueprintPaintingVariants.register(modEventBus);
+        BlueprintPaintingVariants.PAINTING_VARIANTS.register(modEventBus);
         REGISTRATE.registerEventListeners(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.SERVER, ServerConfig.SERVER_SPEC);

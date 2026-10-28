@@ -1,11 +1,8 @@
 package net.myr.createmechanicalcompanion;
 
-import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
-
-import static net.myr.createmechanicalcompanion.CreateMechanicalCompanion.LOGGER;
 
 public class ServerConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
@@ -69,6 +66,10 @@ public class ServerConfig {
     public static final ModConfigSpec.DoubleValue teslaTailDamage = BUILDER
             .comment("Damage dealt by the Tesla Tail (Default value = 2.0)")
             .defineInRange("teslaTailDamage", 2.0, 0.0, Double.MAX_VALUE);
+
+    public static final ModConfigSpec.IntValue teslaTailCooldown = BUILDER
+            .comment("Delay (in ticks) between each damage from the Tesla Tail (Default value = 10)")
+            .defineInRange("teslaTailDelay", 10, 0, Integer.MAX_VALUE);
 
     public static final ModConfigSpec.IntValue smeltingFangsFireDuration = BUILDER
             .comment("Duration that the target is set on fire by the Smelting Fangs (Default value = 5)")

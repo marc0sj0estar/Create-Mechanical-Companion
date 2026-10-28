@@ -11,7 +11,6 @@ public class ModBlockEntities {
 
     public static final BlockEntityEntry<CompanionFoundryEntity> COMPANION_FOUNDRY_ENTITY = CreateMechanicalCompanion.REGISTRATE
             .blockEntity("companion_foundry", CompanionFoundryEntity::new)
-            .visual(() -> SingleAxisRotatingVisual.of(AllPartialModels.MILLSTONE_COG), false)
             .validBlocks(ModBlocks.COMPANION_FOUNDRY)
             .renderer(() -> CompanionFoundryRenderer::new)
             .register();

@@ -1,0 +1,11 @@
+{
+  "asset_id": "createmechanicalcompanion:blueprint_art_4",
+  "width": 1,
+  "height": 1,
+  "title": {
+    "translate": "painting.createmechanicalcompanion.blueprint_art_4.title"
+  },
+  "author": {
+    "translate": "painting.createmechanicalcompanion.blueprint_art_4.author"
+  }
+}

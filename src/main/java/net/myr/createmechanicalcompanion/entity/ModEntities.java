@@ -10,7 +10,7 @@ import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 
 import java.util.function.Supplier;
 
-public class ModEntity {
+public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, CreateMechanicalCompanion.MOD_ID);
 
     public static final Supplier<EntityType<CustomWolf>> CUSTOM_WOLF = ENTITIES.register("custom_wolf",

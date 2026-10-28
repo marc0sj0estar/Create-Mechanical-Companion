@@ -14,23 +14,23 @@ import net.myr.createmechanicalcompanion.client.PotatoCannonIllagerRenderer;
 import net.myr.createmechanicalcompanion.client.WolfRenderer;
 import net.myr.createmechanicalcompanion.entity.CustomWolf;
 import net.myr.createmechanicalcompanion.entity.IllagerEngineer;
-import net.myr.createmechanicalcompanion.entity.ModEntity;
+import net.myr.createmechanicalcompanion.entity.ModEntities;
 
 public class EventHandler {
 
     @SubscribeEvent
     public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
-        event.put(ModEntity.CUSTOM_WOLF.get(), CustomWolf.createAttributes().build());
-        event.put(ModEntity.ILLAGER_ENGINEER.get(), IllagerEngineer.createAttributes().build());
-        event.put(ModEntity.POTATO_CANNON_ILLAGER.get(), IllagerEngineer.createAttributes().build());
+        event.put(ModEntities.CUSTOM_WOLF.get(), CustomWolf.createAttributes().build());
+        event.put(ModEntities.ILLAGER_ENGINEER.get(), IllagerEngineer.createAttributes().build());
+        event.put(ModEntities.POTATO_CANNON_ILLAGER.get(), IllagerEngineer.createAttributes().build());
     }
 
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntity.CUSTOM_WOLF.get(), WolfRenderer::new);
-        event.registerEntityRenderer(ModEntity.ILLAGER_ENGINEER.get(), IllagerEngineerRenderer::new);
-        event.registerEntityRenderer(ModEntity.POTATO_CANNON_ILLAGER.get(), PotatoCannonIllagerRenderer::new);
-        event.registerEntityRenderer(ModEntity.BLUEPRINT_ENTITY.get(), PaintingRenderer::new);
+        event.registerEntityRenderer(ModEntities.CUSTOM_WOLF.get(), WolfRenderer::new);
+        event.registerEntityRenderer(ModEntities.ILLAGER_ENGINEER.get(), IllagerEngineerRenderer::new);
+        event.registerEntityRenderer(ModEntities.POTATO_CANNON_ILLAGER.get(), PotatoCannonIllagerRenderer::new);
+        event.registerEntityRenderer(ModEntities.BLUEPRINT_ENTITY.get(), PaintingRenderer::new);
     }
 
     @SubscribeEvent
@@ -39,5 +39,7 @@ public class EventHandler {
                 Capabilities.FluidHandler.BLOCK, ModBlockEntities.COMPANION_FOUNDRY_ENTITY.get(),
                 (CompanionFoundryEntity blockEntity, Direction side) -> blockEntity.fluidTank
         );
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.COMPANION_FOUNDRY_ENTITY.get(),
+                (CompanionFoundryEntity blockEntity, Direction side) -> blockEntity.itemHandler);
     }
 }

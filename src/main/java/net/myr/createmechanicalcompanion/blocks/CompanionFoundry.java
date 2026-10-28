@@ -1,6 +1,6 @@
 package net.myr.createmechanicalcompanion.blocks;
 
-import com.simibubi.create.content.kinetics.base.KineticBlock;
+import com.simibubi.create.content.kinetics.base.*;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class CompanionFoundry extends KineticBlock implements IBE<CompanionFoundryEntity>, ICogWheel {
+public class CompanionFoundry extends HorizontalKineticBlock implements IBE<CompanionFoundryEntity>, IRotate {
 
     public CompanionFoundry(BlockBehaviour.Properties properties) {
         super(properties);
@@ -39,12 +39,12 @@ public class CompanionFoundry extends KineticBlock implements IBE<CompanionFound
 
     @Override
     public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
-        return face.getAxis() == getRotationAxis(state);
+        return face == state.getValue(HORIZONTAL_FACING).getOpposite();
     }
 
     @Override
     public Direction.Axis getRotationAxis(BlockState blockState) {
-        return Direction.Axis.Y;
+        return blockState.getValue(HORIZONTAL_FACING).getAxis();
     }
 
     @Override

@@ -22,7 +22,7 @@ import net.minecraft.world.level.Level;
 import net.myr.createmechanicalcompanion.ServerConfig;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.myr.createmechanicalcompanion.entity.CustomWolf;
-import net.myr.createmechanicalcompanion.entity.ModEntity;
+import net.myr.createmechanicalcompanion.entity.ModEntities;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
@@ -156,7 +156,7 @@ public class MechanicalWolfLink extends Item implements ICurioItem {
             return;
         }
 
-        CustomWolf newWolf = new CustomWolf(ModEntity.CUSTOM_WOLF.get(), level);
+        CustomWolf newWolf = new CustomWolf(ModEntities.CUSTOM_WOLF.get(), level);
         newWolf.tameToPlayer(player);
         newWolf.setPos(player.getX(), player.getY(), player.getZ());
         level.addFreshEntity(newWolf);
