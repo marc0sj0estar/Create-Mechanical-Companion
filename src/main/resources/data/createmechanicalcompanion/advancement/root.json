@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "id": "createmechanicalcompanion:tab_icon"
+    },
+    "title": {
+      "translate": "advancement.createmechanicalcompanion.root.title"
+    },
+    "description": {
+      "translate": "advancement.createmechanicalcompanion.root.description"
+    },
+    "background": "createmechanicalcompanion:textures/gui/advancement_background.png",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "start_done": {
+      "trigger": "minecraft:inventory_changed"
+    }
+  }
+}

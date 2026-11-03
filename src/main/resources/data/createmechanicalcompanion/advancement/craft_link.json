@@ -1,0 +1,29 @@
+{
+  "parent": "createmechanicalcompanion:root",
+  "display": {
+    "icon": {
+      "id": "createmechanicalcompanion:mechanical_wolf_link"
+    },
+    "title": {
+      "translate": "advancement.createmechanicalcompanion.craft_link.title"
+    },
+    "description": {
+      "translate": "advancement.createmechanicalcompanion.craft_link.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "craft_link": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "createmechanicalcompanion:mechanical_wolf_link"
+          }
+        ]
+      }
+    }
+  }
+}

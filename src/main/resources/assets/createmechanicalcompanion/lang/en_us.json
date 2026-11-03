@@ -83,5 +83,17 @@
   "createmechanicalcompanion.ponder.companion_foundry.text_4" : "After each item is inserted, the Companion Foundry will begin to process.",
   "createmechanicalcompanion.ponder.companion_foundry.text_5" : "The processing time can be reduced by increasing the rotational speed.",
   "createmechanicalcompanion.ponder.companion_foundry.text_6" : "The creation process can also require fluids, which can be inserted with a fluid pipe.",
-  "createmechanicalcompanion.ponder.companion_foundry.text_7" : "After all the steps are complete, the link for the Mechanical Companion will be ready to collect."
+  "createmechanicalcompanion.ponder.companion_foundry.text_7" : "After all the steps are complete, the link for the Mechanical Companion will be ready to collect.",
+
+
+  "advancement.createmechanicalcompanion.root.title": "Create Mechanical Companion",
+  "advancement.createmechanicalcompanion.root.description": "Every great engineer needs a helping hand ... or paw.",
+  "advancement.createmechanicalcompanion.craft_link.title": "Who Let The Cogs Out?",
+  "advancement.createmechanicalcompanion.craft_link.description": "Craft a Mechanical Wolf link",
+  "advancement.createmechanicalcompanion.fully_equip_wolf.title": "Tactical Good Boy",
+  "advancement.createmechanicalcompanion.fully_equip_wolf.description": "Equip your Mechanical Companion with the maximum amount of modules",
+  "advancement.createmechanicalcompanion.illager_workshop_map.title": "Industrial Espionage",
+  "advancement.createmechanicalcompanion.illager_workshop_map.description": "Get an Illager Workshop map from a cartographer",
+  "advancement.createmechanicalcompanion.find_illager_workshop.title": "Behind Enemy Assembly Lines",
+  "advancement.createmechanicalcompanion.find_illager_workshop.description": "Find an Illager Workshop"
 }

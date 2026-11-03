@@ -1,7 +1,9 @@
 package net.myr.createmechanicalcompanion.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -12,6 +14,7 @@ import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MapItem;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -50,6 +53,9 @@ public class IllagerWorkshopMapTrade implements VillagerTrades.ItemListing{
         MapItem.renderBiomePreviewMap(world, map);
         MapItemSavedData.addTargetDecoration(map, target, "+", MapDecorationTypes.RED_X);
         map.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME, Component.translatable("item.createmechanicalcompanion.illager_workshop_map"));
+        CompoundTag tag = new CompoundTag();
+        tag.putBoolean("IllagerWorkshopMap", true);
+        map.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
 
         return new MerchantOffer(
                 new ItemCost(Items.EMERALD, 10),

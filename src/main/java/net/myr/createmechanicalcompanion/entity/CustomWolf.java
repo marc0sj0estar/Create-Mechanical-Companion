@@ -82,7 +82,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
     private int mobRadarCooldown;
 
 
-    private BlockPos previousLightPos = null;
     private float mountedCrossbowTick = 0;
     private float regenerativeCasingHealTick = 0;
     private float teslaTailTick = 0;
@@ -191,15 +190,9 @@ public class CustomWolf extends Wolf implements MenuProvider {
     @Override
     public void load(CompoundTag pCompound) {
         super.load(pCompound);
-        if(pCompound.contains("previousLightPosition"))
-        {
-            int[] coordinates = pCompound.getIntArray("previousLightPosition");
-            previousLightPos = new BlockPos(coordinates[0], coordinates[1], coordinates[2]);
-        }
         if (pCompound.contains("inventory")) {
             itemHandler.deserializeNBT(this.registryAccess(), pCompound.getCompound("inventory"));
         }
-        removeLightBlocksAround(this, 3);
     }
 
     public boolean isBlacklisted(Entity entity) {
@@ -211,11 +204,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
     @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         pCompound.put("inventory", itemHandler.serializeNBT(this.registryAccess()));
-        if(previousLightPos != null)
-        {
-            int[] previousLightPositionCoordinates = {previousLightPos.getX(), previousLightPos.getY(), previousLightPos.getZ()};
-            pCompound.putIntArray("previousLightPosition", previousLightPositionCoordinates);
-        }
         super.addAdditionalSaveData(pCompound);
     }
 
@@ -496,7 +484,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
     private void spawnCogParticles(){
         if(level() instanceof ServerLevel serverLevel){
             serverLevel.sendParticles(ModParticles.COG_PARTICLE.get(),
-                    getX(), getY() + 0.45D, getZ(), 10,
+                    getX(), getY() + 0.5D, getZ(), 10,
                     0.4D, 0.3D, 0.4D, 0D);
         }
     }
@@ -513,31 +501,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
             level().addParticle(ParticleTypes.REVERSE_PORTAL, x, y, z, 0.0, 0.01, 0.0);
     }
 
-    private void removePreviousLightBlock(){
-        if(previousLightPos == null){
-            return;
-        }
-
-        this.level().setBlock(previousLightPos, Blocks.AIR.defaultBlockState(), 3);
-        previousLightPos = null;
-    }
-
-    public static void removeLightBlocksAround(Entity entity, int radius) {
-        Level level = entity.level();
-        BlockPos center = entity.blockPosition();
-
-        for (int dx = -radius; dx <= radius; dx++) {
-            for (int dy = -radius; dy <= radius; dy++) {
-                for (int dz = -radius; dz <= radius; dz++) {
-                    BlockPos pos = center.offset(dx, dy, dz);
-                    BlockState state = level.getBlockState(pos);
-                    if (state.is(Blocks.LIGHT)) {
-                        level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-                    }
-                }
-            }
-        }
-    }
 
     private void spawnRocketBoostParticles(){
         float boosterAnimationCooldown = 3;
@@ -572,7 +535,8 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
         if(isModuleEquipped(ModItems.TESLA_TAIL.get()))
         {
-            if(teslaTailTick >= teslaTailCooldown && source.getEntity() != null && source.getEntity() != this)
+            if(teslaTailTick >= teslaTailCooldown && source.getEntity() != null && source.getEntity() != this &&
+            source.getEntity().distanceTo(this) <= 3)
             {
                 source.getEntity().hurt(source.getEntity().damageSources().mobAttack(this), (float) teslaTailDamage);
                 source.getEntity().invulnerableTime = 0;
@@ -652,7 +616,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
     @Override
     public void die(DamageSource pCause) {
-        removeLightBlocksAround(this, 5);
         super.die(pCause);
     }
 }

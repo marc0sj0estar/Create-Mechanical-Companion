@@ -1,0 +1,29 @@
+{
+  "parent": "createmechanicalcompanion:illager_workshop_map",
+  "display": {
+    "icon": {
+      "id": "create:wrench"
+    },
+    "title": {
+      "translate": "advancement.createmechanicalcompanion.find_illager_workshop.title"
+    },
+    "description": {
+      "translate": "advancement.createmechanicalcompanion.find_illager_workshop.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "find_illager_workshop": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "location": {
+            "structures": "createmechanicalcompanion:illager_workshop"
+          }
+        }
+      }
+    }
+  }
+}

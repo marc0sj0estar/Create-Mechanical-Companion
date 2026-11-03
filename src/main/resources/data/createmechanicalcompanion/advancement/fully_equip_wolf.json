@@ -1,0 +1,22 @@
+{
+  "parent": "createmechanicalcompanion:craft_link",
+  "display": {
+    "icon": {
+      "id": "createmechanicalcompanion:mechanical_wolf_link"
+    },
+    "title": {
+      "translate": "advancement.createmechanicalcompanion.fully_equip_wolf.title"
+    },
+    "description": {
+      "translate": "advancement.createmechanicalcompanion.fully_equip_wolf.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
