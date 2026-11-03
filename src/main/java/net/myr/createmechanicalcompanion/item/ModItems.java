@@ -21,7 +21,7 @@ public class ModItems {
 
 
     public static final Supplier<Item> MECHANICAL_WOLF_LINK = ITEMS.register("mechanical_wolf_link",
-            () -> new MechanicalWolfLink(new Item.Properties().stacksTo(1)));
+            () -> new MechanicalWolfLink(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
 
     //Recipe items
     public static final Supplier<Item> MECHANICAL_WOLF_PROCESSOR = ITEMS.register("mechanical_wolf_processor", () -> new Item(new Item.Properties().stacksTo(1)){
@@ -138,6 +138,7 @@ public class ModItems {
         public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
             pTooltipComponents.add(Component.translatable("item.createmechanicalcompanion.utility_module"));
             pTooltipComponents.add(Component.translatable("item.createmechanicalcompanion.mounted_light.tooltip"));
+            pTooltipComponents.add(Component.translatable("item.createmechanicalcompanion.mounted_light.tooltip2"));
             super.appendHoverText(pStack, pContext, pTooltipComponents, pIsAdvanced);
         }
     });

@@ -6,6 +6,7 @@ import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.resources.ResourceLocation;
 import net.myr.createmechanicalcompanion.blocks.ModBlockEntities;
 import net.myr.createmechanicalcompanion.blocks.ModBlocks;
+import net.myr.createmechanicalcompanion.client.ModParticles;
 import net.myr.createmechanicalcompanion.ponder.ModPonderPlugin;
 import net.myr.createmechanicalcompanion.screen.CompanionFoundryScreen;
 import net.neoforged.bus.api.IEventBus;
@@ -50,6 +51,7 @@ public class CreateMechanicalCompanion {
         ModSounds.register(modEventBus);
         ModBlocks.register();
         ModBlockEntities.register();
+        ModParticles.register(modEventBus);
         BlueprintPaintingVariants.PAINTING_VARIANTS.register(modEventBus);
         REGISTRATE.registerEventListeners(modEventBus);
 
@@ -65,6 +67,7 @@ public class CreateMechanicalCompanion {
         modEventBus.addListener(EventHandler::onEntityAttributeCreation);
         modEventBus.addListener(EventHandler::onRegisterRenderers);
         modEventBus.addListener(EventHandler::onRegisterCapabilities);
+        modEventBus.addListener(EventHandler::onRegisterParticleProviders);
 
         NeoForge.EVENT_BUS.register(ForgeEventHandler.class);
     }

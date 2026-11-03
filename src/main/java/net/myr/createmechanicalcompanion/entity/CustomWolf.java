@@ -20,7 +20,6 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.*;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -36,9 +35,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.myr.createmechanicalcompanion.client.ModParticles;
 import net.myr.createmechanicalcompanion.item.MechanicalWolfLink;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -84,7 +83,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
 
     private BlockPos previousLightPos = null;
-    private float currentTorchTick = 0;
     private float mountedCrossbowTick = 0;
     private float regenerativeCasingHealTick = 0;
     private float teslaTailTick = 0;
@@ -132,6 +130,14 @@ public class CustomWolf extends Wolf implements MenuProvider {
             }
         };
 
+    }
+
+    @Override
+    public void onAddedToLevel() {
+        super.onAddedToLevel();
+        if(!this.level().isClientSide()) {
+            spawnCogParticles();
+        }
     }
 
     private void getValuesFromConfig(){
@@ -235,6 +241,11 @@ public class CustomWolf extends Wolf implements MenuProvider {
         if (!this.level().isClientSide && player instanceof ServerPlayer serverPlayer) {
             if(player.getItemInHand(hand).getItem() == AllItems.WRENCH.get()){
                 this.heal((float) wrenchHealAmount);
+                if(this.level() instanceof ServerLevel serverLevel) {
+                    this.spawnCogParticles();
+                    float pitch = 0.95F + this.getRandom().nextFloat() * 0.1F;
+                    serverLevel.playSound(this, this.blockPosition(), ModSounds.EQUIP_MODULE.get(), SoundSource.NEUTRAL, 0.8f, pitch);
+                }
                 this.level().playSound(this, this.blockPosition(), SoundEvents.IRON_GOLEM_REPAIR, SoundSource.NEUTRAL, 1, 1);
                 return InteractionResult.SUCCESS;
             }
@@ -272,6 +283,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
+        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
         this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Monster.class, 5, false, false, this::isValidAttackTarget));
         this.targetSelector.addGoal(8, new ResetUniversalAngerTargetGoal<>(this, true));
     }
@@ -288,13 +300,13 @@ public class CustomWolf extends Wolf implements MenuProvider {
 
             if(isModuleEquipped(ModItems.REINFORCED_PLATES.get()))
             {
-                applyModuleArmor(reinforcedPlatesHealthIncrease, reinforcedPlatesKnockBackResistance, reinforcedPlatesArmorValue);
+                applyModuleArmor(reinforcedPlatesHealthIncrease, reinforcedPlatesKnockBackResistance);
             }
             else if(isModuleEquipped(ModItems.NETHERITE_PLATES.get()))
             {
-                applyModuleArmor(netheritePlatesHealthIncrease, netheritePlatesKnockBackResistance, netheritePlatesArmorValue);
+                applyModuleArmor(netheritePlatesHealthIncrease, netheritePlatesKnockBackResistance);
             }else{
-                applyModuleArmor(0.0D, 0.0D, 0.0D);
+                applyModuleArmor(0.0D, 0.0D);
             }
 
             if (isModuleEquipped(ModItems.REGENERATIVE_CASING.get()) && this.getHealth() < this.getMaxHealth()) {
@@ -379,9 +391,6 @@ public class CustomWolf extends Wolf implements MenuProvider {
                 syncItemHandler();
         }else{
 
-            if(isModuleEquipped(ModItems.MOUNTED_LIGHT.get())) {
-                spawnMountedTorchParticles();
-            }
 
             if(this.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue() == movementSpeed + boosterRocketSpeedIncrease){
                 spawnRocketBoostParticles();
@@ -417,13 +426,12 @@ public class CustomWolf extends Wolf implements MenuProvider {
     }
 
 
-    private void applyModuleArmor(double healthIncrease, double knockBackResistance, double armorValue) {
+    private void applyModuleArmor(double healthIncrease, double knockBackResistance) {
         double currentMaxHealth = this.getAttribute(Attributes.MAX_HEALTH).getBaseValue();
         double newMaxHealth = defaultHealthValue + healthIncrease;
         if(currentMaxHealth != newMaxHealth){
             this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(newMaxHealth);
             this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(knockBackResistance);
-            this.getAttribute(Attributes.ARMOR).setBaseValue(armorValue);
         }
     }
 
@@ -485,6 +493,14 @@ public class CustomWolf extends Wolf implements MenuProvider {
         }
     }
 
+    private void spawnCogParticles(){
+        if(level() instanceof ServerLevel serverLevel){
+            serverLevel.sendParticles(ModParticles.COG_PARTICLE.get(),
+                    getX(), getY() + 0.45D, getZ(), 10,
+                    0.4D, 0.3D, 0.4D, 0D);
+        }
+    }
+
     private void spawnQuantumDriveParticles() {
             double offsetX = (random.nextDouble() - 0.5) * 0.6;
             double offsetY = random.nextDouble() * 0.4 + 0.8;
@@ -536,25 +552,7 @@ public class CustomWolf extends Wolf implements MenuProvider {
         }
     }
 
-    private void spawnMountedTorchParticles(){
-        float mountedTorchParticleDelayInTicks = 30;
-        if (currentTorchTick >= mountedTorchParticleDelayInTicks && level().isClientSide) {
-                double offsetX = (random.nextDouble() - 0.5) * 0.6;
-                double offsetY = random.nextDouble() * 0.4 + 1;
-                double offsetZ = (random.nextDouble() - 0.5) * 0.6;
 
-                double x = getX() + offsetX;
-                double y = getY() + offsetY;
-                double z = getZ() + offsetZ;
-
-                level().addParticle(ParticleTypes.SMOKE, x, y, z, 0.0, 0.05, 0.0);
-            level().addParticle(ParticleTypes.FLAME, x, y, z, 0.0, 0.05, 0.0);
-            currentTorchTick = 0;
-        }
-        else if(currentTorchTick < mountedTorchParticleDelayInTicks){
-            currentTorchTick++;
-        }
-    }
 
     @Override
     public boolean doHurtTarget(Entity pEntity) {
@@ -588,11 +586,9 @@ public class CustomWolf extends Wolf implements MenuProvider {
     private void spawnTeslaTailParticles(){
         if(!(level() instanceof ServerLevel serverLevel)){return;}
 
-        for (int i = 0; i < 10; i++) {
-            serverLevel.sendParticles(ParticleTypes.ELECTRIC_SPARK,
-                    getX(), getY() + 0.5D, getZ(), 8,
-                    0.5D, 0.5D, 0.5D, 0.2D);
-        }
+        serverLevel.sendParticles(ParticleTypes.ELECTRIC_SPARK,
+                getX(), getY() + 0.5D, getZ(), 10,
+                0.5D, 0.5D, 0.5D, 0.2D);
     }
 
     @Override

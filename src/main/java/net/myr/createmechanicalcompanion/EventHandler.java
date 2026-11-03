@@ -4,19 +4,23 @@ import net.minecraft.client.renderer.entity.PaintingRenderer;
 import net.minecraft.core.Direction;
 import net.myr.createmechanicalcompanion.blocks.ModBlockEntities;
 import net.myr.createmechanicalcompanion.blocks.CompanionFoundryEntity;
+import net.myr.createmechanicalcompanion.client.*;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.myr.createmechanicalcompanion.client.IllagerEngineerRenderer;
-import net.myr.createmechanicalcompanion.client.PotatoCannonIllagerRenderer;
-import net.myr.createmechanicalcompanion.client.WolfRenderer;
 import net.myr.createmechanicalcompanion.entity.CustomWolf;
 import net.myr.createmechanicalcompanion.entity.IllagerEngineer;
 import net.myr.createmechanicalcompanion.entity.ModEntities;
 
 public class EventHandler {
+
+    @SubscribeEvent
+    public static void onRegisterParticleProviders(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(ModParticles.COG_PARTICLE.get(), CogParticle.Provider::new);
+    }
 
     @SubscribeEvent
     public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {

@@ -22,6 +22,7 @@
   "item.createmechanicalcompanion.utility_module": "§5Utility Module",
   "item.createmechanicalcompanion.regenerative_casing.tooltip": "§8Gives the §7Mechanical Wolf §8the ability to regenerate health.",
   "item.createmechanicalcompanion.mounted_light.tooltip": "§8Gives the §7Mechanical Wolf §8a portable light source.",
+  "item.createmechanicalcompanion.mounted_light.tooltip2": "\n§cRequires a dynamic lights mod for entities (e.g., LambDynamicLights).",
   "item.createmechanicalcompanion.mob_radar.tooltip": "§8Highlights hostile mobs near the §7Mechanical Wolf §8even through walls.",
 
   "item.createmechanicalcompanion.reinforced_plates": "Reinforced Plates",
