@@ -15,7 +15,7 @@
     "announce_to_chat": true
   },
   "criteria": {
-    "impossible": {
+    "has_all_modules": {
       "trigger": "minecraft:impossible"
     }
   }

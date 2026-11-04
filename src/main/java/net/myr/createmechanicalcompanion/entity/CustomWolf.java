@@ -1,6 +1,7 @@
 package net.myr.createmechanicalcompanion.entity;
 
 import com.simibubi.create.AllItems;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -34,9 +35,8 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 import net.myr.createmechanicalcompanion.client.ModParticles;
 import net.myr.createmechanicalcompanion.item.MechanicalWolfLink;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -81,27 +81,37 @@ public class CustomWolf extends Wolf implements MenuProvider {
     private int mobRadarRange;
     private int mobRadarCooldown;
 
+    // Timers
 
-    private float mountedCrossbowTick = 0;
-    private float regenerativeCasingHealTick = 0;
-    private float teslaTailTick = 0;
+    private int mountedCrossbowTick = 0;
+    private int regenerativeCasingHealTick = 0;
+    private int teslaTailTick = 0;
+    private int boosterTimer = 0;
+    private int boosterAnimationTick = 0;
+    private int quantumDriveTimer = 0;
+    private int quantumDriveParticleTimer = 0;
+    private int mobRadarTimer = 0;
 
-    private float boosterTimer = 0;
-    private float boosterAnimationTick = 0;
-    private float quantumDriveTimer = 0;
-    private float quantumDriveParticleTimer = 0;
-    private float mobRadarTimer = 0;
+    // Inventory
+
     private final int slotAmount = 9;
-
     private ItemStackHandler itemHandler = new ItemStackHandler(slotAmount);
-
     protected final ContainerData data;
-
     private static final EntityDataAccessor<CompoundTag> ITEM_HANDLER_DATA = SynchedEntityData.defineId(CustomWolf.class, EntityDataSerializers.COMPOUND_TAG);
+
+    // Owner info
+
+    private boolean isFullyEquippedAdvancementDone = false;
+    private AdvancementHolder fullyEquippedAdvancement;
+
+
 
     public CustomWolf(EntityType<? extends Wolf> entityType, Level level) {
         super(entityType, level);
         getValuesFromConfig();
+        if(!level.isClientSide()) {
+            fullyEquippedAdvancement = level.getServer().getAdvancements().get(CreateMechanicalCompanion.genRL("fully_equip_wolf"));
+        }
 
         data = new ContainerData() {
             private final int[] values = new int[slotAmount];
@@ -285,6 +295,8 @@ public class CustomWolf extends Wolf implements MenuProvider {
             }
 
             checkForDuplicate();
+            if(!isFullyEquippedAdvancementDone) {checkFullyEquippedAdvancement();}
+
 
             if(isModuleEquipped(ModItems.REINFORCED_PLATES.get()))
             {
@@ -569,6 +581,19 @@ public class CustomWolf extends Wolf implements MenuProvider {
             return netheritePlatesArmorValue;
         }
         return super.getArmorValue();
+    }
+
+    private void checkFullyEquippedAdvancement(){
+        for (int slot = 0; slot < slotAmount; slot++) {
+            if (itemHandler.getStackInSlot(slot).isEmpty()) {
+                return;
+            }
+        }
+
+        if (fullyEquippedAdvancement != null && this.getOwner() instanceof ServerPlayer owner) {
+            owner.getAdvancements().award(fullyEquippedAdvancement, "has_all_modules");;
+            isFullyEquippedAdvancementDone = true;
+        }
     }
 
     @Override

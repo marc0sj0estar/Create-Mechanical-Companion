@@ -3,6 +3,7 @@ package net.myr.createmechanicalcompanion.screen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -22,12 +23,12 @@ public class WolfMenu extends AbstractContainerMenu {
     public final CustomWolf wolf;
 
     public static final int slotAmount = 9;
-    private int firstColumnXPosition = 84;
-    private int secondColumnXPosition = 108;
-    private int thirdColumnXPosition = 132;
-    private int firstRowYPosition = 10;
-    private int secondRowYPosition = 32;
-    private int thirdRowYPosition = 54;
+    private static final int firstColumnXPosition = 84;
+    private static final int secondColumnXPosition = 108;
+    private static final int thirdColumnXPosition = 132;
+    private static final int firstRowYPosition = 10;
+    private static final int secondRowYPosition = 32;
+    private static final int thirdRowYPosition = 54;
 
     public WolfMenu(int pContainerId, Inventory inv, RegistryFriendlyByteBuf extraData) {
         this(pContainerId, inv, getWolfEntity(extraData, inv.player.level()), new SimpleContainerData(slotAmount));
@@ -253,4 +254,6 @@ public class WolfMenu extends AbstractContainerMenu {
     public boolean stillValid(Player pPlayer) {
         return this.wolf.isAlive() && this.wolf.distanceTo(pPlayer) < 8.0F;
     }
+
+
 }
