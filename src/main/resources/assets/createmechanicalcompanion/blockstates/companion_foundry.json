@@ -1,20 +1,43 @@
 {
-  "variants": {
-    "facing=north": {
-      "model": "createmechanicalcompanion:block/companion_foundry",
-      "y": 0
+  "multipart": [
+    {
+      "when": {
+        "part": "bottom_center",
+        "facing": "north"
+      },
+      "apply": {
+        "model": "createmechanicalcompanion:block/companion_foundry"
+      }
     },
-    "facing=east": {
-      "model": "createmechanicalcompanion:block/companion_foundry",
-      "y": 90
+    {
+      "when": {
+        "part": "bottom_center",
+        "facing": "east"
+      },
+      "apply": {
+        "model": "createmechanicalcompanion:block/companion_foundry",
+        "y": 90
+      }
     },
-    "facing=south": {
-      "model": "createmechanicalcompanion:block/companion_foundry",
-      "y": 180
+    {
+      "when": {
+        "part": "bottom_center",
+        "facing": "south"
+      },
+      "apply": {
+        "model": "createmechanicalcompanion:block/companion_foundry",
+        "y": 180
+      }
     },
-    "facing=west": {
-      "model": "createmechanicalcompanion:block/companion_foundry",
-      "y": 270
+    {
+      "when": {
+        "part": "bottom_center",
+        "facing": "west"
+      },
+      "apply": {
+        "model": "createmechanicalcompanion:block/companion_foundry",
+        "y": 270
+      }
     }
-  }
+  ]
 }

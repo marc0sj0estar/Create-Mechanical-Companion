@@ -2,6 +2,8 @@ package net.myr.createmechanicalcompanion.screen;
 
 import com.simibubi.create.AllBlocks;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -14,9 +16,28 @@ import net.myr.createmechanicalcompanion.item.ModItems;
 public class CompanionFoundryScreen extends AbstractContainerScreen<CompanionFoundryMenu> {
 
     public static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocation.fromNamespaceAndPath(CreateMechanicalCompanion.MOD_ID, "textures/gui/companion_foundry.png");
+    public static final WidgetSprites BUTTON_TEXTURE = new WidgetSprites(
+            ResourceLocation.fromNamespaceAndPath(CreateMechanicalCompanion.MOD_ID, "companion_foundry_button"),
+            ResourceLocation.fromNamespaceAndPath(CreateMechanicalCompanion.MOD_ID, "companion_foundry_button_hover"));
 
     public CompanionFoundryScreen(CompanionFoundryMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+
+        addRenderableWidget(new ImageButton(
+                leftPos + 10,
+                topPos + 10,
+                16,
+                16,
+                BUTTON_TEXTURE,
+                button -> {}
+        ));
+
+
     }
 
     @Override
@@ -31,7 +52,7 @@ public class CompanionFoundryScreen extends AbstractContainerScreen<CompanionFou
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float v, int i, int i1) {
 
-        guiGraphics.blit(BACKGROUND_TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
+        guiGraphics.blit(BACKGROUND_TEXTURE, leftPos, topPos, 0, 0, 196, 140, 256, 256);
 
         ItemStack currentNeededItem = switch (menu.getBuildingStep()) {
             case 0 -> new ItemStack(ModItems.MECHANICAL_WOLF_CHASSIS.get());
