@@ -1,9 +1,15 @@
 package net.myr.createmechanicalcompanion;
 
 import net.minecraft.client.renderer.entity.PaintingRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.myr.createmechanicalcompanion.blocks.CompanionFoundryBlock;
 import net.myr.createmechanicalcompanion.blocks.ModBlockEntities;
 import net.myr.createmechanicalcompanion.blocks.CompanionFoundryEntity;
+import net.myr.createmechanicalcompanion.blocks.ModBlocks;
 import net.myr.createmechanicalcompanion.client.*;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -39,11 +45,37 @@ public class EventHandler {
 
     @SubscribeEvent
     public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(
-                Capabilities.FluidHandler.BLOCK, ModBlockEntities.COMPANION_FOUNDRY_ENTITY.get(),
-                (CompanionFoundryEntity blockEntity, Direction side) -> blockEntity.fluidTank
+        event.registerBlock(
+                Capabilities.ItemHandler.BLOCK,
+                (Level level, BlockPos pos, BlockState state, BlockEntity blockEntity, Direction side) -> {
+                    if (!(state.getBlock() instanceof CompanionFoundryBlock foundry)){
+                        return null;
+                    }
+
+                    BlockPos centerPos = foundry.getBottomCenter(pos, state);
+                    if(!(level.getBlockEntity(centerPos) instanceof CompanionFoundryEntity center)) {
+                        return null;
+                    }
+                    return center.itemHandler;
+                },
+                ModBlocks.COMPANION_FOUNDRY.get()
         );
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.COMPANION_FOUNDRY_ENTITY.get(),
-                (CompanionFoundryEntity blockEntity, Direction side) -> blockEntity.itemHandler);
+
+        event.registerBlock(
+                Capabilities.FluidHandler.BLOCK,
+                (Level level, BlockPos pos, BlockState state, BlockEntity blockEntity, Direction side) -> {
+                    if (!(state.getBlock() instanceof CompanionFoundryBlock foundry)){
+                        return null;
+                    }
+
+                    BlockPos centerPos = foundry.getBottomCenter(pos, state);
+
+                    if(!(level.getBlockEntity(centerPos) instanceof CompanionFoundryEntity center)) {
+                        return null;
+                    }
+                    return center.fluidTank;
+                },
+                ModBlocks.COMPANION_FOUNDRY.get()
+        );
     }
 }

@@ -241,7 +241,7 @@ public class CompanionFoundryBlock extends HorizontalKineticBlock implements IBE
         );
     }
 
-    private BlockPos getBottomCenter(BlockPos pos, BlockState state) {
+    public BlockPos getBottomCenter(BlockPos pos, BlockState state) {
         Direction widthDirection = state.getValue(HORIZONTAL_FACING).getClockWise();
 
         return switch (state.getValue(PART)) {

@@ -1,8 +1,5 @@
 package net.myr.createmechanicalcompanion.blocks;
 
-import com.simibubi.create.AllPartialModels;
-import com.simibubi.create.content.kinetics.base.ShaftVisual;
-import com.simibubi.create.content.kinetics.base.SingleAxisRotatingVisual;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import net.myr.createmechanicalcompanion.CreateMechanicalCompanion;
 
